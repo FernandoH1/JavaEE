@@ -1,0 +1,117 @@
+package Boutique.io;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+
+@Entity
+public class Venta implements Serializable {
+
+    @ManyToOne
+    private Cliente cliente;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date fechaVenta;
+    private Enum tipoPago;
+    private Enum metodoPago;
+    private double descuento;
+    
+    @OneToMany(mappedBy = "venta")
+    private List<DetalleDeVenta> detalleDeVenta;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<DetalleDeVenta> getDetalleDeVenta() {
+        return detalleDeVenta;
+    }
+
+    public void setDetalleDeVenta(List<DetalleDeVenta> detalleDeVenta) {
+        this.detalleDeVenta = detalleDeVenta;
+    }
+    
+    
+
+    public Date getFechaVenta() {
+        return fechaVenta;
+    }
+
+    public void setFechaVenta(Date fechaVenta) {
+        this.fechaVenta = fechaVenta;
+    }
+
+    public Enum getTipoPago() {
+        return tipoPago;
+    }
+
+    public void setTipoPago(Enum tipoPago) {
+        this.tipoPago = tipoPago;
+    }
+
+    public Enum getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(Enum metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
+    }
+
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Venta)) {
+            return false;
+        }
+        Venta other = (Venta) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Venta{" + "id=" + id + ", fechaVenta=" + fechaVenta + ", tipoPago=" + tipoPago + ", metodoPago=" + metodoPago + ", descuento=" + descuento + '}';
+    }
+
+}

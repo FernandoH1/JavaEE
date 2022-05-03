@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="BoutiquePU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>Boutique.io.Accesorio</class>
+    <class>Boutique.io.Calzado</class>
+    <class>Boutique.io.Cliente</class>
+    <class>Boutique.io.Combo</class>
+    <class>Boutique.io.Compra</class>
+    <class>Boutique.io.DetalleCompra</class>
+    <class>Boutique.io.DetalleDeVenta</class>
+    <class>Boutique.io.Gasto</class>
+    <class>Boutique.io.Indumentaria</class>
+    <class>Boutique.io.Producto</class>
+    <class>Boutique.io.Proveedor</class>
+    <class>Boutique.io.Rubro</class>
+    <class>Boutique.io.Venta</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/boutique?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>
