@@ -126,7 +126,7 @@ public class Clientes extends javax.swing.JFrame {
                                     .addComponent(ci)
                                     .addComponent(tel)
                                     .addComponent(dir))))))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +159,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addComponent(cargardatosBtn)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,11 +183,12 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_guardarbtnActionPerformed
 
     private void TableDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableDatosMouseClicked
-        nombre.setText(TableDatos.getValueAt(TableDatos.getSelectedRow(),0).toString());
-        apellido.setText(TableDatos.getValueAt(TableDatos.getSelectedRow(),1).toString());
-        ci.setText(TableDatos.getValueAt(TableDatos.getSelectedRow(),2).toString());
-        tel.setText(TableDatos.getValueAt(TableDatos.getSelectedRow(),3).toString());
-        dir.setText(TableDatos.getValueAt(TableDatos.getSelectedRow(),4).toString());
+        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),2);
+        nombre.setText(cliente.getNombre());
+        apellido.setText(cliente.getApellido());
+        ci.setText(cliente.getCi());
+        tel.setText(cliente.getTelefonos().toString());
+        dir.setText(cliente.getDireccion());
     }//GEN-LAST:event_TableDatosMouseClicked
 
     private void cargardatosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargardatosBtnActionPerformed
@@ -200,7 +201,7 @@ public class Clientes extends javax.swing.JFrame {
         Object[] fila = new Object[5];
         fila[0]= next.getNombre();
         fila[1]= next.getApellido();
-        fila[2]= next.getCi();
+        fila[2]= next;
         fila[3]= next.getTelefonos();
         fila[4]= next.getDireccion();
         tablaClientes.addRow(fila);
@@ -209,7 +210,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_cargardatosBtnActionPerformed
 
     private void modificarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarbtnActionPerformed
-        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),0);
+        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),2);
         cliente.setNombre(nombre.getText());
         cliente.setApellido(apellido.getText());
         cliente.setCi(ci.getText());
