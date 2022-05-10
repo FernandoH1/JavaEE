@@ -1,6 +1,10 @@
 package Boutique.persistencia;
 
+import Boutique.io.Accesorio;
+import Boutique.io.Calzado;
 import Boutique.io.Cliente;
+import Boutique.io.Indumentaria;
+import Boutique.io.Producto;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -86,6 +90,22 @@ public class Conexion {
             em.getTransaction().rollback();
         }
         return clientes;
+    }
+    
+    
+    public List<Producto> listarProductos() {
+        EntityManager em = getEntity();
+        List<Producto> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM producto, accesorio WHERE producto.id = accesorio.id",Accesorio.class).getResultList();
+            productos.addAll(em.createNativeQuery("SELECT * FROM producto, calzado WHERE producto.id = calzado.id",Calzado.class).getResultList());
+            productos.addAll(em.createNativeQuery("SELECT * FROM producto, indumentaria WHERE producto.id = indumentaria.id",Indumentaria.class).getResultList());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
     }
     
 }

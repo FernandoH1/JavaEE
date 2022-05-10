@@ -9,6 +9,9 @@ public class Clientes extends javax.swing.JFrame {
 
     public Clientes() {
         initComponents();
+        cargarTabla();  
+        modificarbtn.setEnabled(false);
+        cleanBtn.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,9 +30,9 @@ public class Clientes extends javax.swing.JFrame {
         dir = new javax.swing.JTextField();
         guardarbtn = new javax.swing.JButton();
         modificarbtn = new javax.swing.JButton();
-        cargardatosBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableDatos = new javax.swing.JTable();
+        cleanBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,13 +66,6 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
-        cargardatosBtn.setText("Cargar Datos");
-        cargardatosBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cargardatosBtnActionPerformed(evt);
-            }
-        });
-
         TableDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -93,6 +89,13 @@ public class Clientes extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TableDatos);
 
+        cleanBtn.setText("Limpiar Campos");
+        cleanBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cleanBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,12 +103,12 @@ public class Clientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cargardatosBtn)
-                            .addComponent(guardarbtn))
+                        .addGap(91, 91, 91)
+                        .addComponent(guardarbtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(modificarbtn))
+                        .addComponent(modificarbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cleanBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,10 +157,9 @@ public class Clientes extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardarbtn)
-                    .addComponent(modificarbtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cargardatosBtn)
-                .addGap(18, 18, 18)
+                    .addComponent(modificarbtn)
+                    .addComponent(cleanBtn))
+                .addGap(54, 54, 54)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -178,8 +180,9 @@ public class Clientes extends javax.swing.JFrame {
         telefono.add(tel.getText());
         cliente.setTelefonos(telefono);
         cliente.setDireccion(dir.getText());
-        
-        Conexion.getInstance().guardar(cliente);  
+        Conexion.getInstance().guardar(cliente); 
+        cargarTabla();
+        limpiarCampos();
     }//GEN-LAST:event_guardarbtnActionPerformed
 
     private void TableDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableDatosMouseClicked
@@ -189,9 +192,34 @@ public class Clientes extends javax.swing.JFrame {
         ci.setText(cliente.getCi());
         tel.setText(cliente.getTelefonos().toString());
         dir.setText(cliente.getDireccion());
+        guardarbtn.setEnabled(false);
+        modificarbtn.setEnabled(true);
+        cleanBtn.setEnabled(true);
     }//GEN-LAST:event_TableDatosMouseClicked
 
-    private void cargardatosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargardatosBtnActionPerformed
+    private void modificarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarbtnActionPerformed
+        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),2);
+        cliente.setNombre(nombre.getText());
+        cliente.setApellido(apellido.getText());
+        cliente.setCi(ci.getText());
+        ArrayList telefono = new ArrayList();
+        telefono.add(tel.getText());
+        cliente.setTelefonos(telefono);
+        cliente.setDireccion(dir.getText());
+        Conexion.getInstance().guardar(cliente);  
+        cargarTabla();
+        limpiarCampos();
+        guardarbtn.setEnabled(true);
+        modificarbtn.setEnabled(false);
+    }//GEN-LAST:event_modificarbtnActionPerformed
+
+    private void cleanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanBtnActionPerformed
+        limpiarCampos();
+        guardarbtn.setEnabled(true);
+        modificarbtn.setEnabled(false);
+    }//GEN-LAST:event_cleanBtnActionPerformed
+
+    public void cargarTabla(){
         DefaultTableModel tablaClientes = new DefaultTableModel();
         tablaClientes = (DefaultTableModel) TableDatos.getModel();
         Iterator<Cliente> it = Conexion.getInstance().listarClientes().iterator();
@@ -206,22 +234,15 @@ public class Clientes extends javax.swing.JFrame {
         fila[4]= next.getDireccion();
         tablaClientes.addRow(fila);
         }
-        
-    }//GEN-LAST:event_cargardatosBtnActionPerformed
-
-    private void modificarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarbtnActionPerformed
-        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),2);
-        cliente.setNombre(nombre.getText());
-        cliente.setApellido(apellido.getText());
-        cliente.setCi(ci.getText());
-        ArrayList telefono = new ArrayList();
-        telefono.add(tel.getText());
-        cliente.setTelefonos(telefono);
-        cliente.setDireccion(dir.getText());
-        
-        Conexion.getInstance().guardar(cliente);  
-    }//GEN-LAST:event_modificarbtnActionPerformed
-
+    }
+    
+    public void limpiarCampos(){
+        nombre.setText("");
+        apellido.setText("");
+        ci.setText("");
+        tel.setText("");
+        dir.setText("");}
+    
     /**
      * @param args the command line arguments
      */
@@ -267,8 +288,8 @@ public class Clientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableDatos;
     private javax.swing.JTextField apellido;
-    private javax.swing.JButton cargardatosBtn;
     private javax.swing.JTextField ci;
+    private javax.swing.JButton cleanBtn;
     private javax.swing.JTextField dir;
     private javax.swing.JButton guardarbtn;
     private javax.swing.JLabel jLabel1;

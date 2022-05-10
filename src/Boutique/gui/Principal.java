@@ -28,30 +28,36 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Productos = new javax.swing.JButton();
+        CLIENTES = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(0, 0));
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 4, 12, 12));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/producto.png"))); // NOI18N
-        jButton1.setText("jButton1");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/productos.png"))); // NOI18N
+        Productos.setText("PRODUCTOS");
+        Productos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Productos.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        Productos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ProductosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
+        jPanel1.add(Productos);
 
-        jButton2.setText("jButton2");
-        jPanel1.add(jButton2);
+        CLIENTES.setText("CLIENTES");
+        CLIENTES.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CLIENTESActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CLIENTES);
 
         jButton5.setText("jButton5");
         jPanel1.add(jButton5);
@@ -79,9 +85,17 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void ProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductosActionPerformed
+        Productos p = new Productos();
+        p.setVisible(true);
+        this.dispose();    
+    }//GEN-LAST:event_ProductosActionPerformed
+
+    private void CLIENTESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLIENTESActionPerformed
+        Clientes c = new Clientes();
+        c.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CLIENTESActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,8 +133,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton CLIENTES;
+    private javax.swing.JButton Productos;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

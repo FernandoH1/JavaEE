@@ -29,7 +29,7 @@ public class Producto implements Serializable {
     private double precioProveedor;
     private double precioVenta;
     private String marca;
-    private String foto;
+    private byte[] foto;
     
     @OneToMany(mappedBy = "producto")
     private List<DetalleCompra> detalleCompras;
@@ -100,13 +100,15 @@ public class Producto implements Serializable {
         this.marca = marca;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
+
+   
 
     @Override
     public int hashCode() {
