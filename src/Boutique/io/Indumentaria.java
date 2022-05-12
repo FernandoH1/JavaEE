@@ -9,9 +9,17 @@ public class Indumentaria extends Producto implements Serializable {
     private String talle;
     private String tipo;
     private String categoria;
-    private Enum sexo;
+    private String sexo;
     private int stock;
+    private String color;
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public String getTalle() {
         return talle;
@@ -37,13 +45,15 @@ public class Indumentaria extends Producto implements Serializable {
         this.categoria = categoria;
     }
 
-    public Enum getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(Enum sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+
 
     public int getStock() {
         return stock;
@@ -55,9 +65,7 @@ public class Indumentaria extends Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Indumentaria{" + "talle=" + talle + ", tipo=" + tipo + ", categoria=" + categoria + ", sexo=" + sexo + ", stock=" + stock + '}';
+        return "Indumentaria{" + "talle=" + talle + ", tipo=" + tipo + ", categoria=" + categoria + ", sexo=" + sexo + ", stock=" + stock + ", color=" + color + '}';
     }
-    
-    
 
 }
