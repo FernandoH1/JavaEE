@@ -1,6 +1,7 @@
 package Boutique.gui;
 
 import Boutique.io.Accesorio;
+import Boutique.io.Calzado;
 import Boutique.io.Indumentaria;
 import Boutique.persistencia.Conexion;
 import Boutique.io.Producto;
@@ -28,7 +29,9 @@ String fotoPerfil = "";
     public Productos() {
         initComponents();
         cargarTabla();
-        jLabel19.setOpaque(true);
+        botonesA();
+        ColorIndumentaria.setOpaque(true); 
+        
         
     }
 
@@ -46,13 +49,8 @@ String fotoPerfil = "";
         proveedor = new javax.swing.JTextField();
         venta = new javax.swing.JTextField();
         marca = new javax.swing.JTextField();
-        Guardar = new javax.swing.JButton();
-        Modificar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         foto = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -64,8 +62,8 @@ String fotoPerfil = "";
         jLabel17 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         GuardarI = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        EditI = new javax.swing.JButton();
+        CleanI = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
@@ -80,8 +78,8 @@ String fotoPerfil = "";
         jLabel13 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         GuardarAccessorio = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        EditA = new javax.swing.JButton();
+        CleanA = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -89,17 +87,17 @@ String fotoPerfil = "";
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        tipoc = new javax.swing.JTextField();
+        stockc = new javax.swing.JTextField();
         GuardarC = new javax.swing.JButton();
         EditC = new javax.swing.JButton();
         CleanC = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jTextField3 = new javax.swing.JTextField();
+        jTable1 = new javax.swing.JTable();
+        tallec = new javax.swing.JTextField();
         jButton15 = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
         foto1 = new javax.swing.JLabel();
+        ColorIndumentaria = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,38 +117,6 @@ String fotoPerfil = "";
             }
         });
 
-        Guardar.setText("Guardar");
-        Guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarActionPerformed(evt);
-            }
-        });
-
-        Modificar.setText("Modificar");
-        Modificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/file.png"))); // NOI18N
         jButton1.setText("Selecionar Archivo...");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -160,8 +126,6 @@ String fotoPerfil = "";
         });
 
         foto.setBackground(new java.awt.Color(255, 255, 255));
-
-        jButton2.setText("Limpiar Campos");
 
         jLabel14.setText("Talle:");
 
@@ -186,9 +150,14 @@ String fotoPerfil = "";
             }
         });
 
-        jButton13.setText("Modificar");
+        EditI.setText("Modificar");
 
-        jButton14.setText("Limpiar Campos");
+        CleanI.setText("Limpiar Campos");
+        CleanI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CleanIActionPerformed(evt);
+            }
+        });
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -221,7 +190,7 @@ String fotoPerfil = "";
                             .addComponent(jLabel18))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tipo, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(tipo, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                             .addComponent(categoria)
                             .addComponent(talle)
                             .addComponent(genero)
@@ -239,10 +208,10 @@ String fotoPerfil = "";
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(GuardarI)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton13)
+                                .addComponent(EditI)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton14)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(CleanI)))
+                        .addContainerGap(826, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,13 +244,12 @@ String fotoPerfil = "";
                         .addGap(11, 11, 11)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton11)
-                            .addComponent(jLabel17))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jLabel17))))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardarI)
-                    .addComponent(jButton13)
-                    .addComponent(jButton14))
+                    .addComponent(EditI)
+                    .addComponent(CleanI))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
 
@@ -308,9 +276,14 @@ String fotoPerfil = "";
             }
         });
 
-        jButton9.setText("Modificar");
+        EditA.setText("Modificar");
 
-        jButton10.setText("Limpiar Campos");
+        CleanA.setText("Limpiar Campos");
+        CleanA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CleanAActionPerformed(evt);
+            }
+        });
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -344,7 +317,7 @@ String fotoPerfil = "";
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE))
+                        .addGap(34, 93, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textura)
@@ -356,9 +329,9 @@ String fotoPerfil = "";
                 .addContainerGap()
                 .addComponent(GuardarAccessorio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton9)
+                .addComponent(EditA)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton10)
+                .addComponent(CleanA)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -377,14 +350,16 @@ String fotoPerfil = "";
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
-                            .addComponent(jButton7)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton7))))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardarAccessorio)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10))
-                .addContainerGap(233, Short.MAX_VALUE))
+                    .addComponent(EditA)
+                    .addComponent(CleanA))
+                .addGap(233, 233, 233))
         );
 
         jTabbedPane5.addTab("Accesorios", jPanel3);
@@ -398,12 +373,27 @@ String fotoPerfil = "";
         jLabel9.setText("Stock:");
 
         GuardarC.setText("Guardar");
+        GuardarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarCActionPerformed(evt);
+            }
+        });
 
         EditC.setText("Modificar");
+        EditC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditCActionPerformed(evt);
+            }
+        });
 
         CleanC.setText("Limpiar Datos");
+        CleanC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CleanCActionPerformed(evt);
+            }
+        });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -419,7 +409,7 @@ String fotoPerfil = "";
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable1);
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/color.png"))); // NOI18N
         jButton15.setText("Elegir Color...");
@@ -450,9 +440,9 @@ String fotoPerfil = "";
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField3))
+                            .addComponent(tipoc, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(stockc)
+                            .addComponent(tallec))
                         .addGap(56, 56, 56)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))
@@ -479,15 +469,15 @@ String fotoPerfil = "";
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tallec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tipoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(stockc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -502,64 +492,52 @@ String fotoPerfil = "";
 
         jTabbedPane5.addTab("Calzado", jPanel1);
 
-        jLabel19.setBackground(new java.awt.Color(0, 0, 255));
-        jLabel19.setText("jLabel19");
-
         foto1.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane5)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(marca, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(venta)
+                    .addComponent(proveedor)
+                    .addComponent(nombre))
+                .addGap(55, 55, 55)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(marca, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                            .addComponent(venta)
-                            .addComponent(proveedor)
-                            .addComponent(nombre))
-                        .addGap(102, 102, 102)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(Modificar)
-                            .addComponent(Guardar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
                         .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(foto1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(104, 104, 104))
+                        .addGap(33, 33, 33)
+                        .addComponent(foto1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ColorIndumentaria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(246, 246, 246))))
+            .addComponent(jTabbedPane5)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Guardar))
+                            .addComponent(jLabel5)
+                            .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -569,46 +547,26 @@ String fotoPerfil = "";
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Modificar)
-                                    .addComponent(proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(venta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2))
-                                .addGap(8, 8, 8)
-                                .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(venta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)
+                                .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(12, 12, 12)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jButton1)))
-                        .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(foto1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(ColorIndumentaria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(foto1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        Producto producto = new Producto();
-        producto.setNombre(nombre.getText());
-        double p = Double.parseDouble(proveedor.getText());
-        double v = Double.parseDouble(venta.getText());
-        producto.setPrecioProveedor(p);
-        producto.setPrecioVenta(v);
-        producto.setMarca(marca.getText());
-        //producto.setFoto(foto.getText());
-        Conexion.getInstance().guardar(producto);
-    }//GEN-LAST:event_GuardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -641,7 +599,7 @@ String fotoPerfil = "";
         producto.setTipo(tipo.getText());
         producto.setCategoria(categoria.getText());
         producto.setSexo(genero.getText());
-        producto.setColor(String.valueOf(jLabel19.getBackground().getRGB()));
+        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stock_ind.getText()));
         Conexion.getInstance().guardar(producto);
         //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
@@ -662,7 +620,7 @@ String fotoPerfil = "";
         producto.setMarca(marca.getText());
         producto.setFoto(convertirImagen(fotoPerfil));
         producto.setTextura(textura.getText());
-        producto.setColor(String.valueOf(jLabel19.getBackground().getRGB()));
+        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stock.getText()));
         Conexion.getInstance().guardar(producto);
         //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
@@ -677,10 +635,6 @@ String fotoPerfil = "";
      
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModificarActionPerformed
-
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         ColorChooser();
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -688,6 +642,50 @@ String fotoPerfil = "";
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         ColorChooser();
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void GuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarCActionPerformed
+         try {
+        Calzado producto = new Calzado();
+        producto.setNombre(nombre.getText());
+        double p = Double.parseDouble(proveedor.getText());
+        double v = Double.parseDouble(venta.getText());
+        producto.setPrecioProveedor(p);
+        producto.setPrecioVenta(v);
+        producto.setMarca(marca.getText());
+        producto.setFoto(convertirImagen(fotoPerfil));
+        producto.setTalle(tallec.getText());
+        producto.setTipo(tipoc.getText());
+        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+        producto.setStock(Integer.valueOf(stockc.getText()));
+        Conexion.getInstance().guardar(producto);
+        //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
+        foto1.setIcon(getFotoImage(producto.getFoto()));
+    } catch (IOException ex) {
+        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_GuardarCActionPerformed
+
+    private void EditCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCActionPerformed
+       
+    }//GEN-LAST:event_EditCActionPerformed
+
+    private void CleanCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanCActionPerformed
+        limpiarCampos();
+        GuardarC.setEnabled(true);
+        EditC.setEnabled(false);
+    }//GEN-LAST:event_CleanCActionPerformed
+
+    private void CleanIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanIActionPerformed
+        limpiarCampos();
+        GuardarI.setEnabled(true);
+        EditI.setEnabled(false);
+    }//GEN-LAST:event_CleanIActionPerformed
+
+    private void CleanAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanAActionPerformed
+        limpiarCampos();
+        GuardarAccessorio.setEnabled(true);
+        EditA.setEnabled(false);
+    }//GEN-LAST:event_CleanAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -758,38 +756,58 @@ String fotoPerfil = "";
         return perfil;
     }
     
-    public void limpiarCampos(){}
+    public void limpiarCampos(){
+        nombre.setText("");
+        proveedor.setText("");
+        stock.setText("");
+        stock_ind.setText("");
+        stockc.setText("");
+        talle.setText("");
+        tallec.setText("");
+        textura.setText("");
+        tipo.setText("");
+        tipoc.setText("");
+        venta.setText("");
+        marca.setText("");   
+    }
     
     public void ColorChooser(){
     JColorChooser cc=new JColorChooser();
        Color color1 = cc.showDialog(this,"Selector de color",Color.white);
-       jLabel19.setBackground(color1);
-       jLabel19.repaint();
-       jLabel19.validate();
+       ColorIndumentaria.setBackground(color1);
+       ColorIndumentaria.repaint();
+       ColorIndumentaria.validate();
+    }
+    
+    public void botonesA(){
+        EditI.setEnabled(false);
+        EditA.setEnabled(false);
+        EditC.setEnabled(false);
+        CleanI.setEnabled(false);
+        CleanA.setEnabled(false);
+        CleanC.setEnabled(false);
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CleanA;
     private javax.swing.JButton CleanC;
+    private javax.swing.JButton CleanI;
+    private javax.swing.JLabel ColorIndumentaria;
+    private javax.swing.JButton EditA;
     private javax.swing.JButton EditC;
-    private javax.swing.JButton Guardar;
+    private javax.swing.JButton EditI;
     private javax.swing.JButton GuardarAccessorio;
     private javax.swing.JButton GuardarC;
     private javax.swing.JButton GuardarI;
-    private javax.swing.JButton Modificar;
     private javax.swing.JTextField categoria;
     private javax.swing.JLabel foto;
     private javax.swing.JLabel foto1;
     private javax.swing.JTextField genero;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -801,7 +819,6 @@ String fotoPerfil = "";
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -813,26 +830,24 @@ String fotoPerfil = "";
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField marca;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField proveedor;
     private javax.swing.JTextField stock;
     private javax.swing.JTextField stock_ind;
+    private javax.swing.JTextField stockc;
     private javax.swing.JTextField talle;
+    private javax.swing.JTextField tallec;
     private javax.swing.JTextField textura;
     private javax.swing.JTextField tipo;
+    private javax.swing.JTextField tipoc;
     private javax.swing.JTextField venta;
     // End of variables declaration//GEN-END:variables
 }
