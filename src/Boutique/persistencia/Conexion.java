@@ -108,4 +108,43 @@ public class Conexion {
         return productos;
     }
     
+    public List<Accesorio> listarAccesorio() {
+        EntityManager em = getEntity();
+        List<Accesorio> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM producto, accesorio WHERE producto.id = accesorio.id",Accesorio.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
+    public List<Indumentaria> listarIndumentaria() {
+        EntityManager em = getEntity();
+        List<Indumentaria> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM producto, indumentaria WHERE producto.id = indumentaria.id",Indumentaria.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
+    public List<Calzado> listarCalzado() {
+        EntityManager em = getEntity();
+        List<Calzado> productos = null;
+        em.getTransaction().begin();
+        try {
+             productos = em.createNativeQuery("SELECT * FROM producto, calzado WHERE producto.id = calzado.id",Calzado.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
 }

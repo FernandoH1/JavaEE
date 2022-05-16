@@ -28,7 +28,9 @@ String fotoPerfil = "";
     
     public Productos() {
         initComponents();
-        cargarTabla();
+        cargarTablaCalzado();
+        cargarTablaInd();
+        cargarTablaAcc();
         botonesA();
         ColorIndumentaria.setOpaque(true); 
         
@@ -631,8 +633,7 @@ String fotoPerfil = "";
     }//GEN-LAST:event_GuardarAccessorioActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       ColorChooser();
-     
+        ColorChooser();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -666,7 +667,21 @@ String fotoPerfil = "";
     }//GEN-LAST:event_GuardarCActionPerformed
 
     private void EditCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCActionPerformed
-       
+       Calzado calzado = (Calzado) jTable1.getValueAt(jTable1.getSelectedRow(),0);
+        calzado.setNombre(nombre.getText());
+        calzado.setPrecioProveedor(Double.valueOf(proveedor.getText()));
+        calzado.setPrecioVenta(Double.valueOf(venta.getText()));
+        calzado.setMarca(marca.getText());
+        calzado.setTalle(tallec.getText());
+        calzado.setTipo(tipoc.getText());
+        calzado.setStock(Integer.valueOf(stockc.getText()));
+        /*ArrayList telefono = new ArrayList();
+        telefono.add(tel.getText());
+        cliente.setTelefonos(telefono);
+        cliente.setDireccion(dir.getText());
+        Conexion.getInstance().guardar(cliente);  
+        cargarTabla();*/
+        limpiarCampos();
     }//GEN-LAST:event_EditCActionPerformed
 
     private void CleanCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanCActionPerformed
@@ -722,21 +737,65 @@ String fotoPerfil = "";
         });
     }
     
-    public void cargarTabla(){
+    public void cargarTablaCalzado(){
         DefaultTableModel tableProductos = (DefaultTableModel) jTable1.getModel();
-        Iterator<Producto> it = Conexion.getInstance().listarProductos().iterator();
+        Iterator<Calzado> it = Conexion.getInstance().listarCalzado().iterator();
         tableProductos.setRowCount(0);
         while(it.hasNext()){
-        Producto next = it.next();
-        Object[] fila = new Object[5];
+        Calzado next = it.next();
+        Object[] fila = new Object[9];
         fila[0]= next.getNombre();
         fila[1]= next.getPrecioProveedor();
         fila[2]= next.getPrecioVenta();
         fila[3]= next.getMarca();
-        //fila[4]= next.getFoto();
+        fila[4]= next.getFoto();
+        fila[5]= next.getTalle();
+        fila[6]= next.getTipo();
+        fila[7]= next.getColor();
+        fila[8]= next.getStock();
         tableProductos.addRow(fila);
         }
     }
+    
+    public void cargarTablaInd(){
+    DefaultTableModel tableProductos = (DefaultTableModel) jTable4.getModel();
+        Iterator<Indumentaria> it = Conexion.getInstance().listarIndumentaria().iterator();
+        tableProductos.setRowCount(0);
+        while(it.hasNext()){
+        Indumentaria next = it.next();
+        Object[] fila = new Object[11];
+        fila[0]= next.getNombre();
+        fila[1]= next.getPrecioProveedor();
+        fila[2]= next.getPrecioVenta();
+        fila[3]= next.getMarca();
+        fila[4]= next.getFoto();
+        fila[5]= next.getTalle();
+        fila[6]= next.getTipo();
+        fila[7]= next.getCategoria();
+        fila[8]= next.getSexo();
+        fila[9]= next.getColor();
+        fila[10]= next.getStock();
+        tableProductos.addRow(fila);
+        }
+    }
+        
+    public void cargarTablaAcc(){
+    DefaultTableModel tableProductos = (DefaultTableModel) jTable3.getModel();
+        Iterator<Accesorio> it = Conexion.getInstance().listarAccesorio().iterator();
+        tableProductos.setRowCount(0);
+        while(it.hasNext()){
+        Accesorio next = it.next();
+        Object[] fila = new Object[9];
+        fila[0]= next.getNombre();
+        fila[1]= next.getPrecioProveedor();
+        fila[2]= next.getPrecioVenta();
+        fila[3]= next.getMarca();
+        fila[4]= next.getFoto();
+        fila[5]= next.getTextura();
+        fila[7]= next.getColor();
+        fila[8]= next.getStock();
+        tableProductos.addRow(fila);
+        }}
     
     public byte[] convertirImagen(String path) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
