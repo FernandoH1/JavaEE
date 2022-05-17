@@ -67,7 +67,7 @@ String fotoPerfil = "";
         EditA = new javax.swing.JButton();
         CleanA = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        TablaAccesorio = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -79,7 +79,7 @@ String fotoPerfil = "";
         EditC = new javax.swing.JButton();
         CleanC = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaCalzado = new javax.swing.JTable();
         tallec = new javax.swing.JTextField();
         jButton15 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -95,7 +95,7 @@ String fotoPerfil = "";
         EditI = new javax.swing.JButton();
         CleanI = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        TablaIndumentaria = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         genero = new javax.swing.JTextField();
         stock_ind = new javax.swing.JTextField();
@@ -186,7 +186,7 @@ String fotoPerfil = "";
         });
         jPanel3.add(CleanA, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        TablaAccesorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -202,7 +202,7 @@ String fotoPerfil = "";
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(TablaAccesorio);
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 50, 803, 90));
 
@@ -254,7 +254,7 @@ String fotoPerfil = "";
         });
         jPanel1.add(CleanC, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaCalzado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -270,7 +270,12 @@ String fotoPerfil = "";
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        TablaCalzado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaCalzadoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TablaCalzado);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 52, 803, 90));
         jPanel1.add(tallec, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 61, 157, -1));
@@ -331,7 +336,7 @@ String fotoPerfil = "";
         });
         jPanel2.add(CleanI, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        TablaIndumentaria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -339,7 +344,7 @@ String fotoPerfil = "";
                 "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Categoria", "Genero", "Stock", "Color"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(TablaIndumentaria);
 
         jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 803, 90));
 
@@ -422,6 +427,7 @@ String fotoPerfil = "";
         Conexion.getInstance().guardar(producto);
         //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
         foto1.setIcon(getFotoImage(producto.getFoto()));
+        limpiarCampos();
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -465,21 +471,7 @@ String fotoPerfil = "";
     }//GEN-LAST:event_GuardarCActionPerformed
 
     private void EditCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCActionPerformed
-       Calzado calzado = (Calzado) jTable1.getValueAt(jTable1.getSelectedRow(),0);
-        calzado.setNombre(nombre.getText());
-        calzado.setPrecioProveedor(Double.valueOf(proveedor.getText()));
-        calzado.setPrecioVenta(Double.valueOf(venta.getText()));
-        calzado.setMarca(marca.getText());
-        calzado.setTalle(tallec.getText());
-        calzado.setTipo(tipoc.getText());
-        calzado.setStock(Integer.valueOf(stockc.getText()));
-        /*ArrayList telefono = new ArrayList();
-        telefono.add(tel.getText());
-        cliente.setTelefonos(telefono);
-        cliente.setDireccion(dir.getText());
-        Conexion.getInstance().guardar(cliente);  
-        cargarTabla();*/
-        limpiarCampos();
+       
     }//GEN-LAST:event_EditCActionPerformed
 
     private void CleanCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanCActionPerformed
@@ -503,6 +495,21 @@ String fotoPerfil = "";
     private void tipocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipocActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipocActionPerformed
+
+    private void TablaCalzadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalzadoMouseClicked
+        Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),0);
+        calzado.setNombre(nombre.getText());
+        calzado.setPrecioProveedor(Double.valueOf(proveedor.getText()));
+        calzado.setPrecioVenta(Double.valueOf(venta.getText()));
+        calzado.setMarca(marca.getText());
+        calzado.setTalle(tallec.getText());
+        calzado.setTipo(tipoc.getText());
+        calzado.setStock(Integer.valueOf(stockc.getText()));
+        GuardarC.setEnabled(false);
+        EditC.setEnabled(true);
+        CleanC.setEnabled(true);
+        //limpiarCampos();
+    }//GEN-LAST:event_TablaCalzadoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -540,7 +547,7 @@ String fotoPerfil = "";
     }
     
     public void cargarTablaCalzado(){
-        DefaultTableModel tableProductos = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel tableProductos = (DefaultTableModel) TablaCalzado.getModel();
         Iterator<Calzado> it = Conexion.getInstance().listarCalzado().iterator();
         tableProductos.setRowCount(0);
         while(it.hasNext()){
@@ -560,7 +567,7 @@ String fotoPerfil = "";
     }
     
     public void cargarTablaInd(){
-    DefaultTableModel tableProductos = (DefaultTableModel) jTable4.getModel();
+    DefaultTableModel tableProductos = (DefaultTableModel) TablaIndumentaria.getModel();
         Iterator<Indumentaria> it = Conexion.getInstance().listarIndumentaria().iterator();
         tableProductos.setRowCount(0);
         while(it.hasNext()){
@@ -582,7 +589,7 @@ String fotoPerfil = "";
     }
         
     public void cargarTablaAcc(){
-    DefaultTableModel tableProductos = (DefaultTableModel) jTable3.getModel();
+    DefaultTableModel tableProductos = (DefaultTableModel) TablaAccesorio.getModel();
         Iterator<Accesorio> it = Conexion.getInstance().listarAccesorio().iterator();
         tableProductos.setRowCount(0);
         while(it.hasNext()){
@@ -661,6 +668,9 @@ String fotoPerfil = "";
     private javax.swing.JButton GuardarAccessorio;
     private javax.swing.JButton GuardarC;
     private javax.swing.JButton GuardarI;
+    private javax.swing.JTable TablaAccesorio;
+    private javax.swing.JTable TablaCalzado;
+    private javax.swing.JTable TablaIndumentaria;
     private javax.swing.JTextField categoria;
     private javax.swing.JLabel foto;
     private javax.swing.JLabel foto1;
@@ -695,9 +705,6 @@ String fotoPerfil = "";
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JLabel labelColor;
     private javax.swing.JTextField marca;
     private javax.swing.JTextField nombre;
