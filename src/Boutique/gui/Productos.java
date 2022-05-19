@@ -285,7 +285,6 @@ String fotoPerfil = "";
                 "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Categoria", "Genero", "Color", "Stock"
             }
         ));
-        TablaIndumentaria.setEnabled(false);
         TablaIndumentaria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaIndumentariaMouseClicked(evt);
@@ -367,7 +366,6 @@ String fotoPerfil = "";
                 return canEdit [columnIndex];
             }
         });
-        TablaAccesorio.setEnabled(false);
         TablaAccesorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaAccesorioMouseClicked(evt);
