@@ -65,7 +65,7 @@ public class Indumentaria extends Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Indumentaria{" + "talle=" + talle + ", tipo=" + tipo + ", categoria=" + categoria + ", sexo=" + sexo + ", stock=" + stock + ", color=" + color + '}';
+        return talle;
     }
 
 }

@@ -37,7 +37,7 @@ public class Accesorio extends Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Accesorio{" + "color=" + color + ", textura=" + textura + ", stock=" + stock + '}';
+        return textura;
     }
     
     

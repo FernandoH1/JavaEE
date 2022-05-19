@@ -36,10 +36,7 @@ String fotoPerfil = "";
         botonesA();
         ColorIndumentaria.setOpaque(true); 
         labelColor.setOpaque(true);
-        labelColor.setVisible(false);
-        //labelColor.setForeground();
-        
-        
+        labelColor.setVisible(false); 
     }
 
     @SuppressWarnings("unchecked")
@@ -89,7 +86,7 @@ String fotoPerfil = "";
         TablaIndumentaria = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         genero = new javax.swing.JTextField();
-        stock_ind = new javax.swing.JTextField();
+        stocki = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -98,7 +95,7 @@ String fotoPerfil = "";
         stock = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        GuardarAccessorio = new javax.swing.JButton();
+        GuardarA = new javax.swing.JButton();
         EditA = new javax.swing.JButton();
         CleanA = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -265,6 +262,11 @@ String fotoPerfil = "";
         jPanel2.add(GuardarI, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         EditI.setText("Modificar");
+        EditI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditIActionPerformed(evt);
+            }
+        });
         jPanel2.add(EditI, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
         CleanI.setText("Limpiar Campos");
@@ -280,9 +282,15 @@ String fotoPerfil = "";
 
             },
             new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Categoria", "Genero", "Stock", "Color"
+                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Categoria", "Genero", "Color", "Stock"
             }
         ));
+        TablaIndumentaria.setEnabled(false);
+        TablaIndumentaria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaIndumentariaMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(TablaIndumentaria);
 
         jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 830, 300));
@@ -290,7 +298,7 @@ String fotoPerfil = "";
         jLabel10.setText("Genero:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
         jPanel2.add(genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 118, -1));
-        jPanel2.add(stock_ind, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 118, -1));
+        jPanel2.add(stocki, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 118, -1));
 
         jLabel18.setText("Stock:");
         jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
@@ -319,13 +327,13 @@ String fotoPerfil = "";
         });
         jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
-        GuardarAccessorio.setText("Guardar");
-        GuardarAccessorio.addActionListener(new java.awt.event.ActionListener() {
+        GuardarA.setText("Guardar");
+        GuardarA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarAccessorioActionPerformed(evt);
+                GuardarAActionPerformed(evt);
             }
         });
-        jPanel3.add(GuardarAccessorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jPanel3.add(GuardarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         EditA.setText("Modificar");
         EditA.addActionListener(new java.awt.event.ActionListener() {
@@ -357,6 +365,12 @@ String fotoPerfil = "";
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        TablaAccesorio.setEnabled(false);
+        TablaAccesorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaAccesorioMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(TablaAccesorio);
@@ -400,22 +414,25 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        if(!fotoPerfil.equals("")){
         producto.setFoto(convertirImagen(fotoPerfil));
+        }
         producto.setTalle(talle.getText());
         producto.setTipo(tipo.getText());
         producto.setCategoria(categoria.getText());
         producto.setSexo(genero.getText());
         producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
-        producto.setStock(Integer.valueOf(stock_ind.getText()));
+        producto.setStock(Integer.valueOf(stocki.getText()));
         Conexion.getInstance().guardar(producto);
-        //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
-        //foto1.setIcon(getFotoImage(producto.getFoto()));
+        limpiarCampos();
+        cargarTablaInd();
+        fotoPerfil = "";
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
     }  
     }//GEN-LAST:event_GuardarIActionPerformed
 
-    private void GuardarAccessorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarAccessorioActionPerformed
+    private void GuardarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarAActionPerformed
     try {
         Accesorio producto = new Accesorio();
         producto.setNombre(nombre.getText());
@@ -424,18 +441,19 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        if(!fotoPerfil.equals("")){
         producto.setFoto(convertirImagen(fotoPerfil));
+        }
         producto.setTextura(textura.getText());
         producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stock.getText()));
         Conexion.getInstance().guardar(producto);
-        //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
-        //foto1.setIcon(getFotoImage(producto.getFoto()));
         limpiarCampos();
+        cargarTablaAcc();
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
     }
-    }//GEN-LAST:event_GuardarAccessorioActionPerformed
+    }//GEN-LAST:event_GuardarAActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         ColorChooser();
@@ -467,10 +485,9 @@ String fotoPerfil = "";
         producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stockc.getText()));
         Conexion.getInstance().guardar(producto);
+        limpiarCampos();
         cargarTablaCalzado();
         fotoPerfil = "";
-        //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
-        //foto1.setIcon(getFotoImage(producto.getFoto()));
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
     }        
@@ -488,15 +505,13 @@ String fotoPerfil = "";
         if(!fotoPerfil.equals("")){
            producto.setFoto(convertirImagen(fotoPerfil)); 
         }
-        
         producto.setTalle(tallec.getText());
         producto.setTipo(tipoc.getText());
         producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stockc.getText()));
         Conexion.getInstance().guardar(producto);
         cargarTablaCalzado();
-        //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
-        //foto1.setIcon(getFotoImage(producto.getFoto()));
+        limpiarCampos();
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
     }        
@@ -516,12 +531,12 @@ String fotoPerfil = "";
 
     private void CleanAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanAActionPerformed
         limpiarCampos();
-        GuardarAccessorio.setEnabled(true);
+        GuardarA.setEnabled(true);
         EditA.setEnabled(false);
     }//GEN-LAST:event_CleanAActionPerformed
 
     private void tipocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipocActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tipocActionPerformed
 
     private void TablaCalzadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalzadoMouseClicked
@@ -539,16 +554,93 @@ String fotoPerfil = "";
         GuardarC.setEnabled(false);
         EditC.setEnabled(true);
         CleanC.setEnabled(true);
-        //limpiarCampos();
     }//GEN-LAST:event_TablaCalzadoMouseClicked
 
     private void EditAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditAActionPerformed
-        // TODO add your handling code here:
+        try {
+        Accesorio producto = (Accesorio) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);
+        producto.setNombre(nombre.getText());
+        double p = Double.parseDouble(proveedor.getText());
+        double v = Double.parseDouble(venta.getText());
+        producto.setPrecioProveedor(p);
+        producto.setPrecioVenta(v);
+        producto.setMarca(marca.getText());
+        if(!fotoPerfil.equals("")){
+           producto.setFoto(convertirImagen(fotoPerfil)); 
+        }
+        producto.setTextura(textura.getText());
+        producto.setStock(Integer.valueOf(stock.getText()));
+        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+        Conexion.getInstance().guardar(producto);
+        cargarTablaAcc();
+        limpiarCampos();
+    } catch (IOException ex) {
+        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
+    }        
     }//GEN-LAST:event_EditAActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void EditIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditIActionPerformed
+         try {
+        Indumentaria producto = (Indumentaria) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(),5);
+        producto.setNombre(nombre.getText());
+        double p = Double.parseDouble(proveedor.getText());
+        double v = Double.parseDouble(venta.getText());
+        producto.setPrecioProveedor(p);
+        producto.setPrecioVenta(v);
+        producto.setMarca(marca.getText());
+        if(!fotoPerfil.equals("")){
+           producto.setFoto(convertirImagen(fotoPerfil)); 
+        }
+        producto.setTalle(talle.getText());
+        producto.setTipo(tipo.getText());
+        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+        producto.setStock(Integer.valueOf(stocki.getText()));
+        producto.setCategoria(categoria.getText());
+        producto.setSexo(genero.getText());
+        Conexion.getInstance().guardar(producto);
+        cargarTablaInd();
+        limpiarCampos();
+    } catch (IOException ex) {
+        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
+    }        
+    }//GEN-LAST:event_EditIActionPerformed
+
+    private void TablaIndumentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaIndumentariaMouseClicked
+        Indumentaria indumentaria = (Indumentaria)TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);
+        nombre.setText(indumentaria.getNombre());
+        proveedor.setText(String.valueOf(indumentaria.getPrecioProveedor()));
+        venta.setText(String.valueOf(indumentaria.getPrecioVenta()));
+        marca.setText(indumentaria.getMarca());
+        talle.setText(indumentaria.getTalle());
+        tipo.setText(indumentaria.getTipo());
+        categoria.setText(indumentaria.getCategoria());
+        genero.setText(indumentaria.getSexo());
+        stocki.setText(String.valueOf(indumentaria.getStock()));
+        foto.setIcon(getFotoImage(indumentaria.getFoto()));
+        ColorIndumentaria.setBackground(new Color(Integer.valueOf(indumentaria.getColor())));
+        labelColor.setVisible(true);
+        GuardarI.setEnabled(false);
+        EditI.setEnabled(true);
+        CleanI.setEnabled(true);
+    }//GEN-LAST:event_TablaIndumentariaMouseClicked
+
+    private void TablaAccesorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAccesorioMouseClicked
+        Accesorio accesorio = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(),5);
+        nombre.setText(accesorio.getNombre());
+        proveedor.setText(String.valueOf(accesorio.getPrecioProveedor()));
+        venta.setText(String.valueOf(accesorio.getPrecioVenta()));
+        marca.setText(accesorio.getMarca());
+        stock.setText(String.valueOf(accesorio.getStock()));
+        textura.setText(String.valueOf(accesorio.getStock()));
+        foto.setIcon(getFotoImage(accesorio.getFoto()));
+        ColorIndumentaria.setBackground(new Color(Integer.valueOf(accesorio.getColor())));
+        labelColor.setVisible(true);
+        GuardarA.setEnabled(false);
+        EditA.setEnabled(true);
+        CleanA.setEnabled(true);
+    }//GEN-LAST:event_TablaAccesorioMouseClicked
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -618,13 +710,18 @@ String fotoPerfil = "";
         fila[2]= next.getPrecioVenta();
         fila[3]= next.getMarca();
         fila[4]= new JLabel(getFotoImage(next.getFoto()));
-        fila[5]= next.getTalle();
+        fila[5]= next;
         fila[6]= next.getTipo();
         fila[7]= next.getCategoria();
         fila[8]= next.getSexo();
-        fila[9]= next.getColor();
+        JLabel lbl = new JLabel();
+        lbl.setOpaque(true);
+        lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
+        fila[9]= lbl;
         fila[10]= next.getStock();
         tableProductos.addRow(fila);
+        TablaIndumentaria.setDefaultRenderer(Object.class, new ImgTabla());
+        TablaIndumentaria.setRowHeight(85);
         }
     }
         
@@ -634,17 +731,23 @@ String fotoPerfil = "";
         tableProductos.setRowCount(0);
         while(it.hasNext()){
         Accesorio next = it.next();
-        Object[] fila = new Object[9];
+        Object[] fila = new Object[8];
         fila[0]= next.getNombre();
         fila[1]= next.getPrecioProveedor();
         fila[2]= next.getPrecioVenta();
         fila[3]= next.getMarca();
         fila[4]= new JLabel(getFotoImage(next.getFoto()));
-        fila[5]= next.getTextura();
-        fila[7]= next.getColor();
-        fila[8]= next.getStock();
+        fila[5]= next;
+        JLabel lbl = new JLabel();
+        lbl.setOpaque(true);
+        lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
+        fila[6]= lbl;
+        fila[7]= next.getStock();
         tableProductos.addRow(fila);
-        }}
+        TablaAccesorio.setDefaultRenderer(Object.class, new ImgTabla());
+        TablaAccesorio.setRowHeight(85);
+        }
+    }
     
     public byte[] convertirImagen(String path) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -668,7 +771,7 @@ String fotoPerfil = "";
         nombre.setText("");
         proveedor.setText("");
         stock.setText("");
-        stock_ind.setText("");
+        stocki.setText("");
         stockc.setText("");
         talle.setText("");
         tallec.setText("");
@@ -677,12 +780,14 @@ String fotoPerfil = "";
         tipoc.setText("");
         venta.setText("");
         marca.setText("");
+        genero.setText("");
+        categoria.setText("");
         labelColor.setVisible(false);
         ColorIndumentaria.setBackground(new Color(0,0,0,0));
         foto.setIcon(null);
         TablaCalzado.clearSelection();
         TablaAccesorio.clearSelection();
-        TablaIndumentaria.clearSelection();
+        TablaIndumentaria.clearSelection();    
     }
     
     public void ColorChooser(){
@@ -711,7 +816,7 @@ String fotoPerfil = "";
     private javax.swing.JButton EditA;
     private javax.swing.JButton EditC;
     private javax.swing.JButton EditI;
-    private javax.swing.JButton GuardarAccessorio;
+    private javax.swing.JButton GuardarA;
     private javax.swing.JButton GuardarC;
     private javax.swing.JButton GuardarI;
     private javax.swing.JTable TablaAccesorio;
@@ -755,8 +860,8 @@ String fotoPerfil = "";
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField proveedor;
     private javax.swing.JTextField stock;
-    private javax.swing.JTextField stock_ind;
     private javax.swing.JTextField stockc;
+    private javax.swing.JTextField stocki;
     private javax.swing.JTextField talle;
     private javax.swing.JTextField tallec;
     private javax.swing.JTextField textura;
