@@ -3,12 +3,14 @@ import Boutique.io.Cliente;
 import Boutique.persistencia.Conexion;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 public class Clientes extends javax.swing.JFrame {
 
     public Clientes() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
         cargarTabla();  
         modificarbtn.setEnabled(false);
         cleanBtn.setEnabled(false);

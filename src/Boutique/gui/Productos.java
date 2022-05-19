@@ -29,6 +29,7 @@ String fotoPerfil = "";
     
     public Productos() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
         cargarTablaCalzado();
         cargarTablaInd();
         cargarTablaAcc();

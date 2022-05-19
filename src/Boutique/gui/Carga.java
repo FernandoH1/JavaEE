@@ -11,14 +11,14 @@ public class Carga extends javax.swing.JFrame implements Runnable {
     public Carga() {
         initComponents();
         this.setAlwaysOnTop(true);
-        //this.setIconImage(new ImageIcon(getClass().getResource("Image/GifCarga.gif")).getImage());
-        this.setSize(400,300);
+        this.setSize(500,300);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
         this.setBackground(new Color(0,0,0,0));
         this.setLocationRelativeTo(null);
         //System.out.println(getClass().getResource("/Boutique/Image/GifCarga.gif"));
         ImageIcon icono2 = new ImageIcon(getClass().getResource("/Boutique/Image/GifCarga.gif"));
         jLabel1.setIcon(icono2);
-        jLabel1.setSize(400, 300);
+        jLabel1.setSize(400,300);
         jLabel1.setLocation(0, 0);
         tiempo = new Thread(this);
         new Inicio().start();
