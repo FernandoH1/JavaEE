@@ -47,7 +47,7 @@ public class Calzado extends Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Calzado{" + "talle=" + talle + ", tipo=" + tipo + ", color=" + color + ", stock=" + stock + '}';
+        return talle;
     }
     
 }

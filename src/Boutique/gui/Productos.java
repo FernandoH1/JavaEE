@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,6 +35,7 @@ String fotoPerfil = "";
         botonesA();
         ColorIndumentaria.setOpaque(true); 
         labelColor.setOpaque(true);
+        labelColor.setVisible(false);
         //labelColor.setForeground();
         
         
@@ -56,18 +58,6 @@ String fotoPerfil = "";
         jButton1 = new javax.swing.JButton();
         foto = new javax.swing.JLabel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        textura = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        stock = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        GuardarAccessorio = new javax.swing.JButton();
-        EditA = new javax.swing.JButton();
-        CleanA = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TablaAccesorio = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -100,7 +90,18 @@ String fotoPerfil = "";
         genero = new javax.swing.JTextField();
         stock_ind = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        foto1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        textura = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        stock = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        GuardarAccessorio = new javax.swing.JButton();
+        EditA = new javax.swing.JButton();
+        CleanA = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TablaAccesorio = new javax.swing.JTable();
         ColorIndumentaria = new javax.swing.JLabel();
         labelColor = new javax.swing.JLabel();
 
@@ -145,90 +146,27 @@ String fotoPerfil = "";
         foto.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 57, 103, 75));
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setText("Textura:");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
-        jPanel3.add(textura, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 50, 149, -1));
-
-        jLabel12.setText("Stock:");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 83, -1, -1));
-        jPanel3.add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 81, 149, -1));
-
-        jLabel13.setText("Color");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 118, -1, -1));
-
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/color.png"))); // NOI18N
-        jButton7.setText("Elegir Color...");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 118, -1, -1));
-
-        GuardarAccessorio.setText("Guardar");
-        GuardarAccessorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarAccessorioActionPerformed(evt);
-            }
-        });
-        jPanel3.add(GuardarAccessorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
-
-        EditA.setText("Modificar");
-        jPanel3.add(EditA, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
-
-        CleanA.setText("Limpiar Campos");
-        CleanA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CleanAActionPerformed(evt);
-            }
-        });
-        jPanel3.add(CleanA, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
-
-        TablaAccesorio.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Textura", "Color", "Stock"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(TablaAccesorio);
-
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 50, 803, 90));
-
-        jTabbedPane5.addTab("Accesorios", jPanel3);
-
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Talle:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jLabel7.setText("Tipo:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         jLabel8.setText("Color");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 148, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel9.setText("Stock:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         tipoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipocActionPerformed(evt);
             }
         });
-        jPanel1.add(tipoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 157, -1));
-        jPanel1.add(stockc, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 157, -1));
+        jPanel1.add(tipoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 157, -1));
+        jPanel1.add(stockc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 157, -1));
 
         GuardarC.setText("Guardar");
         GuardarC.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +174,7 @@ String fotoPerfil = "";
                 GuardarCActionPerformed(evt);
             }
         });
-        jPanel1.add(GuardarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        jPanel1.add(GuardarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         EditC.setText("Modificar");
         EditC.addActionListener(new java.awt.event.ActionListener() {
@@ -244,7 +182,7 @@ String fotoPerfil = "";
                 EditCActionPerformed(evt);
             }
         });
-        jPanel1.add(EditC, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
+        jPanel1.add(EditC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
         CleanC.setText("Limpiar Datos");
         CleanC.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +190,7 @@ String fotoPerfil = "";
                 CleanCActionPerformed(evt);
             }
         });
-        jPanel1.add(CleanC, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
+        jPanel1.add(CleanC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
 
         TablaCalzado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -277,8 +215,8 @@ String fotoPerfil = "";
         });
         jScrollPane2.setViewportView(TablaCalzado);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 52, 803, 90));
-        jPanel1.add(tallec, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 61, 157, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 830, 300));
+        jPanel1.add(tallec, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 157, -1));
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/color.png"))); // NOI18N
         jButton15.setText("Elegir Color...");
@@ -287,7 +225,7 @@ String fotoPerfil = "";
                 jButton15ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 148, -1, -1));
+        jPanel1.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
 
         jTabbedPane5.addTab("Calzado", jPanel1);
 
@@ -323,10 +261,10 @@ String fotoPerfil = "";
                 GuardarIActionPerformed(evt);
             }
         });
-        jPanel2.add(GuardarI, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        jPanel2.add(GuardarI, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         EditI.setText("Modificar");
-        jPanel2.add(EditI, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
+        jPanel2.add(EditI, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
         CleanI.setText("Limpiar Campos");
         CleanI.addActionListener(new java.awt.event.ActionListener() {
@@ -334,7 +272,7 @@ String fotoPerfil = "";
                 CleanIActionPerformed(evt);
             }
         });
-        jPanel2.add(CleanI, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+        jPanel2.add(CleanI, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
 
         TablaIndumentaria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -346,7 +284,7 @@ String fotoPerfil = "";
         ));
         jScrollPane4.setViewportView(TablaIndumentaria);
 
-        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 803, 90));
+        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 830, 300));
 
         jLabel10.setText("Genero:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
@@ -358,10 +296,75 @@ String fotoPerfil = "";
 
         jTabbedPane5.addTab("Indumentaria", jPanel2);
 
-        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 145, -1, 330));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        foto1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(foto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 57, 103, 75));
+        jLabel11.setText("Textura:");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        jPanel3.add(textura, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 149, -1));
+
+        jLabel12.setText("Stock:");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jPanel3.add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 149, -1));
+
+        jLabel13.setText("Color");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/color.png"))); // NOI18N
+        jButton7.setText("Elegir Color...");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+
+        GuardarAccessorio.setText("Guardar");
+        GuardarAccessorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarAccessorioActionPerformed(evt);
+            }
+        });
+        jPanel3.add(GuardarAccessorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+
+        EditA.setText("Modificar");
+        EditA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditAActionPerformed(evt);
+            }
+        });
+        jPanel3.add(EditA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
+
+        CleanA.setText("Limpiar Campos");
+        CleanA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CleanAActionPerformed(evt);
+            }
+        });
+        jPanel3.add(CleanA, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
+
+        TablaAccesorio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Textura", "Color", "Stock"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(TablaAccesorio);
+
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 803, 300));
+
+        jTabbedPane5.addTab("Accesorios", jPanel3);
+
+        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 145, -1, 330));
         getContentPane().add(ColorIndumentaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 20, 20));
 
         labelColor.setText("ColorSelecionado:");
@@ -426,7 +429,7 @@ String fotoPerfil = "";
         producto.setStock(Integer.valueOf(stock.getText()));
         Conexion.getInstance().guardar(producto);
         //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
-        foto1.setIcon(getFotoImage(producto.getFoto()));
+        //foto1.setIcon(getFotoImage(producto.getFoto()));
         limpiarCampos();
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
@@ -435,9 +438,7 @@ String fotoPerfil = "";
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         ColorChooser();
-        labelColor.setForeground(Color.BLACK);
-        labelColor.repaint();
-        labelColor.validate();
+        labelColor.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -457,21 +458,47 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        if(!fotoPerfil.equals("")){
         producto.setFoto(convertirImagen(fotoPerfil));
+        }
         producto.setTalle(tallec.getText());
         producto.setTipo(tipoc.getText());
         producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stockc.getText()));
         Conexion.getInstance().guardar(producto);
+        cargarTablaCalzado();
+        fotoPerfil = "";
         //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
-        foto1.setIcon(getFotoImage(producto.getFoto()));
+        //foto1.setIcon(getFotoImage(producto.getFoto()));
     } catch (IOException ex) {
-        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
+    }        
     }//GEN-LAST:event_GuardarCActionPerformed
 
     private void EditCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCActionPerformed
-       
+         try {
+        Calzado producto = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),5);
+        producto.setNombre(nombre.getText());
+        double p = Double.parseDouble(proveedor.getText());
+        double v = Double.parseDouble(venta.getText());
+        producto.setPrecioProveedor(p);
+        producto.setPrecioVenta(v);
+        producto.setMarca(marca.getText());
+        if(!fotoPerfil.equals("")){
+           producto.setFoto(convertirImagen(fotoPerfil)); 
+        }
+        
+        producto.setTalle(tallec.getText());
+        producto.setTipo(tipoc.getText());
+        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+        producto.setStock(Integer.valueOf(stockc.getText()));
+        Conexion.getInstance().guardar(producto);
+        cargarTablaCalzado();
+        //jLabel19.setBackground(new Color(-13369549)); Color que esta en la base de datos convertido a int
+        //foto1.setIcon(getFotoImage(producto.getFoto()));
+    } catch (IOException ex) {
+        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
+    }        
     }//GEN-LAST:event_EditCActionPerformed
 
     private void CleanCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanCActionPerformed
@@ -497,19 +524,26 @@ String fotoPerfil = "";
     }//GEN-LAST:event_tipocActionPerformed
 
     private void TablaCalzadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalzadoMouseClicked
-        Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),0);
-        calzado.setNombre(nombre.getText());
-        calzado.setPrecioProveedor(Double.valueOf(proveedor.getText()));
-        calzado.setPrecioVenta(Double.valueOf(venta.getText()));
-        calzado.setMarca(marca.getText());
-        calzado.setTalle(tallec.getText());
-        calzado.setTipo(tipoc.getText());
-        calzado.setStock(Integer.valueOf(stockc.getText()));
+        Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),5);
+        nombre.setText(calzado.getNombre());
+        proveedor.setText(String.valueOf(calzado.getPrecioProveedor()));
+        venta.setText(String.valueOf(calzado.getPrecioVenta()));
+        marca.setText(calzado.getMarca());
+        tallec.setText(calzado.getTalle());
+        tipoc.setText(calzado.getTipo());
+        stockc.setText(String.valueOf(calzado.getStock()));
+        foto.setIcon(getFotoImage(calzado.getFoto()));
+        ColorIndumentaria.setBackground(new Color(Integer.valueOf(calzado.getColor())));
+        labelColor.setVisible(true);
         GuardarC.setEnabled(false);
         EditC.setEnabled(true);
         CleanC.setEnabled(true);
         //limpiarCampos();
     }//GEN-LAST:event_TablaCalzadoMouseClicked
+
+    private void EditAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,12 +591,17 @@ String fotoPerfil = "";
         fila[1]= next.getPrecioProveedor();
         fila[2]= next.getPrecioVenta();
         fila[3]= next.getMarca();
-        fila[4]= next.getFoto();
-        fila[5]= next.getTalle();
+        fila[4]= new JLabel(getFotoImage(next.getFoto()));
+        fila[5]= next;
         fila[6]= next.getTipo();
-        fila[7]= next.getColor();
+        JLabel lbl = new JLabel();
+        lbl.setOpaque(true);
+        lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
+        fila[7]= lbl;
         fila[8]= next.getStock();
         tableProductos.addRow(fila);
+        TablaCalzado.setDefaultRenderer(Object.class, new ImgTabla());
+        TablaCalzado.setRowHeight(85);
         }
     }
     
@@ -577,7 +616,7 @@ String fotoPerfil = "";
         fila[1]= next.getPrecioProveedor();
         fila[2]= next.getPrecioVenta();
         fila[3]= next.getMarca();
-        fila[4]= next.getFoto();
+        fila[4]= new JLabel(getFotoImage(next.getFoto()));
         fila[5]= next.getTalle();
         fila[6]= next.getTipo();
         fila[7]= next.getCategoria();
@@ -599,7 +638,7 @@ String fotoPerfil = "";
         fila[1]= next.getPrecioProveedor();
         fila[2]= next.getPrecioVenta();
         fila[3]= next.getMarca();
-        fila[4]= next.getFoto();
+        fila[4]= new JLabel(getFotoImage(next.getFoto()));
         fila[5]= next.getTextura();
         fila[7]= next.getColor();
         fila[8]= next.getStock();
@@ -620,7 +659,7 @@ String fotoPerfil = "";
     
     public ImageIcon getFotoImage(byte[] foto) {
         Image aux = new ImageIcon(foto).getImage();
-        ImageIcon perfil = new ImageIcon(aux.getScaledInstance(foto1.getWidth(), foto1.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon perfil = new ImageIcon(aux.getScaledInstance(this.foto.getWidth(), this.foto.getHeight(), Image.SCALE_DEFAULT));
         return perfil;
     }
     
@@ -636,7 +675,13 @@ String fotoPerfil = "";
         tipo.setText("");
         tipoc.setText("");
         venta.setText("");
-        marca.setText("");   
+        marca.setText("");
+        labelColor.setVisible(false);
+        ColorIndumentaria.setBackground(new Color(0,0,0,0));
+        foto.setIcon(null);
+        TablaCalzado.clearSelection();
+        TablaAccesorio.clearSelection();
+        TablaIndumentaria.clearSelection();
     }
     
     public void ColorChooser(){
@@ -673,7 +718,6 @@ String fotoPerfil = "";
     private javax.swing.JTable TablaIndumentaria;
     private javax.swing.JTextField categoria;
     private javax.swing.JLabel foto;
-    private javax.swing.JLabel foto1;
     private javax.swing.JTextField genero;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
