@@ -6,6 +6,7 @@
 package Boutique.gui;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
+        this.setTitle("Boutique Anita");
     }
 
     /**
@@ -34,15 +36,18 @@ public class Principal extends javax.swing.JFrame {
         Productos = new javax.swing.JButton();
         CLIENTES = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        VENTA = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
 
+        jPanel1.setBackground(new java.awt.Color(240, 196, 129));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setLayout(new java.awt.GridLayout(2, 4, 12, 12));
 
+        Productos.setBackground(new java.awt.Color(240, 218, 168));
         Productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/productos.png"))); // NOI18N
         Productos.setText("PRODUCTOS");
         Productos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -54,7 +59,11 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel1.add(Productos);
 
+        CLIENTES.setBackground(new java.awt.Color(240, 218, 168));
+        CLIENTES.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/clientes.png"))); // NOI18N
         CLIENTES.setText("CLIENTES");
+        CLIENTES.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CLIENTES.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         CLIENTES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CLIENTESActionPerformed(evt);
@@ -62,16 +71,32 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel1.add(CLIENTES);
 
-        jButton5.setText("jButton5");
+        jButton5.setBackground(new java.awt.Color(240, 218, 168));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/Combo.png"))); // NOI18N
+        jButton5.setText("COMBOS");
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         jPanel1.add(jButton5);
 
-        jButton3.setText("jButton3");
-        jPanel1.add(jButton3);
+        VENTA.setBackground(new java.awt.Color(240, 218, 168));
+        VENTA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/Venta.png"))); // NOI18N
+        VENTA.setText("VENTA");
+        VENTA.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        VENTA.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanel1.add(VENTA);
 
-        jButton4.setText("jButton4");
+        jButton4.setBackground(new java.awt.Color(240, 218, 168));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/gastos.png"))); // NOI18N
+        jButton4.setText("GASTOS");
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         jPanel1.add(jButton4);
 
-        jButton6.setText("jButton6");
+        jButton6.setBackground(new java.awt.Color(240, 218, 168));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/compra.png"))); // NOI18N
+        jButton6.setText("COMPRA");
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         jPanel1.add(jButton6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,7 +163,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CLIENTES;
     private javax.swing.JButton Productos;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton VENTA;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

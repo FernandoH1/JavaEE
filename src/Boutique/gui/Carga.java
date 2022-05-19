@@ -1,7 +1,10 @@
 package Boutique.gui;
 
 import Boutique.persistencia.Conexion;
+import com.sun.awt.AWTUtilities;
 import java.awt.Color;
+import java.awt.Shape;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.ImageIcon;
 
 public class Carga extends javax.swing.JFrame implements Runnable {
@@ -11,10 +14,12 @@ public class Carga extends javax.swing.JFrame implements Runnable {
     public Carga() {
         initComponents();
         this.setAlwaysOnTop(true);
-        this.setSize(500,300);
+        this.setSize(400,300);
         this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
         this.setBackground(new Color(0,0,0,0));
         this.setLocationRelativeTo(null);
+        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 150, 150);
+        AWTUtilities.setWindowShape(this, forma);
         //System.out.println(getClass().getResource("/Boutique/Image/GifCarga.gif"));
         ImageIcon icono2 = new ImageIcon(getClass().getResource("/Boutique/Image/GifCarga.gif"));
         jLabel1.setIcon(icono2);
