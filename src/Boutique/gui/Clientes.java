@@ -1,6 +1,7 @@
 package Boutique.gui;
 import Boutique.io.Cliente;
 import Boutique.persistencia.Conexion;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
@@ -10,10 +11,14 @@ public class Clientes extends javax.swing.JFrame {
 
     public Clientes() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
         cargarTabla();  
         modificarbtn.setEnabled(false);
         cleanBtn.setEnabled(false);
+        Volver.setBackground(new Color(0,0,0,0));
+        this.setSize(689, 355);
+        this.setTitle("Clientes");
     }
 
     @SuppressWarnings("unchecked")
@@ -35,9 +40,10 @@ public class Clientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableDatos = new javax.swing.JTable();
         cleanBtn = new javax.swing.JButton();
+        Volver = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(678, 370));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nombre:");
@@ -115,6 +121,18 @@ public class Clientes extends javax.swing.JFrame {
         });
         getContentPane().add(cleanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
 
+        Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/anterior.png"))); // NOI18N
+        Volver.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/anteriorr.png"))); // NOI18N
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 50, 50));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/fondo.jpg"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 710, 340));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -170,6 +188,12 @@ public class Clientes extends javax.swing.JFrame {
         guardarbtn.setEnabled(true);
         modificarbtn.setEnabled(false);
     }//GEN-LAST:event_cleanBtnActionPerformed
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        Principal p = new Principal();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_VolverActionPerformed
 
     public void cargarTabla(){
         DefaultTableModel tablaClientes = new DefaultTableModel();
@@ -239,6 +263,7 @@ public class Clientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableDatos;
+    private javax.swing.JButton Volver;
     private javax.swing.JTextField apellido;
     private javax.swing.JTextField ci;
     private javax.swing.JButton cleanBtn;
@@ -249,6 +274,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificarbtn;
     private javax.swing.JTextField nombre;

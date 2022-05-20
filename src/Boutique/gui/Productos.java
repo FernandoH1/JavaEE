@@ -29,14 +29,17 @@ String fotoPerfil = "";
     
     public Productos() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
         cargarTablaCalzado();
         cargarTablaInd();
         cargarTablaAcc();
         botonesA();
         ColorIndumentaria.setOpaque(true); 
+        ColorIndumentaria.setBackground(new Color(0,0,0,0));
         labelColor.setOpaque(true);
         labelColor.setVisible(false); 
+        Volver.setBackground(new Color(0,0,0,0));
     }
 
     @SuppressWarnings("unchecked")
@@ -44,6 +47,7 @@ String fotoPerfil = "";
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
+        Volver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -102,10 +106,21 @@ String fotoPerfil = "";
         TablaAccesorio = new javax.swing.JTable();
         ColorIndumentaria = new javax.swing.JLabel();
         labelColor = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 204, 153));
+        setBackground(new java.awt.Color(240, 218, 168));
+        setFocusable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/anterior.png"))); // NOI18N
+        Volver.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/anteriorr.png"))); // NOI18N
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 0, 50, 50));
 
         jLabel1.setText("Nombre:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
@@ -142,8 +157,9 @@ String fotoPerfil = "";
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
 
         foto.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 57, 103, 75));
+        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 140, 120));
 
+        jPanel1.setBackground(new java.awt.Color(240, 218, 168));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Talle:");
@@ -213,7 +229,7 @@ String fotoPerfil = "";
         });
         jScrollPane2.setViewportView(TablaCalzado);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 830, 300));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 810, 290));
         jPanel1.add(tallec, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 157, -1));
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/color.png"))); // NOI18N
@@ -227,6 +243,7 @@ String fotoPerfil = "";
 
         jTabbedPane5.addTab("Calzado", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(240, 218, 168));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setText("Talle:");
@@ -300,7 +317,7 @@ String fotoPerfil = "";
         });
         jScrollPane4.setViewportView(TablaIndumentaria);
 
-        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 830, 300));
+        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 810, 290));
 
         jLabel10.setText("Genero:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
@@ -312,6 +329,7 @@ String fotoPerfil = "";
 
         jTabbedPane5.addTab("Indumentaria", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(240, 218, 168));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setText("Textura:");
@@ -348,7 +366,7 @@ String fotoPerfil = "";
                 EditAActionPerformed(evt);
             }
         });
-        jPanel3.add(EditA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
+        jPanel3.add(EditA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         CleanA.setText("Limpiar Campos");
         CleanA.addActionListener(new java.awt.event.ActionListener() {
@@ -356,7 +374,7 @@ String fotoPerfil = "";
                 CleanAActionPerformed(evt);
             }
         });
-        jPanel3.add(CleanA, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
+        jPanel3.add(CleanA, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, -1, -1));
 
         TablaAccesorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -381,15 +399,20 @@ String fotoPerfil = "";
         });
         jScrollPane3.setViewportView(TablaAccesorio);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 803, 300));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 790, 290));
 
         jTabbedPane5.addTab("Accesorios", jPanel3);
 
-        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 145, -1, 330));
-        getContentPane().add(ColorIndumentaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 20, 20));
+        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1120, 340));
+
+        ColorIndumentaria.setBackground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(ColorIndumentaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 20, 20));
 
         labelColor.setText("ColorSelecionado:");
-        getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
+        getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/fondo.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -464,14 +487,19 @@ String fotoPerfil = "";
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         ColorChooser();
         labelColor.setVisible(true);
+        labelColor.setBackground(new Color(0,0,0,0));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         ColorChooser();
+        labelColor.setVisible(true);
+        labelColor.setBackground(new Color(0,0,0,0));
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         ColorChooser();
+        labelColor.setVisible(true);
+        labelColor.setBackground(new Color(0,0,0,0));
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void GuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarCActionPerformed
@@ -645,6 +673,12 @@ String fotoPerfil = "";
         EditA.setEnabled(true);
         CleanA.setEnabled(true);
     }//GEN-LAST:event_TablaAccesorioMouseClicked
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        Principal p = new Principal();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_VolverActionPerformed
 
 
     public static void main(String args[]) {
@@ -828,7 +862,9 @@ String fotoPerfil = "";
     private javax.swing.JTable TablaAccesorio;
     private javax.swing.JTable TablaCalzado;
     private javax.swing.JTable TablaIndumentaria;
+    private javax.swing.JButton Volver;
     private javax.swing.JTextField categoria;
+    private javax.swing.JLabel fondo;
     private javax.swing.JLabel foto;
     private javax.swing.JTextField genero;
     private javax.swing.JButton jButton1;

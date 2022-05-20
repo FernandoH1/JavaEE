@@ -19,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
         this.setTitle("Boutique Anita");
     }
@@ -113,17 +114,17 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductosActionPerformed
-        Productos p = new Productos();
-        p.setVisible(true);
-        this.dispose();    
-    }//GEN-LAST:event_ProductosActionPerformed
-
     private void CLIENTESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLIENTESActionPerformed
         Clientes c = new Clientes();
         c.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CLIENTESActionPerformed
+
+    private void ProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductosActionPerformed
+        Productos p = new Productos();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ProductosActionPerformed
 
     /**
      * @param args the command line arguments
