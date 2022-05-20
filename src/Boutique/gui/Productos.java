@@ -177,6 +177,12 @@ String fotoPerfil = "";
         fondoProducto.setBackground(new java.awt.Color(240, 218, 168));
         getContentPane().add(fondoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 550, 140));
 
+        jTabbedPane5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane5MouseClicked(evt);
+            }
+        });
+
         jPanel1.setBackground(new java.awt.Color(240, 218, 168));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -696,6 +702,10 @@ String fotoPerfil = "";
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jTabbedPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane5MouseClicked
+        limpiarCampos();
+    }//GEN-LAST:event_jTabbedPane5MouseClicked
 
 
     public static void main(String args[]) {
