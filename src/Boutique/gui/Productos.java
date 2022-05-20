@@ -37,6 +37,9 @@ String fotoPerfil = "";
         botonesA();
         ColorIndumentaria.setOpaque(true); 
         ColorIndumentaria.setBackground(new Color(0,0,0,0));
+        fondoProducto.setOpaque(true);
+        fondoProducto.setBackground(new Color(240,218,168));
+        agrandarLabel();
         labelColor.setOpaque(true);
         labelColor.setVisible(false); 
         Volver.setBackground(new Color(0,0,0,0));
@@ -58,7 +61,10 @@ String fotoPerfil = "";
         venta = new javax.swing.JTextField();
         marca = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        ColorIndumentaria = new javax.swing.JLabel();
+        labelColor = new javax.swing.JLabel();
         foto = new javax.swing.JLabel();
+        fondoProducto = new javax.swing.JLabel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -104,8 +110,6 @@ String fotoPerfil = "";
         CleanA = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaAccesorio = new javax.swing.JTable();
-        ColorIndumentaria = new javax.swing.JLabel();
-        labelColor = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -149,6 +153,11 @@ String fotoPerfil = "";
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/file.png"))); // NOI18N
         jButton1.setText("Selecionar Archivo...");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -156,8 +165,17 @@ String fotoPerfil = "";
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
 
+        ColorIndumentaria.setBackground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(ColorIndumentaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 20, 20));
+
+        labelColor.setText("ColorSelecionado:");
+        getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
+
         foto.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 140, 120));
+
+        fondoProducto.setBackground(new java.awt.Color(240, 218, 168));
+        getContentPane().add(fondoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 550, 140));
 
         jPanel1.setBackground(new java.awt.Color(240, 218, 168));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -405,12 +423,6 @@ String fotoPerfil = "";
 
         getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1120, 340));
 
-        ColorIndumentaria.setBackground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(ColorIndumentaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 20, 20));
-
-        labelColor.setText("ColorSelecionado:");
-        getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
-
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/fondo.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 510));
 
@@ -425,9 +437,10 @@ String fotoPerfil = "";
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             fotoPerfil = jFileChooser1.getSelectedFile().getPath();
             Image aux = new ImageIcon(fotoPerfil).getImage();
-            ImageIcon perfil = new ImageIcon(aux.getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT));
-            foto.setIcon(perfil);
+            ImageIcon perfil = new ImageIcon(aux.getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)); 
+            foto.setIcon(perfil);        
         }
+          
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorActionPerformed
@@ -680,6 +693,10 @@ String fotoPerfil = "";
         this.dispose();
     }//GEN-LAST:event_VolverActionPerformed
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -847,6 +864,13 @@ String fotoPerfil = "";
         CleanC.setEnabled(false);
     }
     
+    ///Duda para el profe
+    public void agrandarLabel(){
+        fondoProducto.setSize(740, 140);
+        fondoProducto.repaint();
+        fondoProducto.validate(); 
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CleanA;
@@ -865,6 +889,7 @@ String fotoPerfil = "";
     private javax.swing.JButton Volver;
     private javax.swing.JTextField categoria;
     private javax.swing.JLabel fondo;
+    private javax.swing.JLabel fondoProducto;
     private javax.swing.JLabel foto;
     private javax.swing.JTextField genero;
     private javax.swing.JButton jButton1;
