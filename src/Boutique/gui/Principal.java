@@ -84,6 +84,11 @@ public class Principal extends javax.swing.JFrame {
         VENTA.setText("VENTA");
         VENTA.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         VENTA.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        VENTA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VENTAActionPerformed(evt);
+            }
+        });
         jPanel1.add(VENTA);
 
         jButton4.setBackground(new java.awt.Color(240, 218, 168));
@@ -125,6 +130,12 @@ public class Principal extends javax.swing.JFrame {
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ProductosActionPerformed
+
+    private void VENTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VENTAActionPerformed
+        Venta v = new Venta();
+        v.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_VENTAActionPerformed
 
     /**
      * @param args the command line arguments
