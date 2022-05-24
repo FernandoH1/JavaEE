@@ -446,6 +446,7 @@ String fotoPerfil = "";
             ImageIcon perfil = new ImageIcon(aux.getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)); 
             foto.setIcon(perfil);        
         }
+        agrandarLabel();
           
     }//GEN-LAST:event_jButton1ActionPerformed
 

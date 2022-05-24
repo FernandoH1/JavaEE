@@ -111,7 +111,7 @@ public class Clientes extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TableDatos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 630, 110));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 630, 110));
 
         cleanBtn.setText("Limpiar Campos");
         cleanBtn.addActionListener(new java.awt.event.ActionListener() {

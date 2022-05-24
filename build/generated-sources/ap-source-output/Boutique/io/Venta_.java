@@ -10,10 +10,10 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Venta.class)
 public abstract class Venta_ {
 
-	public static volatile SingularAttribute<Venta, Enum> metodoPago;
+	public static volatile SingularAttribute<Venta, String> metodoPago;
 	public static volatile SingularAttribute<Venta, Cliente> cliente;
 	public static volatile SingularAttribute<Venta, Double> descuento;
-	public static volatile SingularAttribute<Venta, Enum> tipoPago;
+	public static volatile SingularAttribute<Venta, String> tipoPago;
 	public static volatile SingularAttribute<Venta, Long> id;
 	public static volatile ListAttribute<Venta, DetalleDeVenta> detalleDeVenta;
 	public static volatile SingularAttribute<Venta, Date> fechaVenta;

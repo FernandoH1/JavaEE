@@ -23,8 +23,8 @@ public class Venta implements Serializable {
     private Long id;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fechaVenta;
-    private Enum tipoPago;
-    private Enum metodoPago;
+    private String tipoPago;
+    private String metodoPago;
     private double descuento;
     
     @OneToMany(mappedBy = "venta")
@@ -64,19 +64,19 @@ public class Venta implements Serializable {
         this.fechaVenta = fechaVenta;
     }
 
-    public Enum getTipoPago() {
+    public String getTipoPago() {
         return tipoPago;
     }
 
-    public void setTipoPago(Enum tipoPago) {
+    public void setTipoPago(String tipoPago) {
         this.tipoPago = tipoPago;
     }
 
-    public Enum getMetodoPago() {
+    public String getMetodoPago() {
         return metodoPago;
     }
 
-    public void setMetodoPago(Enum metodoPago) {
+    public void setMetodoPago(String metodoPago) {
         this.metodoPago = metodoPago;
     }
 
