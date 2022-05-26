@@ -70,14 +70,6 @@ public class Venta extends javax.swing.JFrame {
         Volver = new javax.swing.JButton();
         ClientesCombo = new BD.WideComboBox();
         jTabbedPane5 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        buscarA = new javax.swing.JTextField();
-        nombreA = new javax.swing.JRadioButton();
-        textura = new javax.swing.JRadioButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TablaAccesorio = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
-        agregarA = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         buscarC = new javax.swing.JTextField();
         nombreC = new javax.swing.JRadioButton();
@@ -85,10 +77,10 @@ public class Venta extends javax.swing.JFrame {
         talleC = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaCalzado = new javax.swing.JTable();
-        jTextField2 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         agregarC = new javax.swing.JButton();
+        jSpinner2 = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         buscarI = new javax.swing.JTextField();
         nombreI = new javax.swing.JRadioButton();
@@ -98,6 +90,16 @@ public class Venta extends javax.swing.JFrame {
         TablaIndumentaria = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         agregarI = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        buscarA = new javax.swing.JTextField();
+        nombreA = new javax.swing.JRadioButton();
+        textura = new javax.swing.JRadioButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TablaAccesorio = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        agregarA = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
         foto = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -203,68 +205,6 @@ public class Venta extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(240, 218, 168));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        buscarA.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                buscarAKeyReleased(evt);
-            }
-        });
-        jPanel3.add(buscarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 270, -1));
-
-        buttonGroupA.add(nombreA);
-        nombreA.setText("Nombre");
-        nombreA.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nombreAMouseClicked(evt);
-            }
-        });
-        jPanel3.add(nombreA, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
-
-        buttonGroupA.add(textura);
-        textura.setText("Textura");
-        textura.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                texturaMouseClicked(evt);
-            }
-        });
-        jPanel3.add(textura, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, -1));
-
-        TablaAccesorio.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Textura", "Color", "Stock"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TablaAccesorio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaAccesorioMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(TablaAccesorio);
-
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 220));
-
-        jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel12.setText("Buscar :");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        agregarA.setText("Agregar");
-        jPanel3.add(agregarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 160, -1));
-
-        jTabbedPane5.addTab("Accesorios", jPanel3);
-
         jPanel1.setBackground(new java.awt.Color(240, 218, 168));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -335,10 +275,7 @@ public class Venta extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 220));
 
-        jTextField2.setText("jTextField2");
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
-
-        jLabel16.setText("jLabel16");
+        jLabel16.setText("Cantidad:");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -347,6 +284,9 @@ public class Venta extends javax.swing.JFrame {
 
         agregarC.setText("Agregar");
         jPanel1.add(agregarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 150, -1));
+
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10000, 1));
+        jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 60, -1));
 
         jTabbedPane5.addTab("Calzado", jPanel1);
 
@@ -420,6 +360,73 @@ public class Venta extends javax.swing.JFrame {
         jPanel2.add(agregarI, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 160, -1));
 
         jTabbedPane5.addTab("Indumentaria", jPanel2);
+
+        jPanel3.setBackground(new java.awt.Color(240, 218, 168));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buscarA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscarAKeyReleased(evt);
+            }
+        });
+        jPanel3.add(buscarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 270, -1));
+
+        buttonGroupA.add(nombreA);
+        nombreA.setText("Nombre");
+        nombreA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nombreAMouseClicked(evt);
+            }
+        });
+        jPanel3.add(nombreA, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        buttonGroupA.add(textura);
+        textura.setText("Textura");
+        textura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                texturaMouseClicked(evt);
+            }
+        });
+        jPanel3.add(textura, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, -1));
+
+        TablaAccesorio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Textura", "Color", "Stock"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaAccesorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaAccesorioMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(TablaAccesorio);
+
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 220));
+
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Cantidad:");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel12.setText("Buscar :");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        agregarA.setText("Agregar");
+        jPanel3.add(agregarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 160, -1));
+        jPanel3.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 40, -1));
+
+        jTabbedPane5.addTab("Accesorios", jPanel3);
 
         getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 910, 330));
 
@@ -808,6 +815,7 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -818,10 +826,11 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JComboBox<String> metodoDePagoCombo;
