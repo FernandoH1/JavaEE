@@ -23,7 +23,6 @@ public class DetalleDeVenta implements Serializable {
     private int cantidad;
     private double precioUnitario;
     private double precioCompra;
-    private double descuento;
     
     @ManyToOne
     private Producto producto;
@@ -86,16 +85,7 @@ public class DetalleDeVenta implements Serializable {
     public void setPrecioCompra(double precioCompra) {
         this.precioCompra = precioCompra;
     }
-
-    public double getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(double descuento) {
-        this.descuento = descuento;
-    }
     
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -118,7 +108,7 @@ public class DetalleDeVenta implements Serializable {
 
     @Override
     public String toString() {
-        return "DetalleDeVenta{" + "id=" + id + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + ", precioCompra=" + precioCompra + ", descuento=" + descuento + '}';
+        return "DetalleDeVenta{" + "id=" + id + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + ", precioCompra=" + precioCompra + '}';
     }
 
 }

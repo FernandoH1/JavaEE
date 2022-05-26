@@ -10,7 +10,6 @@ public abstract class DetalleDeVenta_ {
 
 	public static volatile SingularAttribute<DetalleDeVenta, Venta> venta;
 	public static volatile SingularAttribute<DetalleDeVenta, Double> precioUnitario;
-	public static volatile SingularAttribute<DetalleDeVenta, Double> descuento;
 	public static volatile SingularAttribute<DetalleDeVenta, Double> precioCompra;
 	public static volatile SingularAttribute<DetalleDeVenta, Combo> combo;
 	public static volatile SingularAttribute<DetalleDeVenta, Long> id;

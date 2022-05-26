@@ -3,10 +3,11 @@ package Boutique.gui;
 import Boutique.io.Accesorio;
 import Boutique.io.Calzado;
 import Boutique.io.Cliente;
+import Boutique.io.DetalleDeVenta;
 import Boutique.io.Indumentaria;
-import Boutique.io.Producto;
 import Boutique.persistencia.Conexion;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -17,8 +18,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 
@@ -30,6 +31,9 @@ public class Venta extends javax.swing.JFrame {
     public Venta() {
         initComponents();
         Volver.setBackground(new Color(0,0,0,0));
+        cantidadC.setEnabled(false);
+        cantidadA.setEnabled(false);
+        cantidadI.setEnabled(false);
         cargarTablaCalzado();
         cargarTablaInd();
         cargarTablaAcc();
@@ -64,7 +68,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        detalleDeVenta = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         cliente = new javax.swing.JTextField();
         Volver = new javax.swing.JButton();
@@ -80,7 +84,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         agregarC = new javax.swing.JButton();
-        jSpinner2 = new javax.swing.JSpinner();
+        cantidadC = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         buscarI = new javax.swing.JTextField();
         nombreI = new javax.swing.JRadioButton();
@@ -90,6 +94,8 @@ public class Venta extends javax.swing.JFrame {
         TablaIndumentaria = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         agregarI = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        cantidadI = new javax.swing.JSpinner();
         jPanel3 = new javax.swing.JPanel();
         buscarA = new javax.swing.JTextField();
         nombreA = new javax.swing.JRadioButton();
@@ -99,7 +105,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         agregarA = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
+        cantidadA = new javax.swing.JSpinner();
         foto = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -154,7 +160,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel7.setText("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 930, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        detalleDeVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -170,7 +176,7 @@ public class Venta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(detalleDeVenta);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 910, 190));
 
@@ -275,6 +281,8 @@ public class Venta extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 220));
 
+        jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Cantidad:");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
 
@@ -283,10 +291,20 @@ public class Venta extends javax.swing.JFrame {
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         agregarC.setText("Agregar");
+        agregarC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarCMouseClicked(evt);
+            }
+        });
+        agregarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarCActionPerformed(evt);
+            }
+        });
         jPanel1.add(agregarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 150, -1));
 
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10000, 1));
-        jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 60, -1));
+        cantidadC.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
+        jPanel1.add(cantidadC, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 60, -1));
 
         jTabbedPane5.addTab("Calzado", jPanel1);
 
@@ -359,6 +377,14 @@ public class Venta extends javax.swing.JFrame {
         agregarI.setText("Agregar");
         jPanel2.add(agregarI, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 160, -1));
 
+        jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel17.setText("Cantidad:");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, 20));
+
+        cantidadI.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
+        jPanel2.add(cantidadI, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 50, -1));
+
         jTabbedPane5.addTab("Indumentaria", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(240, 218, 168));
@@ -414,9 +440,10 @@ public class Venta extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 220));
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Cantidad:");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, -1, 20));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel12.setText("Buscar :");
@@ -424,7 +451,9 @@ public class Venta extends javax.swing.JFrame {
 
         agregarA.setText("Agregar");
         jPanel3.add(agregarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 160, -1));
-        jPanel3.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 40, -1));
+
+        cantidadA.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
+        jPanel3.add(cantidadA, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 70, -1));
 
         jTabbedPane5.addTab("Accesorios", jPanel3);
 
@@ -500,13 +529,14 @@ public class Venta extends javax.swing.JFrame {
             ClientesCombo.setModel(mdl);
             if(mdl.getSize() > 0){
             ClientesCombo.showPopup();
-            }
-            
+            }    
         }
     }//GEN-LAST:event_clienteKeyReleased
 
     private void jTabbedPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane5MouseClicked
-
+        TablaCalzado.clearSelection();
+        TablaAccesorio.clearSelection();
+        TablaIndumentaria.clearSelection();
     }//GEN-LAST:event_jTabbedPane5MouseClicked
 
     private void talleCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_talleCActionPerformed
@@ -514,15 +544,27 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_talleCActionPerformed
 
     private void TablaCalzadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalzadoMouseClicked
-       
+       Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),5);   
+        SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadC.getModel();         
+        modeloSpinner.setMaximum(calzado.getStock()); 
+        modeloSpinner.setMinimum(1);
+        cantidadC.setEnabled(true);
     }//GEN-LAST:event_TablaCalzadoMouseClicked
 
     private void TablaIndumentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaIndumentariaMouseClicked
-        
+        Indumentaria ind = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);   
+        SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();         
+        modeloSpinner.setMaximum(ind.getStock()); 
+        modeloSpinner.setMinimum(1);
+        cantidadI.setEnabled(true);
     }//GEN-LAST:event_TablaIndumentariaMouseClicked
 
     private void TablaAccesorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAccesorioMouseClicked
-        
+        Accesorio acc = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(),5);   
+        SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();         
+        modeloSpinner.setMaximum(acc.getStock()); 
+        modeloSpinner.setMinimum(1);
+        cantidadA.setEnabled(true);
     }//GEN-LAST:event_TablaAccesorioMouseClicked
 
     private void buscarCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarCKeyTyped
@@ -613,6 +655,30 @@ public class Venta extends javax.swing.JFrame {
     private void tipoVentaComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoVentaComboActionPerformed
         
     }//GEN-LAST:event_tipoVentaComboActionPerformed
+
+    private void agregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCActionPerformed
+        Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),5);                
+        DetalleDeVenta dv = new DetalleDeVenta();
+        int cantidad = (int) cantidadC.getValue();
+        dv.setCantidad(cantidad);
+        dv.setPrecioUnitario(calzado.getPrecioVenta());
+        dv.setPrecioCompra(calzado.getPrecioVenta()*cantidad);
+        dv.setProducto(calzado);
+        Conexion.getInstance().guardar(dv);
+        
+        /*DefaultTableModel tableProductos = (DefaultTableModel) detalleDeVenta.getModel();
+        tableProductos.setRowCount(0);
+        Object[] fila = new Object[4];
+        fila[0]= dv.getProducto().getNombre();
+        fila[2]= dv.getPrecioUnitario();
+        fila[3]= dv.getPrecioCompra();
+        fila[1]= dv.getCantidad();
+        tableProductos.addRow(fila);*/
+    }//GEN-LAST:event_agregarCActionPerformed
+
+    private void agregarCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarCMouseClicked
+        
+    }//GEN-LAST:event_agregarCMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -717,6 +783,7 @@ public class Venta extends javax.swing.JFrame {
         fila[6]= lbl;
         fila[7]= next.getStock();
         tableProductos.addRow(fila);
+        TablaAccesorio.setDefaultRenderer(Object.class, new ImgTabla());
         TablaAccesorio.setRowHeight(40);
         }
     }
@@ -794,7 +861,11 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupC;
     private javax.swing.ButtonGroup buttonGroupDesc;
     private javax.swing.ButtonGroup buttonGroupInd;
+    private javax.swing.JSpinner cantidadA;
+    private javax.swing.JSpinner cantidadC;
+    private javax.swing.JSpinner cantidadI;
     private javax.swing.JTextField cliente;
+    private javax.swing.JTable detalleDeVenta;
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -808,6 +879,7 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -826,10 +898,7 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
