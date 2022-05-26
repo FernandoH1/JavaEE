@@ -93,11 +93,11 @@ public class Clientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Apellido", "CI", "Teléfono", "Dirección"
+                "Nombre Completo", "CI", "Teléfono", "Dirección"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -156,7 +156,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_guardarbtnActionPerformed
 
     private void TableDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableDatosMouseClicked
-        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),2);
+        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),0);
         nombre.setText(cliente.getNombre());
         apellido.setText(cliente.getApellido());
         ci.setText(cliente.getCi());
@@ -168,7 +168,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_TableDatosMouseClicked
 
     private void modificarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarbtnActionPerformed
-        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),2);
+        Cliente cliente = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),0);
         cliente.setNombre(nombre.getText());
         cliente.setApellido(apellido.getText());
         cliente.setCi(ci.getText());
@@ -202,12 +202,11 @@ public class Clientes extends javax.swing.JFrame {
         tablaClientes.setRowCount(0);
         while(it.hasNext()){
         Cliente next = it.next();
-        Object[] fila = new Object[5];
-        fila[0]= next.getNombre();
-        fila[1]= next.getApellido();
-        fila[2]= next;
-        fila[3]= next.getTelefonos();
-        fila[4]= next.getDireccion();
+        Object[] fila = new Object[4];
+        fila[0]= next;
+        fila[1]= next.getCi();
+        fila[2]= next.getTelefonos();
+        fila[3]= next.getDireccion();
         tablaClientes.addRow(fila);
         }
     }

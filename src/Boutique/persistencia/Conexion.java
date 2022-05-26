@@ -147,4 +147,17 @@ public class Conexion {
         return productos;
     }
     
+     public List<Cliente> listarClientesByName(String cliente) {
+        EntityManager em = getEntity();
+        List<Cliente> clientes = null;
+        em.getTransaction().begin();
+        try {
+            clientes = em.createNativeQuery("SELECT * FROM cliente WHERE nombre LIKE '"+cliente+"%' ORDER BY nombre ASC",Cliente.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return clientes;
+    }
+    
 }

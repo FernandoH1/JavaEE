@@ -37,9 +37,9 @@ String fotoPerfil = "";
         botonesA();
         ColorIndumentaria.setOpaque(true); 
         ColorIndumentaria.setBackground(new Color(0,0,0,0));
-        fondoProducto.setOpaque(true);
-        fondoProducto.setBackground(new Color(240,218,168));
-        agrandarLabel();
+        fondoProducto.setBackground(new Color(240,218,168)); 
+        fotoPanel.setVisible(false);
+        fotoPanel.setBackground(new Color(240,218,168));
         labelColor.setOpaque(true);
         labelColor.setVisible(false); 
         Volver.setBackground(new Color(0,0,0,0));
@@ -64,7 +64,8 @@ String fotoPerfil = "";
         ColorIndumentaria = new javax.swing.JLabel();
         labelColor = new javax.swing.JLabel();
         foto = new javax.swing.JLabel();
-        fondoProducto = new javax.swing.JLabel();
+        fotoPanel = new javax.swing.JPanel();
+        fondoProducto = new javax.swing.JPanel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -111,6 +112,7 @@ String fotoPerfil = "";
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaAccesorio = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(240, 218, 168));
@@ -172,9 +174,8 @@ String fotoPerfil = "";
         getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
 
         foto.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 140, 120));
-
-        fondoProducto.setBackground(new java.awt.Color(240, 218, 168));
+        getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 140, 110));
+        getContentPane().add(fotoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 180, 140));
         getContentPane().add(fondoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 550, 140));
 
         jTabbedPane5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -432,6 +433,9 @@ String fotoPerfil = "";
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/fondo.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 510));
 
+        jLabel19.setText("jLabel19");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -442,11 +446,12 @@ String fotoPerfil = "";
         int returnVal = jFileChooser1.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             fotoPerfil = jFileChooser1.getSelectedFile().getPath();
+            fotoPanel.setVisible(true);
             Image aux = new ImageIcon(fotoPerfil).getImage();
             ImageIcon perfil = new ImageIcon(aux.getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)); 
             foto.setIcon(perfil);        
         }
-        agrandarLabel();
+        
           
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -855,7 +860,8 @@ String fotoPerfil = "";
         foto.setIcon(null);
         TablaCalzado.clearSelection();
         TablaAccesorio.clearSelection();
-        TablaIndumentaria.clearSelection();    
+        TablaIndumentaria.clearSelection();   
+        fotoPanel.setVisible(false);
     }
     
     public void ColorChooser(){
@@ -877,7 +883,7 @@ String fotoPerfil = "";
     
     ///Duda para el profe
     public void agrandarLabel(){
-        fondoProducto.setSize(740, 140);
+        fondoProducto.setSize(550, 140);
         fondoProducto.repaint();
         fondoProducto.validate(); 
     }
@@ -900,8 +906,9 @@ String fotoPerfil = "";
     private javax.swing.JButton Volver;
     private javax.swing.JTextField categoria;
     private javax.swing.JLabel fondo;
-    private javax.swing.JLabel fondoProducto;
+    private javax.swing.JPanel fondoProducto;
     private javax.swing.JLabel foto;
+    private javax.swing.JPanel fotoPanel;
     private javax.swing.JTextField genero;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
@@ -918,6 +925,7 @@ String fotoPerfil = "";
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
