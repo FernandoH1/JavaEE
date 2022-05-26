@@ -881,13 +881,6 @@ String fotoPerfil = "";
         CleanC.setEnabled(false);
     }
     
-    ///Duda para el profe
-    public void agrandarLabel(){
-        fondoProducto.setSize(550, 140);
-        fondoProducto.repaint();
-        fondoProducto.validate(); 
-    }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CleanA;

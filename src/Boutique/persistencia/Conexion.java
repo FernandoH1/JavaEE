@@ -159,5 +159,18 @@ public class Conexion {
         }
         return clientes;
     }
+     
+     public List<Indumentaria> listarIndumentariaByNombre(String nombre, String tipo, String talle) {
+        EntityManager em = getEntity();
+        List<Indumentaria> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM producto, indumentaria WHERE producto.id = indumentaria.id AND nombre LIKE '"+nombre+"%' AND tipo='"+tipo+"' AND talle="+talle+" ORDER BY nombre ASC",Indumentaria.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
     
 }
