@@ -59,10 +59,6 @@ public class Venta extends javax.swing.JFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         tipoVentaCombo = new javax.swing.JComboBox<>();
         metodoDePagoCombo = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        Valor = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         detalleDeVenta = new javax.swing.JTable();
@@ -107,7 +103,6 @@ public class Venta extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         quitar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -115,6 +110,8 @@ public class Venta extends javax.swing.JFrame {
         subTotal = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        descuento = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -140,19 +137,6 @@ public class Venta extends javax.swing.JFrame {
 
         metodoDePagoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
         getContentPane().add(metodoDePagoCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 160, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 730, 146, -1));
-
-        buttonGroupDesc.add(jRadioButton1);
-        jRadioButton1.setText("%");
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 700, -1, -1));
-
-        buttonGroupDesc.add(Valor);
-        Valor.setText("Valor");
-        getContentPane().add(Valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 700, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel6.setText("/");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 700, 30, -1));
 
         jLabel7.setText("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 930, -1));
@@ -483,13 +467,15 @@ public class Venta extends javax.swing.JFrame {
         });
         jPanel5.add(quitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel5.setText("Tipo de Descuento:");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
-
         jLabel4.setText("Descuento:");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
-        jButton1.setText("Sacar Desquento");
+        jButton1.setText("Generar Desquento");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         jButton4.setText("Confirmar Venta");
@@ -499,14 +485,26 @@ public class Venta extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 180, -1));
-        jPanel5.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, 60, -1));
+        jPanel5.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 120, -1));
         jPanel5.add(subTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 60, -1));
 
         jLabel10.setText("SUB-TOTAL:");
         jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
 
         jLabel11.setText("TOTAL:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, -1, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, -1, -1));
+
+        descuento.setText("0");
+        descuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descuentoActionPerformed(evt);
+            }
+        });
+        jPanel5.add(descuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 50, -1));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setText("%");
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 910, 150));
 
@@ -699,6 +697,14 @@ public class Venta extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         generarVenta();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void descuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descuentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descuentoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       calcularSubTotal();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -989,7 +995,6 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JTable TablaAccesorio;
     private javax.swing.JTable TablaCalzado;
     private javax.swing.JTable TablaIndumentaria;
-    private javax.swing.JRadioButton Valor;
     private javax.swing.JButton Volver;
     private javax.swing.JButton agregarA;
     private javax.swing.JButton agregarC;
@@ -1005,6 +1010,7 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JSpinner cantidadC;
     private javax.swing.JSpinner cantidadI;
     private javax.swing.JTextField cliente;
+    private javax.swing.JTextField descuento;
     private javax.swing.JTable detalleDeVenta;
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton1;
@@ -1023,7 +1029,6 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1032,13 +1037,11 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> metodoDePagoCombo;
     private javax.swing.JRadioButton nombreA;
     private javax.swing.JRadioButton nombreC;
@@ -1055,6 +1058,21 @@ public class Venta extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void generarVenta() {
+       
+    //Venta v = new Venta(); 
+    /*v.setFechaVenta(fechaVenta);
+    v.setTipoPago(tipoPago);
+    v.setMetodoPago(metodoPago);
+    v.setDescuento(HEIGHT);*/
+    for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
+        DetalleDeVenta dv = new DetalleDeVenta();
+        int cantidad = (int) detalleDeVenta.getValueAt(i, 1);
+        dv.setCantidad(cantidad);
+        dv.setPrecioUnitario((double) detalleDeVenta.getValueAt(i, 2));
+        dv.setPrecioCompra((double) detalleDeVenta.getValueAt(i, 3));
+        dv.setProducto((Producto) detalleDeVenta.getValueAt(i, 0));
+        Conexion.getInstance().guardar(dv);
+    }
 
     }
     
@@ -1063,12 +1081,9 @@ public class Venta extends javax.swing.JFrame {
         for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
             total+= (double) detalleDeVenta.getValueAt(i, 3);
         }
-        
         subTotal.setText(""+total);
-    }
-    
-    private void calcularTotal(){
-        total.setText("");
+        double desc = Double.parseDouble(descuento.getText());
+        this.total.setText(""+((100-desc)/100*total));
     }
 
 }
