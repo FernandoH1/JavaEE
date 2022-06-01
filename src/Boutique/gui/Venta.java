@@ -14,6 +14,8 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -870,7 +872,7 @@ public class Venta extends javax.swing.JFrame {
     }
 
     public void añadirProductoSelecionado(Calzado calzado) {
-        System.out.println(detalleDeVenta.getRowCount());
+        //System.out.println(detalleDeVenta.getRowCount());
         DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
         if (detalleDeVenta.getRowCount() == 0) {
             Object[] fila = new Object[5];
@@ -910,7 +912,7 @@ public class Venta extends javax.swing.JFrame {
     }
 
     public void añadirProductoSelecionado(Indumentaria indumentaria) {
-        System.out.println(detalleDeVenta.getRowCount());
+        //System.out.println(detalleDeVenta.getRowCount());
         DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
         if (detalleDeVenta.getRowCount() == 0) {
             Object[] fila = new Object[5];
@@ -950,7 +952,7 @@ public class Venta extends javax.swing.JFrame {
     }
 
     public void añadirProductoSelecionado(Accesorio accesorio) {
-        System.out.println(detalleDeVenta.getRowCount());
+        //System.out.println(detalleDeVenta.getRowCount());
         DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
         if (detalleDeVenta.getRowCount() == 0) {
             Object[] fila = new Object[5];
@@ -1059,22 +1061,25 @@ public class Venta extends javax.swing.JFrame {
 
     private void generarVenta() {
        
-    //Venta v = new Venta(); 
-    /*v.setFechaVenta(fechaVenta);
-    v.setTipoPago(tipoPago);
-    v.setMetodoPago(metodoPago);
-    v.setDescuento(HEIGHT);*/
+    Boutique.io.Venta v = new Boutique.io.Venta(); 
+    v.setFechaVenta(jDateChooser1.getDate());
+    v.setTipoPago(tipoVentaCombo.getSelectedItem().toString());
+    v.setMetodoPago(metodoDePagoCombo.getSelectedItem().toString());
+    double desc = Double.parseDouble(descuento.getText());
+    v.setDescuento(desc);
+    Conexion.getInstance().guardar(v);
     for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
         DetalleDeVenta dv = new DetalleDeVenta();
         int cantidad = (int) detalleDeVenta.getValueAt(i, 1);
         dv.setCantidad(cantidad);
         dv.setPrecioUnitario((double) detalleDeVenta.getValueAt(i, 2));
         dv.setPrecioCompra((double) detalleDeVenta.getValueAt(i, 3));
-        dv.setProducto((Producto) detalleDeVenta.getValueAt(i, 0));
+        dv.setVenta(Conexion.getInstance().obtenerUltimaVenta());
+        Long id = (Long) detalleDeVenta.getValueAt(i, 4);
+        dv.setProducto(Conexion.getInstance().obtenerProductobyID(id));
         Conexion.getInstance().guardar(dv);
-    }
-
-    }
+    }  
+   }
     
     private void calcularSubTotal(){
         double total = 0;
@@ -1085,5 +1090,6 @@ public class Venta extends javax.swing.JFrame {
         double desc = Double.parseDouble(descuento.getText());
         this.total.setText(""+((100-desc)/100*total));
     }
+    
 
 }

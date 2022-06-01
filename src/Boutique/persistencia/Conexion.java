@@ -5,6 +5,7 @@ import Boutique.io.Calzado;
 import Boutique.io.Cliente;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
+import Boutique.io.Venta;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -171,6 +172,33 @@ public class Conexion {
             em.getTransaction().rollback();
         }
         return productos;
+    }
+
+
+    public Venta obtenerUltimaVenta() {
+        EntityManager em = getEntity();
+        Venta venta = null;
+        em.getTransaction().begin();
+        try {
+            venta = (Venta) em.createNativeQuery("SELECT * FROM venta ORDER BY id DESC LIMIT 1;",Venta.class).getSingleResult();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return venta;
+    }
+    
+    public Producto obtenerProductobyID(Long id){
+        EntityManager em = getEntity();
+        Producto producto = null;
+        em.getTransaction().begin();
+        try {
+            producto = (Producto) em.createNativeQuery("SELECT * FROM producto WHERE producto.id = "+id,Producto.class).getSingleResult();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return producto;
     }
     
 }
