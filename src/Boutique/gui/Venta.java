@@ -245,11 +245,11 @@ public class Venta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Color", "Stock", "ID"
+                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Color", "Stock"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -409,11 +409,11 @@ public class Venta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Textura", "Color", "Stock", "ID"
+                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Textura", "Color", "Stock"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -678,13 +678,6 @@ public class Venta extends javax.swing.JFrame {
 
     private void agregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCActionPerformed
         Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 5);
-        DetalleDeVenta dv = new DetalleDeVenta();
-        int cantidad = (int) cantidadC.getValue();
-        dv.setCantidad(cantidad);
-        dv.setPrecioUnitario(calzado.getPrecioVenta());
-        dv.setPrecioCompra(calzado.getPrecioVenta() * cantidad);
-        dv.setProducto(calzado);
-        //Conexion.getInstance().guardar(dv);
         añadirProductoSelecionado(calzado);
     }//GEN-LAST:event_agregarCActionPerformed
 
@@ -752,7 +745,7 @@ public class Venta extends javax.swing.JFrame {
         tableProductos.setRowCount(0);
         while (it.hasNext()) {
             Calzado next = it.next();
-            Object[] fila = new Object[10];
+            Object[] fila = new Object[9];
             fila[0] = next.getNombre();
             fila[1] = next.getPrecioProveedor();
             fila[2] = next.getPrecioVenta();
@@ -765,7 +758,6 @@ public class Venta extends javax.swing.JFrame {
             lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
             fila[7] = lbl;
             fila[8] = next.getStock();
-            fila[9] = next.getId();
             tableProductos.addRow(fila);
             TablaCalzado.setDefaultRenderer(Object.class, new ImgTabla());
             TablaCalzado.setRowHeight(40);
@@ -805,7 +797,7 @@ public class Venta extends javax.swing.JFrame {
         tableProductos.setRowCount(0);
         while (it.hasNext()) {
             Accesorio next = it.next();
-            Object[] fila = new Object[9];
+            Object[] fila = new Object[8];
             fila[0] = next.getNombre();
             fila[1] = next.getPrecioProveedor();
             fila[2] = next.getPrecioVenta();
@@ -817,7 +809,6 @@ public class Venta extends javax.swing.JFrame {
             lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
             fila[6] = lbl;
             fila[7] = next.getStock();
-            fila[8] = next.getId();
             tableProductos.addRow(fila);
             TablaAccesorio.setDefaultRenderer(Object.class, new ImgTabla());
             TablaAccesorio.setRowHeight(40);
@@ -876,46 +867,6 @@ public class Venta extends javax.swing.JFrame {
         this.buscarI.disable();
     }
 
-    public void añadirProductoSelecionado(Calzado calzado) {
-        //System.out.println(detalleDeVenta.getRowCount());
-        DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
-        if (detalleDeVenta.getRowCount() == 0) {
-            Object[] fila = new Object[5];
-            fila[0] = calzado.getNombre();
-            int cantidad = (int) cantidadC.getValue();
-            fila[1] = cantidad;
-            fila[2] = calzado.getPrecioVenta();
-            fila[3] = calzado.getPrecioVenta() * cantidad;
-            fila[4] = calzado.getId();
-            tableDetalle.addRow(fila);
-        } else {
-            boolean flag = false;
-            for (int i = 0; i < detalleDeVenta.getRowCount() && !flag; i++) {
-                Long id = (Long) detalleDeVenta.getValueAt(i, 4);
-                if (id == calzado.getId()) {
-                    int catidadActual = (int) detalleDeVenta.getValueAt(i, 1);
-                    int cantidad = (int) cantidadC.getValue();
-                    detalleDeVenta.setValueAt((catidadActual + cantidad), i, 1);
-                    detalleDeVenta.setValueAt((catidadActual + cantidad) * calzado.getPrecioVenta(), i, 3);
-                    flag = true;
-                }
-
-            }
-            if (!flag) {
-                Object[] fila = new Object[5];
-                fila[0] = calzado.getNombre();
-                int cantidad = (int) cantidadC.getValue();
-                fila[1] = cantidad;
-                fila[2] = calzado.getPrecioVenta();
-                fila[3] = calzado.getPrecioVenta() * cantidad;
-                fila[4] = calzado.getId();
-                tableDetalle.addRow(fila);
-            }
-
-        }
-        calcularSubTotal();
-    }
-
     public void añadirProductoSelecionado(Indumentaria indumentaria) {
         DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
         if (detalleDeVenta.getRowCount() == 0) {
@@ -955,7 +906,6 @@ public class Venta extends javax.swing.JFrame {
                     flag = true;
                     break;
                 }
-
             }
             if (!flag) {
                 Object[] fila = new Object[4];
@@ -976,51 +926,135 @@ public class Venta extends javax.swing.JFrame {
                 SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();
                 modeloSpinner.setMaximum(nuevaCantidad);
             }
-
         }
         calcularSubTotal();
     }
-
+    
     public void añadirProductoSelecionado(Accesorio accesorio) {
-        //System.out.println(detalleDeVenta.getRowCount());
         DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
         if (detalleDeVenta.getRowCount() == 0) {
-            Object[] fila = new Object[5];
-            fila[0] = accesorio.getNombre();
+            Object[] fila = new Object[4];
+            DetalleDeVenta dv = new DetalleDeVenta();
             int cantidad = (int) cantidadA.getValue();
+            dv.setPrecioCompra(accesorio.getPrecioVenta() * cantidad);
+            dv.setCantidad(cantidad);
+            dv.setPrecioUnitario(accesorio.getPrecioVenta());
+            dv.setProducto(accesorio);
+            fila[0] = dv;
             fila[1] = cantidad;
             fila[2] = accesorio.getPrecioVenta();
             fila[3] = accesorio.getPrecioVenta() * cantidad;
-            fila[4] = accesorio.getId();
             tableDetalle.addRow(fila);
+            int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) - cantidad;
+            TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
+            cantidadA.setValue(1);
+            SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
+            modeloSpinner.setMaximum(nuevaCantidad);
         } else {
             boolean flag = false;
-            for (int i = 0; i < detalleDeVenta.getRowCount() && !flag; i++) {
-                Long id = (Long) detalleDeVenta.getValueAt(i, 4);
-                if (id == accesorio.getId()) {
+            for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
+                DetalleDeVenta dv = (DetalleDeVenta) detalleDeVenta.getValueAt(i, 0);
+                if (dv.getProducto().getId() == accesorio.getId()) {
                     int catidadActual = (int) detalleDeVenta.getValueAt(i, 1);
                     int cantidad = (int) cantidadA.getValue();
                     detalleDeVenta.setValueAt((catidadActual + cantidad), i, 1);
                     detalleDeVenta.setValueAt((catidadActual + cantidad) * accesorio.getPrecioVenta(), i, 3);
+                    dv.setCantidad((catidadActual + cantidad));
+                    dv.setPrecioCompra((catidadActual + cantidad) * accesorio.getPrecioVenta());
+                    int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) - cantidad;
+                    TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
+                    cantidadA.setValue(1);
+                    SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
+                    modeloSpinner.setMaximum(nuevaCantidad);
                     flag = true;
+                    break;
                 }
-
             }
             if (!flag) {
-                Object[] fila = new Object[5];
-                fila[0] = accesorio.getNombre();
+                Object[] fila = new Object[4];
+                DetalleDeVenta dv = new DetalleDeVenta();
                 int cantidad = (int) cantidadA.getValue();
+                dv.setPrecioCompra(accesorio.getPrecioVenta() * cantidad);
+                dv.setCantidad(cantidad);
+                dv.setPrecioUnitario(accesorio.getPrecioVenta());
+                dv.setProducto(accesorio);
+                fila[0] = dv;
                 fila[1] = cantidad;
                 fila[2] = accesorio.getPrecioVenta();
                 fila[3] = accesorio.getPrecioVenta() * cantidad;
-                fila[4] = accesorio.getId();
                 tableDetalle.addRow(fila);
+                int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) - cantidad;
+                TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
+                cantidadA.setValue(1);
+                SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
+                modeloSpinner.setMaximum(nuevaCantidad);
             }
-
         }
         calcularSubTotal();
     }
-
+    
+    public void añadirProductoSelecionado(Calzado calzado) {
+        DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
+        if (detalleDeVenta.getRowCount() == 0) {
+            Object[] fila = new Object[4];
+            DetalleDeVenta dv = new DetalleDeVenta();
+            int cantidad = (int) cantidadC.getValue();
+            dv.setPrecioCompra(calzado.getPrecioVenta() * cantidad);
+            dv.setCantidad(cantidad);
+            dv.setPrecioUnitario(calzado.getPrecioVenta());
+            dv.setProducto(calzado);
+            fila[0] = dv;
+            fila[1] = cantidad;
+            fila[2] = calzado.getPrecioVenta();
+            fila[3] = calzado.getPrecioVenta() * cantidad;
+            tableDetalle.addRow(fila);
+            int nuevaCantidad = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) - cantidad;
+            TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
+            cantidadC.setValue(1);
+            SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadC.getModel();
+            modeloSpinner.setMaximum(nuevaCantidad);
+        } else {
+            boolean flag = false;
+            for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
+                DetalleDeVenta dv = (DetalleDeVenta) detalleDeVenta.getValueAt(i, 0);
+                if (dv.getProducto().getId() == calzado.getId()) {
+                    int catidadActual = (int) detalleDeVenta.getValueAt(i, 1);
+                    int cantidad = (int) cantidadC.getValue();
+                    detalleDeVenta.setValueAt((catidadActual + cantidad), i, 1);
+                    detalleDeVenta.setValueAt((catidadActual + cantidad) * calzado.getPrecioVenta(), i, 3);
+                    dv.setCantidad((catidadActual + cantidad));
+                    dv.setPrecioCompra((catidadActual + cantidad) * calzado.getPrecioVenta());
+                    int nuevaCantidad = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) - cantidad;
+                    TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
+                    cantidadC.setValue(1);
+                    SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadC.getModel();
+                    modeloSpinner.setMaximum(nuevaCantidad);
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                Object[] fila = new Object[4];
+                DetalleDeVenta dv = new DetalleDeVenta();
+                int cantidad = (int) cantidadC.getValue();
+                dv.setPrecioCompra(calzado.getPrecioVenta() * cantidad);
+                dv.setCantidad(cantidad);
+                dv.setPrecioUnitario(calzado.getPrecioVenta());
+                dv.setProducto(calzado);
+                fila[0] = dv;
+                fila[1] = cantidad;
+                fila[2] = calzado.getPrecioVenta();
+                fila[3] = calzado.getPrecioVenta() * cantidad;
+                tableDetalle.addRow(fila);
+                int nuevaCantidad = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) - cantidad;
+                TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
+                cantidadC.setValue(1);
+                SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadC.getModel();
+                modeloSpinner.setMaximum(nuevaCantidad);
+            }
+        }
+        calcularSubTotal();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAccesorio;
