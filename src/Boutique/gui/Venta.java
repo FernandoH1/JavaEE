@@ -43,7 +43,7 @@ public class Venta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         List<Cliente> clientes = Conexion.getInstance().listarClientes();
-        clientes.forEach(cliente -> ClientesCombo.addItem(cliente));
+        clientes.forEach(cliente -> clientesCombo.addItem(cliente));
 
     }
 
@@ -67,7 +67,7 @@ public class Venta extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         cliente = new javax.swing.JTextField();
         Volver = new javax.swing.JButton();
-        ClientesCombo = new BD.WideComboBox();
+        clientesCombo = new BD.WideComboBox();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         buscarC = new javax.swing.JTextField();
@@ -103,6 +103,7 @@ public class Venta extends javax.swing.JFrame {
         cantidadA = new javax.swing.JSpinner();
         foto = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        clienteFinal = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         quitar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -148,11 +149,11 @@ public class Venta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Producto", "Cantidad", "Precio Unitario", "Sub-Total", "ID"
+                "Producto", "Cantidad", "Precio Unitario", "Sub-Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -186,7 +187,7 @@ public class Venta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 50, 50));
-        getContentPane().add(ClientesCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 160, -1));
+        getContentPane().add(clientesCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 160, -1));
 
         jTabbedPane5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -333,11 +334,11 @@ public class Venta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Categoria", "Genero", "Color", "Stock", "ID"
+                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Categoria", "Genero", "Color", "Stock"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -456,7 +457,12 @@ public class Venta extends javax.swing.JFrame {
         getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 40, 40));
 
         jPanel4.setBackground(new java.awt.Color(240, 218, 168));
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 690, 80));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        clienteFinal.setText("Consumidor Final");
+        jPanel4.add(clienteFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 850, 80));
 
         jPanel5.setBackground(new java.awt.Color(240, 218, 168));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -521,9 +527,9 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_clienteActionPerformed
 
     private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
-         DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();   
-         tableDetalle.removeRow(detalleDeVenta.getSelectedRow());
-         calcularSubTotal();
+        DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
+        tableDetalle.removeRow(detalleDeVenta.getSelectedRow());
+        calcularSubTotal();
     }//GEN-LAST:event_quitarActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
@@ -540,9 +546,9 @@ public class Venta extends javax.swing.JFrame {
                 Cliente next = it.next();
                 mdl.addElement(next);
             }
-            ClientesCombo.setModel(mdl);
+            clientesCombo.setModel(mdl);
             if (mdl.getSize() > 0) {
-                ClientesCombo.showPopup();
+                clientesCombo.showPopup();
             }
         }
     }//GEN-LAST:event_clienteKeyReleased
@@ -577,7 +583,7 @@ public class Venta extends javax.swing.JFrame {
         Accesorio acc = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 5);
         SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
         modeloSpinner.setMaximum(acc.getStock());
-        modeloSpinner.setMinimum(1);
+        modeloSpinner.setMinimum(0);
         cantidadA.setEnabled(true);
     }//GEN-LAST:event_TablaAccesorioMouseClicked
 
@@ -705,7 +711,7 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_descuentoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       calcularSubTotal();
+        calcularSubTotal();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
@@ -772,7 +778,7 @@ public class Venta extends javax.swing.JFrame {
         tableProductos.setRowCount(0);
         while (it.hasNext()) {
             Indumentaria next = it.next();
-            Object[] fila = new Object[12];
+            Object[] fila = new Object[11];
             fila[0] = next.getNombre();
             fila[1] = next.getPrecioProveedor();
             fila[2] = next.getPrecioVenta();
@@ -787,7 +793,6 @@ public class Venta extends javax.swing.JFrame {
             lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
             fila[9] = lbl;
             fila[10] = next.getStock();
-            fila[11] = next.getId();
             tableProductos.addRow(fila);
             TablaIndumentaria.setDefaultRenderer(Object.class, new ImgTabla());
             TablaIndumentaria.setRowHeight(40);
@@ -886,7 +891,7 @@ public class Venta extends javax.swing.JFrame {
         } else {
             boolean flag = false;
             for (int i = 0; i < detalleDeVenta.getRowCount() && !flag; i++) {
-                Long id =  (Long) detalleDeVenta.getValueAt(i, 4);
+                Long id = (Long) detalleDeVenta.getValueAt(i, 4);
                 if (id == calzado.getId()) {
                     int catidadActual = (int) detalleDeVenta.getValueAt(i, 1);
                     int cantidad = (int) cantidadC.getValue();
@@ -912,39 +917,64 @@ public class Venta extends javax.swing.JFrame {
     }
 
     public void añadirProductoSelecionado(Indumentaria indumentaria) {
-        //System.out.println(detalleDeVenta.getRowCount());
         DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
         if (detalleDeVenta.getRowCount() == 0) {
-            Object[] fila = new Object[5];
-            fila[0] = indumentaria.getNombre();
+            Object[] fila = new Object[4];
+            DetalleDeVenta dv = new DetalleDeVenta();
             int cantidad = (int) cantidadI.getValue();
+            dv.setPrecioCompra(indumentaria.getPrecioVenta() * cantidad);
+            dv.setCantidad(cantidad);
+            dv.setPrecioUnitario(indumentaria.getPrecioVenta());
+            dv.setProducto(indumentaria);
+            fila[0] = dv;
             fila[1] = cantidad;
             fila[2] = indumentaria.getPrecioVenta();
             fila[3] = indumentaria.getPrecioVenta() * cantidad;
-            fila[4] = indumentaria.getId();
             tableDetalle.addRow(fila);
+            int nuevaCantidad = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) - cantidad;
+            TablaIndumentaria.setValueAt(nuevaCantidad, TablaIndumentaria.getSelectedRow(), 10);
+            cantidadI.setValue(1);
+            SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();
+            modeloSpinner.setMaximum(nuevaCantidad);
         } else {
             boolean flag = false;
-            for (int i = 0; i < detalleDeVenta.getRowCount() && !flag; i++) {
-                Long id =  (Long) detalleDeVenta.getValueAt(i, 4);
-                if (id == indumentaria.getId()) {
+            for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
+                DetalleDeVenta dv = (DetalleDeVenta) detalleDeVenta.getValueAt(i, 0);
+                if (dv.getProducto().getId() == indumentaria.getId()) {
                     int catidadActual = (int) detalleDeVenta.getValueAt(i, 1);
                     int cantidad = (int) cantidadI.getValue();
                     detalleDeVenta.setValueAt((catidadActual + cantidad), i, 1);
                     detalleDeVenta.setValueAt((catidadActual + cantidad) * indumentaria.getPrecioVenta(), i, 3);
+                    dv.setCantidad((catidadActual + cantidad));
+                    dv.setPrecioCompra((catidadActual + cantidad) * indumentaria.getPrecioVenta());
+                    int nuevaCantidad = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) - cantidad;
+                    TablaIndumentaria.setValueAt(nuevaCantidad, TablaIndumentaria.getSelectedRow(), 10);
+                    cantidadI.setValue(1);
+                    SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();
+                    modeloSpinner.setMaximum(nuevaCantidad);
                     flag = true;
+                    break;
                 }
 
             }
             if (!flag) {
-                Object[] fila = new Object[5];
-                fila[0] = indumentaria.getNombre();
+                Object[] fila = new Object[4];
+                DetalleDeVenta dv = new DetalleDeVenta();
                 int cantidad = (int) cantidadI.getValue();
+                dv.setPrecioCompra(indumentaria.getPrecioVenta() * cantidad);
+                dv.setCantidad(cantidad);
+                dv.setPrecioUnitario(indumentaria.getPrecioVenta());
+                dv.setProducto(indumentaria);
+                fila[0] = dv;
                 fila[1] = cantidad;
                 fila[2] = indumentaria.getPrecioVenta();
                 fila[3] = indumentaria.getPrecioVenta() * cantidad;
-                fila[4] = indumentaria.getId();
                 tableDetalle.addRow(fila);
+                int nuevaCantidad = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) - cantidad;
+                TablaIndumentaria.setValueAt(nuevaCantidad, TablaIndumentaria.getSelectedRow(), 10);
+                cantidadI.setValue(1);
+                SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();
+                modeloSpinner.setMaximum(nuevaCantidad);
             }
 
         }
@@ -966,7 +996,7 @@ public class Venta extends javax.swing.JFrame {
         } else {
             boolean flag = false;
             for (int i = 0; i < detalleDeVenta.getRowCount() && !flag; i++) {
-                Long id =  (Long) detalleDeVenta.getValueAt(i, 4);
+                Long id = (Long) detalleDeVenta.getValueAt(i, 4);
                 if (id == accesorio.getId()) {
                     int catidadActual = (int) detalleDeVenta.getValueAt(i, 1);
                     int cantidad = (int) cantidadA.getValue();
@@ -993,7 +1023,6 @@ public class Venta extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private BD.WideComboBox ClientesCombo;
     private javax.swing.JTable TablaAccesorio;
     private javax.swing.JTable TablaCalzado;
     private javax.swing.JTable TablaIndumentaria;
@@ -1012,6 +1041,8 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JSpinner cantidadC;
     private javax.swing.JSpinner cantidadI;
     private javax.swing.JTextField cliente;
+    private javax.swing.JCheckBox clienteFinal;
+    private BD.WideComboBox clientesCombo;
     private javax.swing.JTextField descuento;
     private javax.swing.JTable detalleDeVenta;
     private javax.swing.JLabel foto;
@@ -1060,36 +1091,44 @@ public class Venta extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void generarVenta() {
-       
-    Boutique.io.Venta v = new Boutique.io.Venta(); 
-    v.setFechaVenta(jDateChooser1.getDate());
-    v.setTipoPago(tipoVentaCombo.getSelectedItem().toString());
-    v.setMetodoPago(metodoDePagoCombo.getSelectedItem().toString());
-    double desc = Double.parseDouble(descuento.getText());
-    v.setDescuento(desc);
-    Conexion.getInstance().guardar(v);
-    for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
-        DetalleDeVenta dv = new DetalleDeVenta();
-        int cantidad = (int) detalleDeVenta.getValueAt(i, 1);
-        dv.setCantidad(cantidad);
-        dv.setPrecioUnitario((double) detalleDeVenta.getValueAt(i, 2));
-        dv.setPrecioCompra((double) detalleDeVenta.getValueAt(i, 3));
-        dv.setVenta(Conexion.getInstance().obtenerUltimaVenta());
-        Long id = (Long) detalleDeVenta.getValueAt(i, 4);
-        dv.setProducto(Conexion.getInstance().obtenerProductobyID(id));
-        Conexion.getInstance().guardar(dv);
-    }  
-   }
-    
-    private void calcularSubTotal(){
+        Boutique.io.Venta v = new Boutique.io.Venta();
+        v.setFechaVenta(jDateChooser1.getDate());
+        v.setTipoPago(tipoVentaCombo.getSelectedItem().toString());
+        v.setMetodoPago(metodoDePagoCombo.getSelectedItem().toString());
+        double desc = Double.parseDouble(descuento.getText());
+        v.setDescuento(desc);
+        if(!clienteFinal.isSelected()){
+            v.setCliente((Cliente) clientesCombo.getSelectedItem());
+        }
+        Conexion.getInstance().guardar(v);
+        for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
+            DetalleDeVenta dv = (DetalleDeVenta) detalleDeVenta.getValueAt(i, 0);
+            int cantidad = (int) detalleDeVenta.getValueAt(i, 1);
+            dv.setVenta(v);
+            Conexion.getInstance().guardar(dv);
+            Producto p = dv.getProducto();
+            if (p instanceof Indumentaria) {
+                Indumentaria ind = (Indumentaria) p;
+                ind.setStock(ind.getStock() - dv.getCantidad());
+            } else if (p instanceof Calzado) {
+                Calzado c = (Calzado) p;
+                c.setStock(c.getStock() - dv.getCantidad());
+            } else {
+                Accesorio a = (Accesorio) p;
+                a.setStock(a.getStock() - dv.getCantidad());
+            }
+            Conexion.getInstance().merge(p);
+        }
+    }
+
+    private void calcularSubTotal() {
         double total = 0;
         for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
-            total+= (double) detalleDeVenta.getValueAt(i, 3);
+            total += (double) detalleDeVenta.getValueAt(i, 3);
         }
-        subTotal.setText(""+total);
+        subTotal.setText("" + total);
         double desc = Double.parseDouble(descuento.getText());
-        this.total.setText(""+((100-desc)/100*total));
+        this.total.setText("" + ((100 - desc) / 100 * total));
     }
-    
 
 }
