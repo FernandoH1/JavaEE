@@ -146,9 +146,7 @@ public class Clientes extends javax.swing.JFrame {
         cliente.setNombre(nombre.getText());
         cliente.setApellido(apellido.getText());
         cliente.setCi(ci.getText());
-        ArrayList telefono = new ArrayList();
-        telefono.add(tel.getText());
-        cliente.setTelefonos(telefono);
+        cliente.setTelefonos(tel.getText());
         cliente.setDireccion(dir.getText());
         Conexion.getInstance().guardar(cliente); 
         cargarTabla();
@@ -172,9 +170,7 @@ public class Clientes extends javax.swing.JFrame {
         cliente.setNombre(nombre.getText());
         cliente.setApellido(apellido.getText());
         cliente.setCi(ci.getText());
-        ArrayList telefono = new ArrayList();
-        telefono.add(tel.getText());
-        cliente.setTelefonos(telefono);
+        cliente.setTelefonos(tel.getText());
         cliente.setDireccion(dir.getText());
         Conexion.getInstance().guardar(cliente);  
         cargarTabla();

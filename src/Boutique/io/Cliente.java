@@ -19,7 +19,7 @@ public class Cliente implements Serializable {
     private String nombre;
     private String apellido;
     private String ci;
-    private ArrayList<String> telefonos;
+    private String telefonos;
     private String direccion;
     
     @OneToMany(mappedBy = "cliente")
@@ -66,11 +66,11 @@ public class Cliente implements Serializable {
         this.ci = ci;
     }
 
-    public ArrayList<String> getTelefonos() {
+    public String getTelefonos() {
         return telefonos;
     }
 
-    public void setTelefonos(ArrayList<String> telefonos) {
+    public void setTelefonos(String telefonos) {
         this.telefonos = telefonos;
     }
 
