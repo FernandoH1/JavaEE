@@ -533,7 +533,7 @@ public class Venta extends javax.swing.JFrame {
          int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) + cantidad;
          TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);*/
          
-         //System.out.println((int) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 1) + 1);
+         System.out.println((int) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 1) + 1);
          //System.out.println(cantidadInd);
          //int nuevaCantidadI = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) + cantidadInd;
          //TablaIndumentaria.setValueAt(nuevaCantidadI, TablaIndumentaria.getSelectedRow(), 10);

@@ -47,8 +47,6 @@ public class Combo implements Serializable {
         this.productos = productos;
     }
     
-    
-
     public void setId(Long id) {
         this.id = id;
     }
