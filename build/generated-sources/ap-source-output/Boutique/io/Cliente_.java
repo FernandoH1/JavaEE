@@ -1,6 +1,5 @@
 package Boutique.io;
 
-import java.util.ArrayList;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -15,7 +14,7 @@ public abstract class Cliente_ {
 	public static volatile SingularAttribute<Cliente, String> direccion;
 	public static volatile ListAttribute<Cliente, Venta> ventas;
 	public static volatile SingularAttribute<Cliente, Long> id;
-	public static volatile SingularAttribute<Cliente, ArrayList> telefonos;
+	public static volatile SingularAttribute<Cliente, String> telefonos;
 	public static volatile SingularAttribute<Cliente, String> nombre;
 
 }

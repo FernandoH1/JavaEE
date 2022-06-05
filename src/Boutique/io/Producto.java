@@ -108,8 +108,6 @@ public class Producto implements Serializable {
         this.foto = foto;
     }
 
-   
-
     @Override
     public int hashCode() {
         int hash = 0;
