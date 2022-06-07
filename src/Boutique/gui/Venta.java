@@ -160,6 +160,11 @@ public class Venta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        detalleDeVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                detalleDeVentaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(detalleDeVenta);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 910, 190));
@@ -528,15 +533,22 @@ public class Venta extends javax.swing.JFrame {
 
     private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
         DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
+        DetalleDeVenta dv = (DetalleDeVenta) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 0);
+        Producto p = dv.getProducto();
+        if (p instanceof Indumentaria) {
+            int cantidadInd = (int) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 1);
+              int nuevaCantidadI = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) + cantidadInd;
+              TablaIndumentaria.setValueAt(nuevaCantidadI, TablaIndumentaria.getSelectedRow(), 10);
+            } else if (p instanceof Calzado) {
+                int cantidadC = (int) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 1);
+                int nuevaCantidadC = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) + cantidadC;
+                TablaCalzado.setValueAt(nuevaCantidadC, TablaCalzado.getSelectedRow(), 8);
+            } else {
+               int cantidad = (int) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 1);
+                int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) + cantidad;
+                TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
+            }
         tableDetalle.removeRow(detalleDeVenta.getSelectedRow());
-         /*int cantidad = (int) cantidadA.getValue();
-         int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) + cantidad;
-         TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);*/
-         
-         System.out.println((int) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 1) + 1);
-         //System.out.println(cantidadInd);
-         //int nuevaCantidadI = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) + cantidadInd;
-         //TablaIndumentaria.setValueAt(nuevaCantidadI, TablaIndumentaria.getSelectedRow(), 10);
         calcularSubTotal();
     }//GEN-LAST:event_quitarActionPerformed
 
@@ -687,6 +699,7 @@ public class Venta extends javax.swing.JFrame {
     private void agregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCActionPerformed
         Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 5);
         añadirProductoSelecionado(calzado);
+        //TablaCalzado.clearSelection();
     }//GEN-LAST:event_agregarCActionPerformed
 
     private void agregarCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarCMouseClicked
@@ -696,11 +709,13 @@ public class Venta extends javax.swing.JFrame {
     private void agregarIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarIActionPerformed
         Indumentaria indumentaria = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 5);
         añadirProductoSelecionado(indumentaria);
+        //TablaIndumentaria.clearSelection(); 
     }//GEN-LAST:event_agregarIActionPerformed
 
     private void agregarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAActionPerformed
         Accesorio accesorio = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 5);
         añadirProductoSelecionado(accesorio);
+        //TablaAccesorio.clearSelection();
     }//GEN-LAST:event_agregarAActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -714,6 +729,11 @@ public class Venta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         calcularSubTotal();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void detalleDeVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detalleDeVentaMouseClicked
+                //TablaAccesorio.clearSelection();
+                //TablaIndumentaria.clearSelection(); 
+    }//GEN-LAST:event_detalleDeVentaMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
