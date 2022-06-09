@@ -36,6 +36,7 @@ public class Venta extends javax.swing.JFrame {
         cantidadC.setEnabled(false);
         cantidadA.setEnabled(false);
         cantidadI.setEnabled(false);
+        metodoDePagoCombo.setEnabled(false);
         cargarTablaCalzado();
         cargarTablaInd();
         cargarTablaAcc();
@@ -130,7 +131,7 @@ public class Venta extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 24, 145, -1));
 
-        tipoVentaCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contado", "Cuotas" }));
+        tipoVentaCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contado", "Devito", "Credito", "Credito de la Casa" }));
         tipoVentaCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoVentaComboActionPerformed(evt);
@@ -138,7 +139,7 @@ public class Venta extends javax.swing.JFrame {
         });
         getContentPane().add(tipoVentaCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 55, 150, -1));
 
-        metodoDePagoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
+        metodoDePagoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OCA", "VISA", "MASTERCARD", "SANTANDER", "MAESTRO" }));
         getContentPane().add(metodoDePagoCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 160, -1));
 
         jLabel7.setText("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -537,8 +538,15 @@ public class Venta extends javax.swing.JFrame {
         Producto p = dv.getProducto();
         if (p instanceof Indumentaria) {
             int cantidadInd = (int) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 1);
-              int nuevaCantidadI = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) + cantidadInd;
-              TablaIndumentaria.setValueAt(nuevaCantidadI, TablaIndumentaria.getSelectedRow(), 10);
+            int fila = -1;
+            for(int i = 0; i < TablaIndumentaria.getRowCount(); i++ ){
+            if(p.equals(TablaIndumentaria.getValueAt(i, 5))){
+                fila=i;
+                break;
+            }
+            }
+              int nuevaCantidadI = (int) TablaIndumentaria.getValueAt(fila, 10) + cantidadInd;
+              TablaIndumentaria.setValueAt(nuevaCantidadI, fila, 10);
             } else if (p instanceof Calzado) {
                 int cantidadC = (int) detalleDeVenta.getValueAt(detalleDeVenta.getSelectedRow(), 1);
                 int nuevaCantidadC = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) + cantidadC;
@@ -693,7 +701,11 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_texturaMouseClicked
 
     private void tipoVentaComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoVentaComboActionPerformed
-
+        if(tipoVentaCombo.getSelectedIndex() == 1 || tipoVentaCombo.getSelectedIndex() == 2){
+            metodoDePagoCombo.setEnabled(true);
+        }else{
+            metodoDePagoCombo.setEnabled(false);
+        }
     }//GEN-LAST:event_tipoVentaComboActionPerformed
 
     private void agregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCActionPerformed
@@ -1156,7 +1168,13 @@ public class Venta extends javax.swing.JFrame {
         Boutique.io.Venta v = new Boutique.io.Venta();
         v.setFechaVenta(jDateChooser1.getDate());
         v.setTipoPago(tipoVentaCombo.getSelectedItem().toString());
+        if(tipoVentaCombo.getSelectedIndex() == 0){
+            v.setMetodoPago(tipoVentaCombo.getSelectedItem().toString());
+        }else if(tipoVentaCombo.getSelectedIndex() == 3){
+            v.setMetodoPago(tipoVentaCombo.getSelectedItem().toString());
+        }else{
         v.setMetodoPago(metodoDePagoCombo.getSelectedItem().toString());
+        }
         double desc = Double.parseDouble(descuento.getText());
         v.setDescuento(desc);
         if(!clienteFinal.isSelected()){

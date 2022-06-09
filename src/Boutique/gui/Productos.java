@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,7 +57,6 @@ String fotoPerfil = "";
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        nombre = new javax.swing.JTextField();
         proveedor = new javax.swing.JTextField();
         venta = new javax.swing.JTextField();
         marca = new javax.swing.JTextField();
@@ -66,6 +66,9 @@ String fotoPerfil = "";
         foto = new javax.swing.JLabel();
         fotoPanel = new javax.swing.JPanel();
         fondoProducto = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        codigo = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -142,7 +145,6 @@ String fotoPerfil = "";
 
         jLabel5.setText("Foto:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 147, -1));
 
         proveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,6 +178,14 @@ String fotoPerfil = "";
         foto.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 140, 110));
         getContentPane().add(fotoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 180, 140));
+
+        fondoProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel20.setText("Codigo:");
+        fondoProducto.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        fondoProducto.add(codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 147, -1));
+        fondoProducto.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 147, -1));
+
         getContentPane().add(fondoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 550, 140));
 
         jTabbedPane5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -468,6 +478,7 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        producto.setCodigo(codigo.getText());
         if(!fotoPerfil.equals("")){
         producto.setFoto(convertirImagen(fotoPerfil));
         }
@@ -478,7 +489,15 @@ String fotoPerfil = "";
         producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stocki.getText()));
         Conexion.getInstance().guardar(producto);
-        limpiarCampos();
+        int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
+        if(opcion == JOptionPane.YES_OPTION){
+            talle.setText("");
+            stocki.setText("");
+            ColorIndumentaria.setBackground(new Color(0,0,0,0));
+            foto.setIcon(null);         
+        }else{
+           limpiarCampos();
+        }
         cargarTablaInd();
         fotoPerfil = "";
     } catch (IOException ex) {
@@ -495,6 +514,7 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        producto.setCodigo(codigo.getText());
         if(!fotoPerfil.equals("")){
         producto.setFoto(convertirImagen(fotoPerfil));
         }
@@ -502,7 +522,15 @@ String fotoPerfil = "";
         producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stock.getText()));
         Conexion.getInstance().guardar(producto);
-        limpiarCampos();
+        int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
+        if(opcion == JOptionPane.YES_OPTION){
+            textura.setText("");
+            stock.setText("");
+            ColorIndumentaria.setBackground(new Color(0,0,0,0));
+            foto.setIcon(null);         
+        }else{
+           limpiarCampos();
+        }
         cargarTablaAcc();
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
@@ -536,6 +564,7 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        producto.setCodigo(codigo.getText());
         if(!fotoPerfil.equals("")){
         producto.setFoto(convertirImagen(fotoPerfil));
         }
@@ -544,7 +573,15 @@ String fotoPerfil = "";
         producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
         producto.setStock(Integer.valueOf(stockc.getText()));
         Conexion.getInstance().guardar(producto);
-        limpiarCampos();
+        int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
+        if(opcion == JOptionPane.YES_OPTION){
+            tallec.setText("");
+            stockc.setText("");
+            ColorIndumentaria.setBackground(new Color(0,0,0,0));
+            foto.setIcon(null);         
+        }else{
+           limpiarCampos();
+        }
         cargarTablaCalzado();
         fotoPerfil = "";
     } catch (IOException ex) {
@@ -561,6 +598,7 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        producto.setCodigo(codigo.getText());
         if(!fotoPerfil.equals("")){
            producto.setFoto(convertirImagen(fotoPerfil)); 
         }
@@ -613,6 +651,8 @@ String fotoPerfil = "";
         GuardarC.setEnabled(false);
         EditC.setEnabled(true);
         CleanC.setEnabled(true);
+        fotoPanel.setVisible(true);
+        codigo.setText(calzado.getCodigo());
     }//GEN-LAST:event_TablaCalzadoMouseClicked
 
     private void EditAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditAActionPerformed
@@ -624,6 +664,7 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        producto.setCodigo(codigo.getText());
         if(!fotoPerfil.equals("")){
            producto.setFoto(convertirImagen(fotoPerfil)); 
         }
@@ -647,6 +688,7 @@ String fotoPerfil = "";
         producto.setPrecioProveedor(p);
         producto.setPrecioVenta(v);
         producto.setMarca(marca.getText());
+        producto.setCodigo(codigo.getText());
         if(!fotoPerfil.equals("")){
            producto.setFoto(convertirImagen(fotoPerfil)); 
         }
@@ -681,6 +723,8 @@ String fotoPerfil = "";
         GuardarI.setEnabled(false);
         EditI.setEnabled(true);
         CleanI.setEnabled(true);
+        fotoPanel.setVisible(true);
+        codigo.setText(indumentaria.getCodigo());
     }//GEN-LAST:event_TablaIndumentariaMouseClicked
 
     private void TablaAccesorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAccesorioMouseClicked
@@ -697,6 +741,8 @@ String fotoPerfil = "";
         GuardarA.setEnabled(false);
         EditA.setEnabled(true);
         CleanA.setEnabled(true);
+        fotoPanel.setVisible(true);
+        codigo.setText(accesorio.getCodigo());
     }//GEN-LAST:event_TablaAccesorioMouseClicked
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
@@ -853,6 +899,7 @@ String fotoPerfil = "";
         tipoc.setText("");
         venta.setText("");
         marca.setText("");
+        codigo.setText("");
         genero.setText("");
         categoria.setText("");
         labelColor.setVisible(false);
@@ -863,6 +910,7 @@ String fotoPerfil = "";
         TablaIndumentaria.clearSelection();   
         fotoPanel.setVisible(false);
     }
+    
     
     public void ColorChooser(){
     JColorChooser cc=new JColorChooser();
@@ -898,6 +946,7 @@ String fotoPerfil = "";
     private javax.swing.JTable TablaIndumentaria;
     private javax.swing.JButton Volver;
     private javax.swing.JTextField categoria;
+    private javax.swing.JTextField codigo;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel fondoProducto;
     private javax.swing.JLabel foto;
@@ -920,6 +969,7 @@ String fotoPerfil = "";
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

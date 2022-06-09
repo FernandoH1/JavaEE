@@ -30,12 +30,21 @@ public class Producto implements Serializable {
     private double precioVenta;
     private String marca;
     private byte[] foto;
+    private String codigo;
     
     @OneToMany(mappedBy = "producto")
     private List<DetalleCompra> detalleCompras;
 
     public Long getId() {
         return id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public List<Combo> getCombos() {

@@ -382,7 +382,7 @@ public class CrearCombos extends javax.swing.JFrame {
 
         jTabbedPane5.addTab("Accesorios", jPanel3);
 
-        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 910, 310));
+        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 910, 310));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -412,11 +412,11 @@ public class CrearCombos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Cantidad"
+                "Nombre", "Cantidad", "Código"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -425,7 +425,7 @@ public class CrearCombos extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(listProductos);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 370, 300));
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 370, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -737,7 +737,7 @@ public class CrearCombos extends javax.swing.JFrame {
         DefaultTableModel tableDetalle = (DefaultTableModel) listProductos.getModel();
         if (listProductos.getRowCount() == 0) {
             Object[] fila = new Object[1];
-            Producto dv = new Producto();
+            Producto dv = indumentaria;
             int cantidad = (int) cantidadI.getValue();
             fila[0] = dv.getNombre();
             

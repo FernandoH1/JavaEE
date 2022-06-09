@@ -75,9 +75,11 @@
     <Component class="javax.swing.JComboBox" name="tipoVentaCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
+          <StringArray count="4">
             <StringItem index="0" value="Contado"/>
-            <StringItem index="1" value="Cuotas"/>
+            <StringItem index="1" value="Devito"/>
+            <StringItem index="2" value="Credito"/>
+            <StringItem index="3" value="Credito de la Casa"/>
           </StringArray>
         </Property>
       </Properties>
@@ -96,9 +98,12 @@
     <Component class="javax.swing.JComboBox" name="metodoDePagoCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="Efectivo"/>
-            <StringItem index="1" value="Tarjeta"/>
+          <StringArray count="5">
+            <StringItem index="0" value="OCA"/>
+            <StringItem index="1" value="VISA"/>
+            <StringItem index="2" value="MASTERCARD"/>
+            <StringItem index="3" value="SANTANDER"/>
+            <StringItem index="4" value="MAESTRO"/>
           </StringArray>
         </Property>
       </Properties>
