@@ -15,6 +15,7 @@
     <class>Boutique.io.Proveedor</class>
     <class>Boutique.io.Rubro</class>
     <class>Boutique.io.Venta</class>
+    <class>Boutique.io.CombosProducto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/boutique?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

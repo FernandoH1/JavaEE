@@ -2,6 +2,7 @@ package Boutique.io;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
@@ -38,8 +39,5 @@ public class Accesorio extends Producto implements Serializable {
     @Override
     public String toString() {
         return textura;
-    }
-    
-    
-    
+    }  
 }

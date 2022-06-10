@@ -2,6 +2,7 @@ package Boutique.io;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,13 +11,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Producto implements Serializable {
-
-    @ManyToMany(mappedBy = "productos")
-    private List<Combo> combos;
 
     @OneToMany(mappedBy = "producto")
     private List<DetalleDeVenta> detalleDeVentas;
@@ -34,7 +33,7 @@ public class Producto implements Serializable {
     
     @OneToMany(mappedBy = "producto")
     private List<DetalleCompra> detalleCompras;
-
+    
     public Long getId() {
         return id;
     }
@@ -45,14 +44,6 @@ public class Producto implements Serializable {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public List<Combo> getCombos() {
-        return combos;
-    }
-
-    public void setCombos(List<Combo> combos) {
-        this.combos = combos;
     }
 
     public List<DetalleDeVenta> getDetalleDeVentas() {
@@ -71,8 +62,6 @@ public class Producto implements Serializable {
         this.detalleCompras = detalleCompras;
     }
     
-    
-
     public void setId(Long id) {
         this.id = id;
     }

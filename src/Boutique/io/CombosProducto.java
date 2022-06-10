@@ -5,36 +5,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-public class DetalleCompra implements Serializable {
-
-    @ManyToOne
-    private Compra compra;
-
-    @ManyToOne
-    private Producto producto;
+public class CombosProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
+    
+    @ManyToOne
+    @JoinColumn(name = "combo_id")
+    private Combo combo;
+    
     private int cantidad;
-    private double precioUnitario;  
-
-    public Long getId() {
-        return id;
-    }
-
-    public Compra getCompra() {
-        return compra;
-    }
-
-    public void setCompra(Compra compra) {
-        this.compra = compra;
-    }
 
     public Producto getProducto() {
         return producto;
@@ -43,11 +33,13 @@ public class DetalleCompra implements Serializable {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-    
-    
 
-    public void setId(Long id) {
-        this.id = id;
+    public Combo getCombo() {
+        return combo;
+    }
+
+    public void setCombo(Combo combo) {
+        this.combo = combo;
     }
 
     public int getCantidad() {
@@ -57,13 +49,15 @@ public class DetalleCompra implements Serializable {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    
+    
 
-    public double getPrecioUnitario() {
-        return precioUnitario;
+    public Long getId() {
+        return id;
     }
 
-    public void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -76,10 +70,10 @@ public class DetalleCompra implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DetalleCompra)) {
+        if (!(object instanceof CombosProducto)) {
             return false;
         }
-        DetalleCompra other = (DetalleCompra) object;
+        CombosProducto other = (CombosProducto) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -88,7 +82,7 @@ public class DetalleCompra implements Serializable {
 
     @Override
     public String toString() {
-        return "DetalleCompra{" + "id=" + id + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + '}';
+        return "Boutique.io.CombosProducto[ id=" + id + " ]";
     }
-
+    
 }

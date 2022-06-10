@@ -11,11 +11,11 @@ public abstract class Combo_ {
 
 	public static volatile SingularAttribute<Combo, String> descripcion;
 	public static volatile SingularAttribute<Combo, Double> precio;
+	public static volatile ListAttribute<Combo, CombosProducto> combosProductos;
 	public static volatile SingularAttribute<Combo, Long> id;
 	public static volatile SingularAttribute<Combo, Integer> cantidad;
 	public static volatile ListAttribute<Combo, DetalleDeVenta> detalleDeVenta;
 	public static volatile SingularAttribute<Combo, String> nombre;
-	public static volatile ListAttribute<Combo, Producto> productos;
 
 }
 

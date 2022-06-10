@@ -1,13 +1,13 @@
 package Boutique.io;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 public class Cliente implements Serializable {
@@ -37,7 +37,6 @@ public class Cliente implements Serializable {
         this.ventas = ventas;
     }
     
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -107,7 +106,5 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return nombre+" "+apellido;
-    }
-
-    
+    } 
 }

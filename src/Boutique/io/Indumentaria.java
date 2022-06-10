@@ -2,6 +2,7 @@ package Boutique.io;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 public class Indumentaria extends Producto implements Serializable {

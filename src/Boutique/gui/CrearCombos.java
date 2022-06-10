@@ -2,6 +2,8 @@ package Boutique.gui;
 
 import Boutique.io.Accesorio;
 import Boutique.io.Calzado;
+import Boutique.io.Combo;
+import Boutique.io.CombosProducto;
 import Boutique.io.DetalleDeVenta;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
@@ -10,10 +12,12 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
@@ -22,13 +26,15 @@ import javax.swing.table.TableRowSorter;
 public class CrearCombos extends javax.swing.JFrame {
     
     private TableRowSorter trsfiltro = new TableRowSorter();
-
+    private ArrayList<CombosProducto> listaComboProducto = new ArrayList();
     public CrearCombos() {
+         
         initComponents();
-        
-        //cargarTablaCalzado();
+        mostrarCombo();
+        //listaComboProducto 
+        cargarTablaCalzado();
         cargarTablaInd();
-        //cargarTablaAcc();
+        cargarTablaAcc();
         
     }
 
@@ -40,13 +46,11 @@ public class CrearCombos extends javax.swing.JFrame {
         groupC = new javax.swing.ButtonGroup();
         groupA = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
+        descripcion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        precio = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel4 = new javax.swing.JLabel();
         Volver = new javax.swing.JButton();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -82,29 +86,26 @@ public class CrearCombos extends javax.swing.JFrame {
         agregarA = new javax.swing.JButton();
         cantidadA = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        combosT = new javax.swing.JTable();
         foto = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         listProductos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nombre:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 31, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 29, 145, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 54, 145, -1));
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 29, 145, -1));
+        getContentPane().add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 54, 145, -1));
 
         jLabel2.setText("Descripcion:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 56, -1, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 79, 145, -1));
+        getContentPane().add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 79, 145, -1));
 
         jLabel3.setText("Precio:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 81, -1, -1));
-        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 104, 41, -1));
-
-        jLabel4.setText("Cantidad");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 106, -1, -1));
 
         Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/anterior.png"))); // NOI18N
         Volver.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/anteriorr.png"))); // NOI18N
@@ -384,23 +385,23 @@ public class CrearCombos extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 910, 310));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        combosT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Descripción", "Precio", "Cantidad"
+                "Nombre", "Descripción", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(combosT);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 910, 270));
 
@@ -425,7 +426,15 @@ public class CrearCombos extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(listProductos);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 370, 300));
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 370, 300));
+
+        jButton1.setText("Crear Combo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -528,7 +537,9 @@ public class CrearCombos extends javax.swing.JFrame {
 
     private void agregarIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarIActionPerformed
         Indumentaria indumentaria = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 5);
-        añadirProductoSelecionado(indumentaria);
+        int cantidad = (int) cantidadI.getValue();
+        añadirProductoSelecionado(indumentaria,cantidad);
+       mostrarListaProductosCombo();
     }//GEN-LAST:event_agregarIActionPerformed
 
     private void buscarAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarAKeyReleased
@@ -577,6 +588,21 @@ public class CrearCombos extends javax.swing.JFrame {
     private void agregarIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIMouseClicked
        
     }//GEN-LAST:event_agregarIMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    Combo c = new Combo();
+    c.setNombre(nombre.getText());
+    c.setPrecio(Integer.parseInt(precio.getText()));
+    c.setDescripcion(descripcion.getText());
+    Conexion.getInstance().guardar(c);
+    Combo combo = Conexion.getInstance().obtenerUltimoCombo();
+    for ( CombosProducto cp : listaComboProducto ) {
+        cp.setCombo(combo);
+        Conexion.getInstance().guardar(cp);
+    }
+    
+    mostrarCombo();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -733,177 +759,63 @@ public class CrearCombos extends javax.swing.JFrame {
         return perfil;
     }
     
-    public void añadirProductoSelecionado(Indumentaria indumentaria) {
+    public void añadirProductoSelecionado(Producto producto,int cantidad) {
+        int index = estaListaProducto(producto);
+       if( index == -1){
+          CombosProducto cp = new CombosProducto();
+        cp.setProducto(producto);
+        cp.setCantidad(cantidad);
+        listaComboProducto.add(cp); 
+       }else{
+       listaComboProducto.get(index).setCantidad(listaComboProducto.get(index).getCantidad()+cantidad);
+       } 
+    }
+    
+    public int estaListaProducto(Producto producto){
+    for ( int i =0; i < listaComboProducto.size(); i++) {
+        if(listaComboProducto.get(i).getProducto().getId() == producto.getId()){
+          return i;  
+        }
+    }
+        return -1;
+    }
+    
+    public void mostrarListaProductosCombo(){
+        limpiarTabla(listProductos);
         DefaultTableModel tableDetalle = (DefaultTableModel) listProductos.getModel();
-        if (listProductos.getRowCount() == 0) {
-            Object[] fila = new Object[1];
-            Producto dv = indumentaria;
-            int cantidad = (int) cantidadI.getValue();
-            fila[0] = dv.getNombre();
-            
+        for ( CombosProducto cp : listaComboProducto ) {
+            Object[] fila = new Object[3];
+            fila[0] = cp.getProducto().getNombre() ;
+            fila[1] = cp.getCantidad() ;
+            fila[2] = cp.getProducto().getCodigo();
             tableDetalle.addRow(fila);
-            int nuevaCantidad = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) - cantidad;
-            TablaIndumentaria.setValueAt(nuevaCantidad, TablaIndumentaria.getSelectedRow(), 10);
-            cantidadI.setValue(1);
-            SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();
-            modeloSpinner.setMaximum(nuevaCantidad);
-        } else {
-            boolean flag = false;
-            for (int i = 0; i < listProductos.getRowCount(); i++) {
-                Producto dv = (Producto) listProductos.getValueAt(i, 0);
-                if (dv.getId() == indumentaria.getId()) {
-                    int catidadActual = (int) listProductos.getValueAt(i, 1);
-                    int cantidad = (int) cantidadI.getValue();
-
-                    int nuevaCantidad = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) - cantidad;
-                    TablaIndumentaria.setValueAt(nuevaCantidad, TablaIndumentaria.getSelectedRow(), 10);
-                    cantidadI.setValue(1);
-                    SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();
-                    modeloSpinner.setMaximum(nuevaCantidad);
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
-                Object[] fila = new Object[1];
-                Producto dv = new Producto();
-                int cantidad = (int) cantidadI.getValue();
-
-                fila[0] = dv;
-
-                tableDetalle.addRow(fila);
-                int nuevaCantidad = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) - cantidad;
-                TablaIndumentaria.setValueAt(nuevaCantidad, TablaIndumentaria.getSelectedRow(), 10);
-                cantidadI.setValue(1);
-                SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();
-                modeloSpinner.setMaximum(nuevaCantidad);
-            }
         }
     }
     
-    /*public void añadirProductoSelecionado(Accesorio accesorio) {
-        DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
-        if (detalleDeVenta.getRowCount() == 0) {
-            Object[] fila = new Object[4];
-            DetalleDeVenta dv = new DetalleDeVenta();
-            int cantidad = (int) cantidadA.getValue();
-            dv.setPrecioCompra(accesorio.getPrecioVenta() * cantidad);
-            dv.setCantidad(cantidad);
-            dv.setPrecioUnitario(accesorio.getPrecioVenta());
-            dv.setProducto(accesorio);
-            fila[0] = dv;
-            fila[1] = cantidad;
-            fila[2] = accesorio.getPrecioVenta();
-            fila[3] = accesorio.getPrecioVenta() * cantidad;
+        private void mostrarCombo() {
+        limpiarTabla(combosT);
+        DefaultTableModel tableDetalle = (DefaultTableModel) combosT.getModel();
+        for ( Combo cp : Conexion.getInstance().getAllCombo() ) {
+            Object[] fila = new Object[3];
+            fila[0] = cp.getNombre() ;
+            fila[1] = cp.getDescripcion();
+            fila[2] = cp.getPrecio();
             tableDetalle.addRow(fila);
-            int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) - cantidad;
-            TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
-            cantidadA.setValue(1);
-            SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
-            modeloSpinner.setMaximum(nuevaCantidad);
-        } else {
-            boolean flag = false;
-            for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
-                DetalleDeVenta dv = (DetalleDeVenta) detalleDeVenta.getValueAt(i, 0);
-                if (dv.getProducto().getId() == accesorio.getId()) {
-                    int catidadActual = (int) detalleDeVenta.getValueAt(i, 1);
-                    int cantidad = (int) cantidadA.getValue();
-                    detalleDeVenta.setValueAt((catidadActual + cantidad), i, 1);
-                    detalleDeVenta.setValueAt((catidadActual + cantidad) * accesorio.getPrecioVenta(), i, 3);
-                    dv.setCantidad((catidadActual + cantidad));
-                    dv.setPrecioCompra((catidadActual + cantidad) * accesorio.getPrecioVenta());
-                    int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) - cantidad;
-                    TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
-                    cantidadA.setValue(1);
-                    SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
-                    modeloSpinner.setMaximum(nuevaCantidad);
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
-                Object[] fila = new Object[4];
-                DetalleDeVenta dv = new DetalleDeVenta();
-                int cantidad = (int) cantidadA.getValue();
-                dv.setPrecioCompra(accesorio.getPrecioVenta() * cantidad);
-                dv.setCantidad(cantidad);
-                dv.setPrecioUnitario(accesorio.getPrecioVenta());
-                dv.setProducto(accesorio);
-                fila[0] = dv;
-                fila[1] = cantidad;
-                fila[2] = accesorio.getPrecioVenta();
-                fila[3] = accesorio.getPrecioVenta() * cantidad;
-                tableDetalle.addRow(fila);
-                int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) - cantidad;
-                TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
-                cantidadA.setValue(1);
-                SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
-                modeloSpinner.setMaximum(nuevaCantidad);
-            }
         }
     }
     
-    public void añadirProductoSelecionado(Calzado calzado) {
-        DefaultTableModel tableDetalle = (DefaultTableModel) detalleDeVenta.getModel();
-        if (detalleDeVenta.getRowCount() == 0) {
-            Object[] fila = new Object[4];
-            DetalleDeVenta dv = new DetalleDeVenta();
-            int cantidad = (int) cantidadC.getValue();
-            dv.setPrecioCompra(calzado.getPrecioVenta() * cantidad);
-            dv.setCantidad(cantidad);
-            dv.setPrecioUnitario(calzado.getPrecioVenta());
-            dv.setProducto(calzado);
-            fila[0] = dv;
-            fila[1] = cantidad;
-            fila[2] = calzado.getPrecioVenta();
-            fila[3] = calzado.getPrecioVenta() * cantidad;
-            tableDetalle.addRow(fila);
-            int nuevaCantidad = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) - cantidad;
-            TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
-            cantidadC.setValue(1);
-            SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadC.getModel();
-            modeloSpinner.setMaximum(nuevaCantidad);
-        } else {
-            boolean flag = false;
-            for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
-                DetalleDeVenta dv = (DetalleDeVenta) detalleDeVenta.getValueAt(i, 0);
-                if (dv.getProducto().getId() == calzado.getId()) {
-                    int catidadActual = (int) detalleDeVenta.getValueAt(i, 1);
-                    int cantidad = (int) cantidadC.getValue();
-                    detalleDeVenta.setValueAt((catidadActual + cantidad), i, 1);
-                    detalleDeVenta.setValueAt((catidadActual + cantidad) * calzado.getPrecioVenta(), i, 3);
-                    dv.setCantidad((catidadActual + cantidad));
-                    dv.setPrecioCompra((catidadActual + cantidad) * calzado.getPrecioVenta());
-                    int nuevaCantidad = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) - cantidad;
-                    TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
-                    cantidadC.setValue(1);
-                    SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadC.getModel();
-                    modeloSpinner.setMaximum(nuevaCantidad);
-                    flag = true;
-                    break;
-                }
+    public void limpiarTabla(JTable tabla){
+        try {
+            DefaultTableModel modelo=(DefaultTableModel) tabla.getModel();
+            int filas=tabla.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
             }
-            if (!flag) {
-                Object[] fila = new Object[4];
-                DetalleDeVenta dv = new DetalleDeVenta();
-                int cantidad = (int) cantidadC.getValue();
-                dv.setPrecioCompra(calzado.getPrecioVenta() * cantidad);
-                dv.setCantidad(cantidad);
-                dv.setPrecioUnitario(calzado.getPrecioVenta());
-                dv.setProducto(calzado);
-                fila[0] = dv;
-                fila[1] = cantidad;
-                fila[2] = calzado.getPrecioVenta();
-                fila[3] = calzado.getPrecioVenta() * cantidad;
-                tableDetalle.addRow(fila);
-                int nuevaCantidad = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) - cantidad;
-                TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
-                cantidadC.setValue(1);
-                SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadC.getModel();
-                modeloSpinner.setMaximum(nuevaCantidad);
-            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
         }
-    }*/
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAccesorio;
@@ -919,10 +831,13 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JSpinner cantidadA;
     private javax.swing.JSpinner cantidadC;
     private javax.swing.JSpinner cantidadI;
+    private javax.swing.JTable combosT;
+    private javax.swing.JTextField descripcion;
     private javax.swing.JLabel foto;
     private javax.swing.ButtonGroup groupA;
     private javax.swing.ButtonGroup groupC;
     private javax.swing.ButtonGroup groupI;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -931,7 +846,6 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -941,20 +855,19 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTable listProductos;
+    private javax.swing.JTextField nombre;
     private javax.swing.JRadioButton nombreA;
     private javax.swing.JRadioButton nombreC;
     private javax.swing.JRadioButton nombreI;
+    private javax.swing.JTextField precio;
     private javax.swing.JRadioButton talleC;
     private javax.swing.JRadioButton talleI;
     private javax.swing.JRadioButton textura;
     private javax.swing.JRadioButton tipoC;
     private javax.swing.JRadioButton tipoI;
     // End of variables declaration//GEN-END:variables
+
+
 }

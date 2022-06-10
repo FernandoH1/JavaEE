@@ -3,6 +3,7 @@ package Boutique.persistencia;
 import Boutique.io.Accesorio;
 import Boutique.io.Calzado;
 import Boutique.io.Cliente;
+import Boutique.io.Combo;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
 import Boutique.io.Venta;
@@ -175,18 +176,32 @@ public class Conexion {
     }
 
 
-    public Venta obtenerUltimaVenta() {
+    public Combo obtenerUltimoCombo() {
         EntityManager em = getEntity();
-        Venta venta = null;
+        Combo combo = null;
         em.getTransaction().begin();
         try {
-            venta = (Venta) em.createNativeQuery("SELECT * FROM venta ORDER BY id DESC LIMIT 1;",Venta.class).getSingleResult();
+            combo = (Combo) em.createNativeQuery("SELECT * FROM combo ORDER BY id DESC LIMIT 1;",Combo.class).getSingleResult();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
         }
-        return venta;
+        return combo;
     }
+    
+    public List<Combo> getAllCombo(){
+       EntityManager em = getEntity();
+        List<Combo> combos = null;
+        em.getTransaction().begin();
+        try {
+            combos = em.createNativeQuery("SELECT * FROM combo",Combo.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return combos;
+    }
+
     
     public Producto obtenerProductobyID(Long id){
         EntityManager em = getEntity();
@@ -199,6 +214,6 @@ public class Conexion {
             em.getTransaction().rollback();
         }
         return producto;
-    }
+}
     
 }

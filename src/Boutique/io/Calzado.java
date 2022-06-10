@@ -2,6 +2,7 @@ package Boutique.io;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
@@ -11,7 +12,6 @@ public class Calzado extends Producto implements Serializable {
     private String tipo;
     private String color;
     private int stock;
-
 
     public String getTalle() {
         return talle;
@@ -48,6 +48,5 @@ public class Calzado extends Producto implements Serializable {
     @Override
     public String toString() {
         return talle;
-    }
-    
+    } 
 }
