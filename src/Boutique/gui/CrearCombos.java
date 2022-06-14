@@ -595,9 +595,8 @@ public class CrearCombos extends javax.swing.JFrame {
     c.setPrecio(Integer.parseInt(precio.getText()));
     c.setDescripcion(descripcion.getText());
     Conexion.getInstance().guardar(c);
-    Combo combo = Conexion.getInstance().obtenerUltimoCombo();
     for ( CombosProducto cp : listaComboProducto ) {
-        cp.setCombo(combo);
+        cp.setCombo(c);
         Conexion.getInstance().guardar(cp);
     }
     
