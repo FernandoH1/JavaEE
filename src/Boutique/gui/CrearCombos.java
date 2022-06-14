@@ -114,7 +114,7 @@ public class CrearCombos extends javax.swing.JFrame {
                 VolverActionPerformed(evt);
             }
         });
-        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 0, 60, 50));
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 0, 60, 50));
 
         jTabbedPane5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -383,7 +383,7 @@ public class CrearCombos extends javax.swing.JFrame {
 
         jTabbedPane5.addTab("Accesorios", jPanel3);
 
-        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 910, 310));
+        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 910, 310));
 
         combosT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -403,7 +403,7 @@ public class CrearCombos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(combosT);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 910, 270));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 1320, 250));
 
         foto.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 40, 40));
@@ -496,7 +496,15 @@ public class CrearCombos extends javax.swing.JFrame {
 
     private void agregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCActionPerformed
         Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 5);
-        //añadirProductoSelecionado(calzado);
+        int cantidad = (int) cantidadC.getValue();
+        int stock = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8);
+        if(stock != 0){
+            añadirProductoSelecionado(calzado,cantidad);
+            disminuirStockC();
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
+        }
+        mostrarListaProductosCombo();
     }//GEN-LAST:event_agregarCActionPerformed
 
     private void buscarIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarIKeyReleased
@@ -538,8 +546,14 @@ public class CrearCombos extends javax.swing.JFrame {
     private void agregarIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarIActionPerformed
         Indumentaria indumentaria = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 5);
         int cantidad = (int) cantidadI.getValue();
-        añadirProductoSelecionado(indumentaria,cantidad);
-       mostrarListaProductosCombo();
+        int stock = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10);
+        if(stock != 0){
+            añadirProductoSelecionado(indumentaria,cantidad);
+            disminuirStockI();
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
+        }
+        mostrarListaProductosCombo();
     }//GEN-LAST:event_agregarIActionPerformed
 
     private void buscarAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarAKeyReleased
@@ -570,13 +584,21 @@ public class CrearCombos extends javax.swing.JFrame {
         Accesorio acc = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 5);
         SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
         modeloSpinner.setMaximum(acc.getStock());
-        modeloSpinner.setMinimum(0);
+        modeloSpinner.setMinimum(1);
         cantidadA.setEnabled(true);
     }//GEN-LAST:event_TablaAccesorioMouseClicked
 
     private void agregarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAActionPerformed
         Accesorio accesorio = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 5);
-        //añadirProductoSelecionado(accesorio);
+        int cantidad = (int) cantidadA.getValue();
+        int stock = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7);
+        if(stock != 0){
+            añadirProductoSelecionado(accesorio,cantidad);
+            disminuirStockA();
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
+        }
+        mostrarListaProductosCombo();
     }//GEN-LAST:event_agregarAActionPerformed
 
     private void jTabbedPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane5MouseClicked
@@ -815,6 +837,24 @@ public class CrearCombos extends javax.swing.JFrame {
         }
     }
     
+    public void disminuirStockA(){
+        int cantidad = (int) cantidadA.getValue();
+        int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) - cantidad;
+        TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
+    }
+    
+    private void disminuirStockI() {
+        int cantidad = (int) cantidadI.getValue();
+        int nuevaCantidad = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) - cantidad;
+        TablaIndumentaria.setValueAt(nuevaCantidad, TablaIndumentaria.getSelectedRow(), 10);
+    }
+    
+    private void disminuirStockC() {
+        int cantidad = (int) cantidadC.getValue();
+        int nuevaCantidad = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) - cantidad;
+        TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAccesorio;
@@ -867,6 +907,4 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JRadioButton tipoC;
     private javax.swing.JRadioButton tipoI;
     // End of variables declaration//GEN-END:variables
-
-
 }

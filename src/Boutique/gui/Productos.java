@@ -657,7 +657,7 @@ String fotoPerfil = "";
 
     private void EditAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditAActionPerformed
         try {
-        Accesorio producto = (Accesorio) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);
+        Accesorio producto = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(),5);
         producto.setNombre(nombre.getText());
         double p = Double.parseDouble(proveedor.getText());
         double v = Double.parseDouble(venta.getText());
@@ -680,8 +680,8 @@ String fotoPerfil = "";
     }//GEN-LAST:event_EditAActionPerformed
 
     private void EditIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditIActionPerformed
-         try {
-        Indumentaria producto = (Indumentaria) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(),5);
+        try {
+        Indumentaria producto = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);
         producto.setNombre(nombre.getText());
         double p = Double.parseDouble(proveedor.getText());
         double v = Double.parseDouble(venta.getText());
