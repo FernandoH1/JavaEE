@@ -511,10 +511,23 @@ public class Venta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Codigo"
+                "", "Nombre", "Codigo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(TablaProductosSelecionados);
+        if (TablaProductosSelecionados.getColumnModel().getColumnCount() > 0) {
+            TablaProductosSelecionados.getColumnModel().getColumn(0).setMinWidth(0);
+            TablaProductosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(0);
+            TablaProductosSelecionados.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
 
         jPanel6.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 730, 90));
 
@@ -860,10 +873,11 @@ public class Venta extends javax.swing.JFrame {
         Iterator<Producto> it = Conexion.getInstance().listarProductoComboSelecionados(id).iterator();
         //tableProductos.setRowCount(0);
         while(it.hasNext()) {
-        Object[] fila = new Object[2];
+        Object[] fila = new Object[3];
         Producto next = it.next();
-        fila[0] = next.getNombre();
-        fila[1] = next.getCodigo();
+        fila[0] = next;
+        fila[1] = next.getNombre();
+        fila[2] = next.getCodigo();
         tableProductos.addRow(fila);
         }  
     }

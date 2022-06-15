@@ -220,7 +220,7 @@ public class Conexion {
         List<Producto> productos = null;
         em.getTransaction().begin();
         try {
-            productos = em.createNativeQuery("SELECT producto.nombre, producto.codigo FROM combosproducto INNER JOIN producto on producto.id = combosproducto.producto_id WHERE combo_id = "+id,Producto.class).getResultList();
+            productos = em.createNativeQuery("SELECT producto.* FROM combosproducto INNER JOIN producto on producto.id = combosproducto.producto_id WHERE combo_id = "+id,Producto.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
