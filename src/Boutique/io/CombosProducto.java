@@ -82,7 +82,7 @@ public class CombosProducto implements Serializable {
 
     @Override
     public String toString() {
-        return "Boutique.io.CombosProducto[ id=" + id + " ]";
+        return producto.getCodigo();
     }
     
 }

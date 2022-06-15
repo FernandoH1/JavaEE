@@ -6,7 +6,6 @@ import Boutique.io.Cliente;
 import Boutique.io.Combo;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
-import Boutique.io.Venta;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -214,6 +213,19 @@ public class Conexion {
             em.getTransaction().rollback();
         }
         return producto;
-}
+    }
+    
+    public List<Producto> listarProductoComboSelecionados(Long id) {
+        EntityManager em = getEntity();
+        List<Producto> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT producto.nombre, producto.codigo FROM combosproducto INNER JOIN producto on producto.id = combosproducto.producto_id WHERE combo_id = "+id,Producto.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
     
 }

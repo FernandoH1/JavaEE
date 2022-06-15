@@ -4,7 +4,6 @@ import Boutique.io.Accesorio;
 import Boutique.io.Calzado;
 import Boutique.io.Combo;
 import Boutique.io.CombosProducto;
-import Boutique.io.DetalleDeVenta;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
 import Boutique.persistencia.Conexion;
@@ -49,7 +48,6 @@ public class CrearCombos extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         descripcion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        precio = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         Volver = new javax.swing.JButton();
         jTabbedPane5 = new javax.swing.JTabbedPane();
@@ -91,6 +89,8 @@ public class CrearCombos extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         listProductos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        precio = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,7 +102,6 @@ public class CrearCombos extends javax.swing.JFrame {
 
         jLabel2.setText("Descripcion:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 56, -1, -1));
-        getContentPane().add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 79, 145, -1));
 
         jLabel3.setText("Precio:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 81, -1, -1));
@@ -436,6 +435,17 @@ public class CrearCombos extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
 
+        jButton2.setText("Quitar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+
+        precio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
+        getContentPane().add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 90, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -500,6 +510,8 @@ public class CrearCombos extends javax.swing.JFrame {
         int stock = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8);
         if(stock != 0){
             añadirProductoSelecionado(calzado,cantidad);
+            double precio = (double) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 2)*cantidad;
+            precioRecomendado(precio);
             disminuirStockC();
         }else{
             JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
@@ -549,6 +561,8 @@ public class CrearCombos extends javax.swing.JFrame {
         int stock = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10);
         if(stock != 0){
             añadirProductoSelecionado(indumentaria,cantidad);
+            double precio = (double) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 2)*cantidad;
+            precioRecomendado(precio);
             disminuirStockI();
         }else{
             JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
@@ -594,6 +608,8 @@ public class CrearCombos extends javax.swing.JFrame {
         int stock = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7);
         if(stock != 0){
             añadirProductoSelecionado(accesorio,cantidad);
+            double precio = (double) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 2)*cantidad;
+            precioRecomendado(precio);
             disminuirStockA();
         }else{
             JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
@@ -614,16 +630,49 @@ public class CrearCombos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     Combo c = new Combo();
     c.setNombre(nombre.getText());
-    c.setPrecio(Integer.parseInt(precio.getText()));
+    SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) precio.getModel();
+    modeloSpinner.setMinimum(0);
+    double precioC = (double) precio.getValue();
+    c.setPrecio(precioC);
     c.setDescripcion(descripcion.getText());
     Conexion.getInstance().guardar(c);
     for ( CombosProducto cp : listaComboProducto ) {
         cp.setCombo(c);
         Conexion.getInstance().guardar(cp);
     }
-    
     mostrarCombo();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel tableDetalle = (DefaultTableModel) listProductos.getModel();
+        CombosProducto dv = (CombosProducto) listProductos.getValueAt(listProductos.getSelectedRow(), 2);
+        Producto p = dv.getProducto();
+        System.out.println("CONTADOR: "+listProductos.getRowCount());
+        if(listProductos.getRowCount() == 1){
+          quitarPrecio();  
+        }
+        if (p instanceof Indumentaria) {
+            int cantidadInd = (int) listProductos.getValueAt(listProductos.getSelectedRow(), 1);
+            int fila = -1;
+            for(int i = 0; i < TablaIndumentaria.getRowCount(); i++ ){
+            if(p.equals(TablaIndumentaria.getValueAt(i, 5))){
+                fila=i;
+                break;
+            }
+            }
+              int nuevaCantidadI = (int) TablaIndumentaria.getValueAt(fila, 10) + cantidadInd;
+              TablaIndumentaria.setValueAt(nuevaCantidadI, fila, 10);
+            } else if (p instanceof Calzado) {
+                int cantidadC = (int) listProductos.getValueAt(listProductos.getSelectedRow(), 1);
+                int nuevaCantidadC = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) + cantidadC;
+                TablaCalzado.setValueAt(nuevaCantidadC, TablaCalzado.getSelectedRow(), 8);
+            } else {
+               int cantidad = (int) listProductos.getValueAt(listProductos.getSelectedRow(), 1);
+                int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) + cantidad;
+                TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
+            }
+            tableDetalle.removeRow(listProductos.getSelectedRow());
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -808,7 +857,7 @@ public class CrearCombos extends javax.swing.JFrame {
             Object[] fila = new Object[3];
             fila[0] = cp.getProducto().getNombre() ;
             fila[1] = cp.getCantidad() ;
-            fila[2] = cp.getProducto().getCodigo();
+            fila[2] = cp;
             tableDetalle.addRow(fila);
         }
     }
@@ -818,7 +867,7 @@ public class CrearCombos extends javax.swing.JFrame {
         DefaultTableModel tableDetalle = (DefaultTableModel) combosT.getModel();
         for ( Combo cp : Conexion.getInstance().getAllCombo() ) {
             Object[] fila = new Object[3];
-            fila[0] = cp.getNombre() ;
+            fila[0] = cp;
             fila[1] = cp.getDescripcion();
             fila[2] = cp.getPrecio();
             tableDetalle.addRow(fila);
@@ -855,6 +904,16 @@ public class CrearCombos extends javax.swing.JFrame {
         TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
     }
     
+    private void precioRecomendado(double valor){
+        double result = (double) precio.getValue();
+        result += valor;
+        precio.setValue(result);
+    }
+    
+    private void quitarPrecio(){
+        precio.setValue(0);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAccesorio;
@@ -877,6 +936,7 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.ButtonGroup groupC;
     private javax.swing.ButtonGroup groupI;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -900,7 +960,7 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JRadioButton nombreA;
     private javax.swing.JRadioButton nombreC;
     private javax.swing.JRadioButton nombreI;
-    private javax.swing.JTextField precio;
+    private javax.swing.JSpinner precio;
     private javax.swing.JRadioButton talleC;
     private javax.swing.JRadioButton talleI;
     private javax.swing.JRadioButton textura;

@@ -3,6 +3,7 @@ package Boutique.gui;
 import Boutique.io.Accesorio;
 import Boutique.io.Calzado;
 import Boutique.io.Cliente;
+import Boutique.io.Combo;
 import Boutique.io.DetalleDeVenta;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
@@ -38,6 +39,7 @@ public class Venta extends javax.swing.JFrame {
         cantidadI.setEnabled(false);
         metodoDePagoCombo.setEnabled(false);
         cargarTablaCalzado();
+        cargarCombos();
         cargarTablaInd();
         cargarTablaAcc();
         deshabilitarLabel();
@@ -102,6 +104,14 @@ public class Venta extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         agregarA = new javax.swing.JButton();
         cantidadA = new javax.swing.JSpinner();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TablaCombos = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        TablaProductosSelecionados = new javax.swing.JTable();
+        jLabel18 = new javax.swing.JLabel();
         foto = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         clienteFinal = new javax.swing.JCheckBox();
@@ -457,6 +467,62 @@ public class Venta extends javax.swing.JFrame {
 
         jTabbedPane5.addTab("Accesorios", jPanel3);
 
+        jPanel6.setBackground(new java.awt.Color(240, 218, 168));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TablaCombos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Descripción", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaCombos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaCombosMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(TablaCombos);
+
+        jPanel6.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 730, 90));
+
+        jLabel6.setText("COMBOS:");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jButton2.setText("Agregar Combo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, -1, -1));
+
+        TablaProductosSelecionados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Codigo"
+            }
+        ));
+        jScrollPane6.setViewportView(TablaProductosSelecionados);
+
+        jPanel6.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 730, 90));
+
+        jLabel18.setText("PRODUCTOS RELACIONADOS:");
+        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jTabbedPane5.addTab("Combos", jPanel6);
+
         getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 910, 330));
 
         foto.setBackground(new java.awt.Color(255, 255, 255));
@@ -747,6 +813,15 @@ public class Venta extends javax.swing.JFrame {
                 //TablaIndumentaria.clearSelection(); 
     }//GEN-LAST:event_detalleDeVentaMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void TablaCombosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCombosMouseClicked
+        Combo cb = (Combo) TablaCombos.getValueAt(TablaCombos.getSelectedRow(), 0);
+        cargarTablaProductos(cb.getId());
+    }//GEN-LAST:event_TablaCombosMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -777,6 +852,20 @@ public class Venta extends javax.swing.JFrame {
                 new Venta().setVisible(true);
             }
         });
+    }
+    
+    public void cargarTablaProductos(Long id){
+        System.out.println("SOY LA ID:"+id);
+        DefaultTableModel tableProductos = (DefaultTableModel) TablaProductosSelecionados.getModel();
+        Iterator<Producto> it = Conexion.getInstance().listarProductoComboSelecionados(id).iterator();
+        //tableProductos.setRowCount(0);
+        while(it.hasNext()) {
+        Object[] fila = new Object[2];
+        Producto next = it.next();
+        fila[0] = next.getNombre();
+        fila[1] = next.getCodigo();
+        tableProductos.addRow(fila);
+        }  
     }
 
     public void cargarTablaCalzado() {
@@ -828,6 +917,17 @@ public class Venta extends javax.swing.JFrame {
             tableProductos.addRow(fila);
             TablaIndumentaria.setDefaultRenderer(Object.class, new ImgTabla());
             TablaIndumentaria.setRowHeight(40);
+        }
+    }
+    
+    public void cargarCombos(){
+    DefaultTableModel tableDetalle = (DefaultTableModel) TablaCombos.getModel();
+        for ( Combo cp : Conexion.getInstance().getAllCombo() ) {
+            Object[] fila = new Object[3];
+            fila[0] = cp;
+            fila[1] = cp.getDescripcion();
+            fila[2] = cp.getPrecio();
+            tableDetalle.addRow(fila);
         }
     }
 
@@ -1099,7 +1199,9 @@ public class Venta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAccesorio;
     private javax.swing.JTable TablaCalzado;
+    private javax.swing.JTable TablaCombos;
     private javax.swing.JTable TablaIndumentaria;
+    private javax.swing.JTable TablaProductosSelecionados;
     private javax.swing.JButton Volver;
     private javax.swing.JButton agregarA;
     private javax.swing.JButton agregarC;
@@ -1121,6 +1223,7 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JTable detalleDeVenta;
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -1132,10 +1235,12 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1144,10 +1249,13 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JComboBox<String> metodoDePagoCombo;
     private javax.swing.JRadioButton nombreA;

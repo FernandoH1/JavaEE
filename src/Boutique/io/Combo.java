@@ -95,7 +95,7 @@ public class Combo implements Serializable {
 
     @Override
     public String toString() {
-        return "Combo{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", cantidad=" + cantidad + '}';
+        return nombre;
     }
 
 
