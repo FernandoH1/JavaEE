@@ -16,9 +16,8 @@ public class CombosProducto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @ManyToOne
-    @JoinColumn(name = "producto_id")
-    private Producto producto;
+    private String codigoProducto;
+    private String nombreProducto;
     
     @ManyToOne
     @JoinColumn(name = "combo_id")
@@ -26,12 +25,22 @@ public class CombosProducto implements Serializable {
     
     private int cantidad;
 
-    public Producto getProducto() {
-        return producto;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+    
+    
+
+    public String getCodigoProducto() {
+        return codigoProducto;
+    }
+
+    public void setCodigoProducto(String codigoProducto) {
+        this.codigoProducto = codigoProducto;
     }
 
     public Combo getCombo() {
@@ -49,7 +58,6 @@ public class CombosProducto implements Serializable {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
     
 
     public Long getId() {
@@ -79,10 +87,12 @@ public class CombosProducto implements Serializable {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
-        return producto.getCodigo();
+        return "CombosProducto{" + "id=" + id + ", codigoProducto=" + codigoProducto + ", combo=" + combo + ", cantidad=" + cantidad + '}';
     }
-    
+  
 }
+
+    

@@ -228,4 +228,56 @@ public class Conexion {
         return productos;
     }
     
+    public List<Calzado> listarCalzadoPorCodigo() {
+        EntityManager em = getEntity();
+        List<Calzado> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM calzado, producto WHERE producto.id=calzado.id GROUP BY producto.codigo;",Calzado.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
+    public List<Accesorio> listarAccesorioPorCodigo() {
+        EntityManager em = getEntity();
+        List<Accesorio> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM accesorio, producto WHERE producto.id=accesorio.id GROUP BY producto.codigo;",Accesorio.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
+    public List<Indumentaria> listarIndumentariaPorCodigo() {
+        EntityManager em = getEntity();
+        List<Indumentaria> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM indumentaria, producto WHERE producto.id=indumentaria.id GROUP BY producto.codigo;",Indumentaria.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
+    public double precioDeProductos(String codigo){
+    EntityManager em = getEntity();
+        double precio = 0;
+        em.getTransaction().begin();
+        try {
+            precio = (double) em.createNativeQuery("SELECT precioVenta FROM producto WHERE codigo="+codigo+" ORDER BY codigo DESC LIMIT 1").getSingleResult();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return precio;
+    }
+    
 }

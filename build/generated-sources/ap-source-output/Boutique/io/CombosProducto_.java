@@ -10,8 +10,9 @@ public abstract class CombosProducto_ {
 
 	public static volatile SingularAttribute<CombosProducto, Combo> combo;
 	public static volatile SingularAttribute<CombosProducto, Long> id;
-	public static volatile SingularAttribute<CombosProducto, Producto> producto;
 	public static volatile SingularAttribute<CombosProducto, Integer> cantidad;
+	public static volatile SingularAttribute<CombosProducto, String> codigoProducto;
+	public static volatile SingularAttribute<CombosProducto, String> nombreProducto;
 
 }
 

@@ -5,16 +5,11 @@ import Boutique.io.Calzado;
 import Boutique.io.Combo;
 import Boutique.io.CombosProducto;
 import Boutique.io.Indumentaria;
-import Boutique.io.Producto;
 import Boutique.persistencia.Conexion;
-import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -23,18 +18,17 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class CrearCombos extends javax.swing.JFrame {
-    
+
     private TableRowSorter trsfiltro = new TableRowSorter();
     private ArrayList<CombosProducto> listaComboProducto = new ArrayList();
+
     public CrearCombos() {
-         
         initComponents();
         mostrarCombo();
-        //listaComboProducto 
         cargarTablaCalzado();
         cargarTablaInd();
         cargarTablaAcc();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -55,7 +49,6 @@ public class CrearCombos extends javax.swing.JFrame {
         buscarC = new javax.swing.JTextField();
         nombreC = new javax.swing.JRadioButton();
         tipoC = new javax.swing.JRadioButton();
-        talleC = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaCalzado = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
@@ -66,7 +59,6 @@ public class CrearCombos extends javax.swing.JFrame {
         buscarI = new javax.swing.JTextField();
         nombreI = new javax.swing.JRadioButton();
         tipoI = new javax.swing.JRadioButton();
-        talleI = new javax.swing.JRadioButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaIndumentaria = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
@@ -88,8 +80,8 @@ public class CrearCombos extends javax.swing.JFrame {
         foto = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         listProductos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        crearCombo = new javax.swing.JButton();
+        quitar = new javax.swing.JButton();
         precio = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -152,30 +144,16 @@ public class CrearCombos extends javax.swing.JFrame {
         });
         jPanel1.add(tipoC, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
-        groupC.add(talleC);
-        talleC.setText("Talle");
-        talleC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                talleCMouseClicked(evt);
-            }
-        });
-        talleC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                talleCActionPerformed(evt);
-            }
-        });
-        jPanel1.add(talleC, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
-
         TablaCalzado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Color", "Stock"
+                "Nombre", "Precio Venta", "Marca", "Tipo", "Codigo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -186,10 +164,18 @@ public class CrearCombos extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaCalzadoMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                TablaCalzadoMouseEntered(evt);
+            }
         });
         jScrollPane2.setViewportView(TablaCalzado);
+        if (TablaCalzado.getColumnModel().getColumnCount() > 0) {
+            TablaCalzado.getColumnModel().getColumn(4).setMinWidth(0);
+            TablaCalzado.getColumnModel().getColumn(4).setPreferredWidth(0);
+            TablaCalzado.getColumnModel().getColumn(4).setMaxWidth(0);
+        }
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 220));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 190));
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
@@ -246,25 +232,16 @@ public class CrearCombos extends javax.swing.JFrame {
         });
         jPanel2.add(tipoI, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, -1));
 
-        groupI.add(talleI);
-        talleI.setText("Talle");
-        talleI.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                talleIMouseClicked(evt);
-            }
-        });
-        jPanel2.add(talleI, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
-
         TablaIndumentaria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Talle", "Tipo", "Categoria", "Genero", "Color", "Stock"
+                "Nombre", "Precio Venta", "Marca", "Tipo", "Categoria", "Genero", "Codigo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -277,8 +254,13 @@ public class CrearCombos extends javax.swing.JFrame {
             }
         });
         jScrollPane4.setViewportView(TablaIndumentaria);
+        if (TablaIndumentaria.getColumnModel().getColumnCount() > 0) {
+            TablaIndumentaria.getColumnModel().getColumn(6).setMinWidth(0);
+            TablaIndumentaria.getColumnModel().getColumn(6).setPreferredWidth(0);
+            TablaIndumentaria.getColumnModel().getColumn(6).setMaxWidth(0);
+        }
 
-        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 220));
+        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 190));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel13.setText("Buscar :");
@@ -340,11 +322,11 @@ public class CrearCombos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Precio Proveedor", "Precio Venta", "Marca", "Foto", "Textura", "Color", "Stock"
+                "Nombre", "Precio Venta", "Marca", "Textura", "Codigo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -357,8 +339,13 @@ public class CrearCombos extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(TablaAccesorio);
+        if (TablaAccesorio.getColumnModel().getColumnCount() > 0) {
+            TablaAccesorio.getColumnModel().getColumn(4).setMinWidth(0);
+            TablaAccesorio.getColumnModel().getColumn(4).setPreferredWidth(0);
+            TablaAccesorio.getColumnModel().getColumn(4).setMaxWidth(0);
+        }
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 210));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 870, 180));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -427,21 +414,21 @@ public class CrearCombos extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 370, 300));
 
-        jButton1.setText("Crear Combo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        crearCombo.setText("Crear Combo");
+        crearCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                crearComboActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        getContentPane().add(crearCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
 
-        jButton2.setText("Quitar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        quitar.setText("Quitar");
+        quitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                quitarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+        getContentPane().add(quitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
 
         precio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
         getContentPane().add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 90, -1));
@@ -484,20 +471,8 @@ public class CrearCombos extends javax.swing.JFrame {
         this.buscarC.enable();
     }//GEN-LAST:event_tipoCMouseClicked
 
-    private void talleCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_talleCMouseClicked
-        this.buscarC.enable();
-    }//GEN-LAST:event_talleCMouseClicked
-
-    private void talleCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_talleCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_talleCActionPerformed
-
     private void TablaCalzadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalzadoMouseClicked
-        Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 5);
-        SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadC.getModel();
-        modeloSpinner.setMaximum(calzado.getStock());
-        modeloSpinner.setMinimum(1);
-        cantidadC.setEnabled(true);
+
     }//GEN-LAST:event_TablaCalzadoMouseClicked
 
     private void agregarCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarCMouseClicked
@@ -505,18 +480,12 @@ public class CrearCombos extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarCMouseClicked
 
     private void agregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCActionPerformed
-        Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 5);
+        String nombre = (String) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 0);
+        String codigo = (String) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 4);
         int cantidad = (int) cantidadC.getValue();
-        int stock = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8);
-        if(stock != 0){
-            añadirProductoSelecionado(calzado,cantidad);
-            double precio = (double) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 2)*cantidad;
-            precioRecomendado(precio);
-            disminuirStockC();
-        }else{
-            JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
-        }
-        mostrarListaProductosCombo();
+        agregar_a_Combo(nombre, codigo, cantidad);
+        cargarProductoSelecionado();
+        estimarPrecio();
     }//GEN-LAST:event_agregarCActionPerformed
 
     private void buscarIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarIKeyReleased
@@ -543,31 +512,17 @@ public class CrearCombos extends javax.swing.JFrame {
         this.buscarI.enable();
     }//GEN-LAST:event_tipoIMouseClicked
 
-    private void talleIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_talleIMouseClicked
-        this.buscarI.enable();
-    }//GEN-LAST:event_talleIMouseClicked
-
     private void TablaIndumentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaIndumentariaMouseClicked
-        Indumentaria ind = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 5);
-        SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadI.getModel();
-        modeloSpinner.setMaximum(ind.getStock());
-        modeloSpinner.setMinimum(1);
-        cantidadI.setEnabled(true);
+
     }//GEN-LAST:event_TablaIndumentariaMouseClicked
 
     private void agregarIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarIActionPerformed
-        Indumentaria indumentaria = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 5);
+        String nombre = (String) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 0);
+        String codigo = (String) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 6);
         int cantidad = (int) cantidadI.getValue();
-        int stock = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10);
-        if(stock != 0){
-            añadirProductoSelecionado(indumentaria,cantidad);
-            double precio = (double) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 2)*cantidad;
-            precioRecomendado(precio);
-            disminuirStockI();
-        }else{
-            JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
-        }
-        mostrarListaProductosCombo();
+        agregar_a_Combo(nombre, codigo, cantidad);
+        cargarProductoSelecionado();
+        estimarPrecio();
     }//GEN-LAST:event_agregarIActionPerformed
 
     private void buscarAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarAKeyReleased
@@ -595,26 +550,16 @@ public class CrearCombos extends javax.swing.JFrame {
     }//GEN-LAST:event_texturaMouseClicked
 
     private void TablaAccesorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAccesorioMouseClicked
-        Accesorio acc = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 5);
-        SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) cantidadA.getModel();
-        modeloSpinner.setMaximum(acc.getStock());
-        modeloSpinner.setMinimum(1);
-        cantidadA.setEnabled(true);
+
     }//GEN-LAST:event_TablaAccesorioMouseClicked
 
     private void agregarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAActionPerformed
-        Accesorio accesorio = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 5);
+        String nombre = (String) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 0);
+        String codigo = (String) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 4);
         int cantidad = (int) cantidadA.getValue();
-        int stock = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7);
-        if(stock != 0){
-            añadirProductoSelecionado(accesorio,cantidad);
-            double precio = (double) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 2)*cantidad;
-            precioRecomendado(precio);
-            disminuirStockA();
-        }else{
-            JOptionPane.showMessageDialog(null, "No hay Stock para este producto");
-        }
-        mostrarListaProductosCombo();
+        agregar_a_Combo(nombre, codigo, cantidad);
+        cargarProductoSelecionado();
+        estimarPrecio();
     }//GEN-LAST:event_agregarAActionPerformed
 
     private void jTabbedPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane5MouseClicked
@@ -624,55 +569,34 @@ public class CrearCombos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane5MouseClicked
 
     private void agregarIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarIMouseClicked
-       
+
     }//GEN-LAST:event_agregarIMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Combo c = new Combo();
-    c.setNombre(nombre.getText());
-    SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) precio.getModel();
-    modeloSpinner.setMinimum(0);
-    double precioC = (double) precio.getValue();
-    c.setPrecio(precioC);
-    c.setDescripcion(descripcion.getText());
-    Conexion.getInstance().guardar(c);
-    for ( CombosProducto cp : listaComboProducto ) {
-        cp.setCombo(c);
-        Conexion.getInstance().guardar(cp);
-    }
-    mostrarCombo();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultTableModel tableDetalle = (DefaultTableModel) listProductos.getModel();
-        CombosProducto dv = (CombosProducto) listProductos.getValueAt(listProductos.getSelectedRow(), 2);
-        Producto p = dv.getProducto();
-        System.out.println("CONTADOR: "+listProductos.getRowCount());
-        if(listProductos.getRowCount() == 1){
-          quitarPrecio();  
+    private void crearComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearComboActionPerformed
+        Combo c = new Combo();
+        c.setNombre(nombre.getText());
+        SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) precio.getModel();
+        modeloSpinner.setMinimum(0);
+        double precioC = (double) precio.getValue();
+        c.setPrecio(precioC);
+        c.setDescripcion(descripcion.getText());
+        Conexion.getInstance().guardar(c);
+        for (CombosProducto cp : listaComboProducto) {
+            cp.setCombo(c);
+            Conexion.getInstance().guardar(cp);
         }
-        if (p instanceof Indumentaria) {
-            int cantidadInd = (int) listProductos.getValueAt(listProductos.getSelectedRow(), 1);
-            int fila = -1;
-            for(int i = 0; i < TablaIndumentaria.getRowCount(); i++ ){
-            if(p.equals(TablaIndumentaria.getValueAt(i, 5))){
-                fila=i;
-                break;
-            }
-            }
-              int nuevaCantidadI = (int) TablaIndumentaria.getValueAt(fila, 10) + cantidadInd;
-              TablaIndumentaria.setValueAt(nuevaCantidadI, fila, 10);
-            } else if (p instanceof Calzado) {
-                int cantidadC = (int) listProductos.getValueAt(listProductos.getSelectedRow(), 1);
-                int nuevaCantidadC = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) + cantidadC;
-                TablaCalzado.setValueAt(nuevaCantidadC, TablaCalzado.getSelectedRow(), 8);
-            } else {
-               int cantidad = (int) listProductos.getValueAt(listProductos.getSelectedRow(), 1);
-                int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) + cantidad;
-                TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
-            }
-            tableDetalle.removeRow(listProductos.getSelectedRow());
-    }//GEN-LAST:event_jButton2ActionPerformed
+        mostrarCombo();
+    }//GEN-LAST:event_crearComboActionPerformed
+
+    private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
+
+        quitarElemento();
+
+    }//GEN-LAST:event_quitarActionPerformed
+
+    private void TablaCalzadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalzadoMouseEntered
+
+    }//GEN-LAST:event_TablaCalzadoMouseEntered
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -705,81 +629,54 @@ public class CrearCombos extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-     public void cargarTablaCalzado() {
+
+    public void cargarTablaCalzado() {
         DefaultTableModel tableProductos = (DefaultTableModel) TablaCalzado.getModel();
-        Iterator<Calzado> it = Conexion.getInstance().listarCalzado().iterator();
+        Iterator<Calzado> it = Conexion.getInstance().listarCalzadoPorCodigo().iterator();
         tableProductos.setRowCount(0);
         while (it.hasNext()) {
             Calzado next = it.next();
-            Object[] fila = new Object[9];
+            Object[] fila = new Object[5];
             fila[0] = next.getNombre();
-            fila[1] = next.getPrecioProveedor();
-            fila[2] = next.getPrecioVenta();
-            fila[3] = next.getMarca();
-            fila[4] = new JLabel(getFotoImage(next.getFoto()));
-            fila[5] = next;
-            fila[6] = next.getTipo();
-            JLabel lbl = new JLabel();
-            lbl.setOpaque(true);
-            lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
-            fila[7] = lbl;
-            fila[8] = next.getStock();
+            fila[1] = next.getPrecioVenta();
+            fila[2] = next.getMarca();
+            fila[3] = next.getTipo();
+            fila[4] = next.getCodigo();
             tableProductos.addRow(fila);
-            TablaCalzado.setDefaultRenderer(Object.class, new ImgTabla());
-            TablaCalzado.setRowHeight(40);
         }
     }
 
     public void cargarTablaInd() {
         DefaultTableModel tableProductos = (DefaultTableModel) TablaIndumentaria.getModel();
-        Iterator<Indumentaria> it = Conexion.getInstance().listarIndumentaria().iterator();
+        Iterator<Indumentaria> it = Conexion.getInstance().listarIndumentariaPorCodigo().iterator();
         tableProductos.setRowCount(0);
         while (it.hasNext()) {
             Indumentaria next = it.next();
-            Object[] fila = new Object[11];
+            Object[] fila = new Object[7];
             fila[0] = next.getNombre();
-            fila[1] = next.getPrecioProveedor();
-            fila[2] = next.getPrecioVenta();
-            fila[3] = next.getMarca();
-            fila[4] = new JLabel(getFotoImage(next.getFoto()));
-            fila[5] = next;
-            fila[6] = next.getTipo();
-            fila[7] = next.getCategoria();
-            fila[8] = next.getSexo();
-            JLabel lbl = new JLabel();
-            lbl.setOpaque(true);
-            lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
-            fila[9] = lbl;
-            fila[10] = next.getStock();
+            fila[1] = next.getPrecioVenta();
+            fila[2] = next.getMarca();
+            fila[3] = next.getTipo();
+            fila[4] = next.getCategoria();
+            fila[5] = next.getSexo();
+            fila[6] = next.getCodigo();
             tableProductos.addRow(fila);
-            TablaIndumentaria.setDefaultRenderer(Object.class, new ImgTabla());
-            TablaIndumentaria.setRowHeight(40);
         }
     }
 
     public void cargarTablaAcc() {
         DefaultTableModel tableProductos = (DefaultTableModel) TablaAccesorio.getModel();
-        Iterator<Accesorio> it = Conexion.getInstance().listarAccesorio().iterator();
+        Iterator<Accesorio> it = Conexion.getInstance().listarAccesorioPorCodigo().iterator();
         tableProductos.setRowCount(0);
         while (it.hasNext()) {
             Accesorio next = it.next();
-            Object[] fila = new Object[8];
+            Object[] fila = new Object[5];
             fila[0] = next.getNombre();
-            fila[1] = next.getPrecioProveedor();
-            fila[2] = next.getPrecioVenta();
-            fila[3] = next.getMarca();
-            fila[4] = new JLabel(getFotoImage(next.getFoto()));
-            fila[5] = next;
-            JLabel lbl = new JLabel();
-            lbl.setOpaque(true);
-            lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
-            fila[6] = lbl;
-            fila[7] = next.getStock();
+            fila[1] = next.getPrecioVenta();
+            fila[2] = next.getMarca();
+            fila[3] = next.getTextura();
+            fila[4] = next.getCodigo();
             tableProductos.addRow(fila);
-            TablaAccesorio.setDefaultRenderer(Object.class, new ImgTabla());
-            TablaAccesorio.setRowHeight(40);
         }
     }
 
@@ -789,10 +686,7 @@ public class CrearCombos extends javax.swing.JFrame {
             int columna = 0;
             trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna));
         } else if (tipoC.isSelected()) {
-            int columna = 6;
-            trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna));
-        } else if (talleC.isSelected()) {
-            int columna = 5;
+            int columna = 3;
             trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna));
         }
     }
@@ -803,10 +697,7 @@ public class CrearCombos extends javax.swing.JFrame {
             int columna = 0;
             trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna));
         } else if (tipoI.isSelected()) {
-            int columna = 6;
-            trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna));
-        } else if (talleI.isSelected()) {
-            int columna = 5;
+            int columna = 3;
             trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna));
         }
     }
@@ -815,57 +706,51 @@ public class CrearCombos extends javax.swing.JFrame {
         String filtro = buscarA.getText();
         if (nombreA.isSelected()) {
             int columna = 0;
-            int columna2 = 5;
-            trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna, columna2));
+            trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna));
         } else if (textura.isSelected()) {
-            int columna = 5;
+            int columna = 3;
             trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, columna));
         }
     }
 
-    public ImageIcon getFotoImage(byte[] foto) {
-        Image aux = new ImageIcon(foto).getImage();
-        ImageIcon perfil = new ImageIcon(aux.getScaledInstance(this.foto.getWidth(), this.foto.getHeight(), Image.SCALE_DEFAULT));
-        return perfil;
-    }
-    
-    public void añadirProductoSelecionado(Producto producto,int cantidad) {
-        int index = estaListaProducto(producto);
-       if( index == -1){
-          CombosProducto cp = new CombosProducto();
-        cp.setProducto(producto);
-        cp.setCantidad(cantidad);
-        listaComboProducto.add(cp); 
-       }else{
-       listaComboProducto.get(index).setCantidad(listaComboProducto.get(index).getCantidad()+cantidad);
-       } 
-    }
-    
-    public int estaListaProducto(Producto producto){
-    for ( int i =0; i < listaComboProducto.size(); i++) {
-        if(listaComboProducto.get(i).getProducto().getId() == producto.getId()){
-          return i;  
-        }
-    }
-        return -1;
-    }
-    
-    public void mostrarListaProductosCombo(){
+    public void cargarProductoSelecionado() {
         limpiarTabla(listProductos);
         DefaultTableModel tableDetalle = (DefaultTableModel) listProductos.getModel();
-        for ( CombosProducto cp : listaComboProducto ) {
+        for (CombosProducto cp : listaComboProducto) {
             Object[] fila = new Object[3];
-            fila[0] = cp.getProducto().getNombre() ;
-            fila[1] = cp.getCantidad() ;
-            fila[2] = cp;
+            fila[0] = cp.getNombreProducto();
+            fila[1] = cp.getCantidad();
+            fila[2] = cp.getCodigoProducto();
             tableDetalle.addRow(fila);
         }
     }
-    
-        private void mostrarCombo() {
+
+    private void agregar_a_Combo(String nombre, String codigo, int cantidad) {
+        int index = estaListaProducto(codigo);
+        if (index == -1) {
+            CombosProducto cp = new CombosProducto();
+            cp.setCantidad(cantidad);
+            cp.setCodigoProducto(codigo);
+            cp.setNombreProducto(nombre);
+            listaComboProducto.add(cp);
+        } else {
+            listaComboProducto.get(index).setCantidad(listaComboProducto.get(index).getCantidad() + cantidad);
+        }
+    }
+
+    public int estaListaProducto(String codigo) {
+        for (int i = 0; i < listaComboProducto.size(); i++) {
+            if (listaComboProducto.get(i).getCodigoProducto().equals(codigo)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void mostrarCombo() {
         limpiarTabla(combosT);
         DefaultTableModel tableDetalle = (DefaultTableModel) combosT.getModel();
-        for ( Combo cp : Conexion.getInstance().getAllCombo() ) {
+        for (Combo cp : Conexion.getInstance().getAllCombo()) {
             Object[] fila = new Object[3];
             fila[0] = cp;
             fila[1] = cp.getDescripcion();
@@ -873,47 +758,43 @@ public class CrearCombos extends javax.swing.JFrame {
             tableDetalle.addRow(fila);
         }
     }
-    
-    public void limpiarTabla(JTable tabla){
+
+    public void limpiarTabla(JTable tabla) {
         try {
-            DefaultTableModel modelo=(DefaultTableModel) tabla.getModel();
-            int filas=tabla.getRowCount();
-            for (int i = 0;filas>i; i++) {
+            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+            int filas = tabla.getRowCount();
+            for (int i = 0; filas > i; i++) {
                 modelo.removeRow(0);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
         }
     }
-    
-    public void disminuirStockA(){
-        int cantidad = (int) cantidadA.getValue();
-        int nuevaCantidad = (int) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 7) - cantidad;
-        TablaAccesorio.setValueAt(nuevaCantidad, TablaAccesorio.getSelectedRow(), 7);
+
+    private void estimarPrecio() {
+        double precio_estimado = 0;
+        System.out.println("CONTADOR: " + listProductos.getRowCount());
+        for (int i = 0; i < listProductos.getRowCount(); i++) {
+            String codigo = (String) listProductos.getValueAt(i, 2);
+            System.out.println("CODIGO: " + codigo);
+            int cant = (int) listProductos.getValueAt(i, 1);
+            double precio = Conexion.getInstance().precioDeProductos(codigo);
+            System.out.println("PRECIO: " + precio);
+            precio_estimado += precio * cant;
+        }
+        precio.setValue(precio_estimado);
     }
-    
-    private void disminuirStockI() {
-        int cantidad = (int) cantidadI.getValue();
-        int nuevaCantidad = (int) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 10) - cantidad;
-        TablaIndumentaria.setValueAt(nuevaCantidad, TablaIndumentaria.getSelectedRow(), 10);
+
+    private void quitarElemento() {
+        int index = estaListaProducto((String) listProductos.getValueAt(listProductos.getSelectedRow(), 2));
+        if (index != -1) {
+            listaComboProducto.remove(index);
+            DefaultTableModel tableDetalle = (DefaultTableModel) listProductos.getModel();
+            tableDetalle.removeRow(listProductos.getSelectedRow());
+        }
+        estimarPrecio();
     }
-    
-    private void disminuirStockC() {
-        int cantidad = (int) cantidadC.getValue();
-        int nuevaCantidad = (int) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 8) - cantidad;
-        TablaCalzado.setValueAt(nuevaCantidad, TablaCalzado.getSelectedRow(), 8);
-    }
-    
-    private void precioRecomendado(double valor){
-        double result = (double) precio.getValue();
-        result += valor;
-        precio.setValue(result);
-    }
-    
-    private void quitarPrecio(){
-        precio.setValue(0);
-    }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAccesorio;
@@ -930,13 +811,12 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JSpinner cantidadC;
     private javax.swing.JSpinner cantidadI;
     private javax.swing.JTable combosT;
+    private javax.swing.JButton crearCombo;
     private javax.swing.JTextField descripcion;
     private javax.swing.JLabel foto;
     private javax.swing.ButtonGroup groupA;
     private javax.swing.ButtonGroup groupC;
     private javax.swing.ButtonGroup groupI;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -961,8 +841,7 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JRadioButton nombreC;
     private javax.swing.JRadioButton nombreI;
     private javax.swing.JSpinner precio;
-    private javax.swing.JRadioButton talleC;
-    private javax.swing.JRadioButton talleI;
+    private javax.swing.JButton quitar;
     private javax.swing.JRadioButton textura;
     private javax.swing.JRadioButton tipoC;
     private javax.swing.JRadioButton tipoI;
