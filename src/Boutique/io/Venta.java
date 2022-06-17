@@ -27,10 +27,28 @@ public class Venta implements Serializable {
     private String tipoPago;
     private String metodoPago;
     private double descuento;
+    private double deuda;
+    private double precioTotal;
     
     @OneToMany(mappedBy = "venta")
     private List<DetalleDeVenta> detalleDeVenta;
 
+    public double getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(double precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+
+    public double getDeuda() {
+        return deuda;
+    }
+
+    public void setDeuda(double deuda) {
+        this.deuda = deuda;
+    }
+    
     public Long getId() {
         return id;
     }

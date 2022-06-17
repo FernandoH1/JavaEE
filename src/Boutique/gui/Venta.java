@@ -4,6 +4,7 @@ import Boutique.io.Accesorio;
 import Boutique.io.Calzado;
 import Boutique.io.Cliente;
 import Boutique.io.Combo;
+import Boutique.io.CombosProducto;
 import Boutique.io.DetalleDeVenta;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
@@ -12,11 +13,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -27,9 +25,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Venta extends javax.swing.JFrame {
-
+    
     private TableRowSorter trsfiltro = new TableRowSorter();
-    private DefaultTableModel tablaDatos;
+    //private DefaultTableModel tablaDatos;
 
     public Venta() {
         initComponents();
@@ -134,9 +132,11 @@ public class Venta extends javax.swing.JFrame {
         jLabel1.setText("Fecha:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 24, -1, -1));
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Tipo de Venta:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 60, -1, -1));
 
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Metodo de Pago:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 24, 145, -1));
@@ -511,11 +511,11 @@ public class Venta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "", "Nombre", "Codigo"
+                "Nombre", "Codigo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -523,11 +523,6 @@ public class Venta extends javax.swing.JFrame {
             }
         });
         jScrollPane6.setViewportView(TablaProductosSelecionados);
-        if (TablaProductosSelecionados.getColumnModel().getColumnCount() > 0) {
-            TablaProductosSelecionados.getColumnModel().getColumn(0).setMinWidth(0);
-            TablaProductosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(0);
-            TablaProductosSelecionados.getColumnModel().getColumn(0).setMaxWidth(0);
-        }
 
         jPanel6.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 730, 90));
 
@@ -868,16 +863,15 @@ public class Venta extends javax.swing.JFrame {
     }
     
     public void cargarTablaProductos(Long id){
-        System.out.println("SOY LA ID:"+id);
+        //System.out.println("SOY LA ID:"+id);
         DefaultTableModel tableProductos = (DefaultTableModel) TablaProductosSelecionados.getModel();
-        Iterator<Producto> it = Conexion.getInstance().listarProductoComboSelecionados(id).iterator();
-        //tableProductos.setRowCount(0);
+        Iterator<CombosProducto> it = Conexion.getInstance().obtenerProductosByComboID(id).iterator();
+        tableProductos.setRowCount(0);
         while(it.hasNext()) {
-        Object[] fila = new Object[3];
-        Producto next = it.next();
-        fila[0] = next;
-        fila[1] = next.getNombre();
-        fila[2] = next.getCodigo();
+        Object[] fila = new Object[2];
+        CombosProducto next = it.next();
+        fila[0] = next.getNombreProducto();
+        fila[1] = next.getCodigoProducto();
         tableProductos.addRow(fila);
         }  
     }
@@ -1294,6 +1288,7 @@ public class Venta extends javax.swing.JFrame {
             v.setMetodoPago(tipoVentaCombo.getSelectedItem().toString());
         }else if(tipoVentaCombo.getSelectedIndex() == 3){
             v.setMetodoPago(tipoVentaCombo.getSelectedItem().toString());
+            v.setDeuda(Double.parseDouble(total.getText()));
         }else{
         v.setMetodoPago(metodoDePagoCombo.getSelectedItem().toString());
         }
@@ -1302,10 +1297,11 @@ public class Venta extends javax.swing.JFrame {
         if(!clienteFinal.isSelected()){
             v.setCliente((Cliente) clientesCombo.getSelectedItem());
         }
+        v.setPrecioTotal(Double.parseDouble(total.getText()));
         Conexion.getInstance().guardar(v);
         for (int i = 0; i < detalleDeVenta.getRowCount(); i++) {
             DetalleDeVenta dv = (DetalleDeVenta) detalleDeVenta.getValueAt(i, 0);
-            int cantidad = (int) detalleDeVenta.getValueAt(i, 1);
+            //int cantidad = (int) detalleDeVenta.getValueAt(i, 1);
             dv.setVenta(v);
             Conexion.getInstance().guardar(dv);
             Producto p = dv.getProducto();

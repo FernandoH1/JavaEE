@@ -4,8 +4,10 @@ import Boutique.io.Accesorio;
 import Boutique.io.Calzado;
 import Boutique.io.Cliente;
 import Boutique.io.Combo;
+import Boutique.io.CombosProducto;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
+import Boutique.io.Venta;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -200,6 +202,19 @@ public class Conexion {
         }
         return combos;
     }
+    
+    public List<CombosProducto> obtenerProductosByComboID(Long id){
+       EntityManager em = getEntity();
+        List<CombosProducto> combos = null;
+        em.getTransaction().begin();
+        try {
+            combos = em.createNativeQuery("SELECT * FROM `combosproducto` WHERE `combo_id`="+id,CombosProducto.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return combos;
+    }
 
     
     public Producto obtenerProductobyID(Long id){
@@ -278,6 +293,19 @@ public class Conexion {
             em.getTransaction().rollback();
         }
         return precio;
+    }
+    
+    public List<Venta> listarVentaCliente(Long id) {
+        EntityManager em = getEntity();
+        List<Venta> ventas = null;
+        em.getTransaction().begin();
+        try {
+            ventas = em.createNativeQuery("SELECT * FROM venta WHERE cliente_id="+id,Venta.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return ventas;
     }
     
 }
