@@ -1,11 +1,13 @@
 package Boutique.gui;
 import Boutique.io.Cliente;
+import Boutique.io.Entrega;
 import Boutique.persistencia.Conexion;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Clientes extends javax.swing.JFrame {
@@ -28,13 +30,15 @@ public class Clientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
-        lavel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaCompras = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaFecha = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         deudaTf = new javax.swing.JTextField();
+        entregaBtn = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        montoEntrega = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -57,48 +61,67 @@ public class Clientes extends javax.swing.JFrame {
 
         jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lavel.setText("1");
-        jDialog1.getContentPane().add(lavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 10, 20));
-
         TablaCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Fecha", "Metodo de Pago", "Tipo de Pago", "Deuda", "Precio Total"
+                "Fecha", "Metodo de Pago", "Deuda", "Precio Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(TablaCompras);
 
-        jDialog1.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 520, 90));
+        jDialog1.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 520, 120));
 
         TablaFecha.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha", "Monto"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(TablaFecha);
 
-        jDialog1.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 350, 100));
+        jDialog1.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 350, 130));
 
         jLabel7.setText("Deuda:");
-        jDialog1.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        jDialog1.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         deudaTf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deudaTfActionPerformed(evt);
             }
         });
-        jDialog1.getContentPane().add(deudaTf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 80, -1));
+        jDialog1.getContentPane().add(deudaTf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 80, -1));
+
+        entregaBtn.setText("Hacer Entrega");
+        entregaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entregaBtnActionPerformed(evt);
+            }
+        });
+        jDialog1.getContentPane().add(entregaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+
+        jLabel8.setText("Monto entregado:");
+        jDialog1.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, -1, -1));
+        jDialog1.getContentPane().add(montoEntrega, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 100, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -268,11 +291,10 @@ public class Clientes extends javax.swing.JFrame {
     private void estadoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoCuentaActionPerformed
         jDialog1.setVisible(true);
         jDialog1.setTitle("Estado de Cuenta");
-        jDialog1.setSize(913, 300);
+        jDialog1.setSize(945, 300);
         jDialog1.setLocationRelativeTo(null);
-        Long idC = (Long) TableDatos.getValueAt(TableDatos.getSelectedRow(),4);
-        lavel.setText(idC.toString());
-        cargarTablaVentas(idC);
+        Cliente c = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),0);
+        cargarTablaVentas(c);
         cargarDeuda();
     }//GEN-LAST:event_estadoCuentaActionPerformed
 
@@ -280,11 +302,39 @@ public class Clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deudaTfActionPerformed
 
+    private void entregaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entregaBtnActionPerformed
+        Entrega e = new Entrega();
+        double monto = Double.parseDouble(montoEntrega.getText());
+        if(monto <= Double.parseDouble(deudaTf.getText())){
+            for(int i = 0; i< TablaCompras.getRowCount(); i++ ){
+                Boutique.io.Venta v = (Boutique.io.Venta) TablaCompras.getValueAt(i, 3);
+                if(v.getDeuda() >= monto){
+                    v.setDeuda(v.getDeuda()-monto);
+                }else if(v.getDeuda() > 0 && v.getDeuda() < monto){
+                    monto = monto-v.getDeuda();
+                    v.setDeuda(0);
+                }
+                Conexion.getInstance().merge(v);
+                Date date = new Date();
+                e.setFecha(date);
+                e.setMonto(monto);
+                e.setCliente(v.getCliente());
+                Conexion.getInstance().guardar(e);
+                cargarTablaVentas(v.getCliente());
+                //cargarEntrega(v.getCliente());
+                cargarDeuda();
+                cargarEntrega(v.getCliente());
+            }
+        }else {
+            JOptionPane.showMessageDialog(this, "No se Puede Ingresar mas de la Deuda");
+        }
+    }//GEN-LAST:event_entregaBtnActionPerformed
+
     
     public void cargarDeuda(){
         double contador =0;
         for(int i=0; i < TablaCompras.getRowCount(); i++){
-            contador += (double) TablaCompras.getValueAt(i, 3);
+            contador += (double) TablaCompras.getValueAt(i, 2);
         }
         System.out.println("DEUDAA: "+contador );
         deudaTf.setText(String.valueOf(contador));
@@ -307,23 +357,40 @@ public class Clientes extends javax.swing.JFrame {
         }
     }
     
-    public void cargarTablaVentas(Long id){
+    public void cargarTablaVentas(Cliente c){
     DefaultTableModel tablaCompras = new DefaultTableModel();
         tablaCompras = (DefaultTableModel) TablaCompras.getModel();
-        Iterator<Boutique.io.Venta> it = Conexion.getInstance().listarVentaCliente(id).iterator();
+        Iterator<Boutique.io.Venta> it = c.getVentas().iterator();
         tablaCompras.setRowCount(0);
         while(it.hasNext()){
         Boutique.io.Venta next = it.next();
-        Object[] fila = new Object[5];
-        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-        fila[0]= date.format(next.getFechaVenta());
-        fila[1]= next.getMetodoPago();
-        fila[2]= next.getTipoPago();
-        fila[3]= next.getDeuda();
-        fila[4]= next.getPrecioTotal();
-        tablaCompras.addRow(fila);
+        if(next.getTipoPago().equals("Credito de la Casa")){
+            Object[] fila = new Object[4];
+            SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+            fila[0]= date.format(next.getFechaVenta());
+            fila[1]= next.getMetodoPago();
+            fila[2]= next.getDeuda();
+            fila[3]= next;
+            tablaCompras.addRow(fila);
+            }
         }
     }
+    
+    public void cargarEntrega(Cliente c){
+        DefaultTableModel tablaEntrega = new DefaultTableModel();
+        tablaEntrega = (DefaultTableModel) TablaFecha.getModel();
+         Iterator<Entrega> it = c.getEntregas().iterator();
+         tablaEntrega.setRowCount(0);
+         while(it.hasNext()){
+         Entrega next = it.next();
+         Object[] fila = new Object[2];
+            SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+            fila[0]= date.format(next.getFecha());
+            fila[1]= next.getMonto();
+           tablaEntrega.addRow(fila);
+         }
+    }
+
     
     public void limpiarCampos(){
         nombre.setText("");
@@ -384,6 +451,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton cleanBtn;
     private javax.swing.JTextField deudaTf;
     private javax.swing.JTextField dir;
+    private javax.swing.JButton entregaBtn;
     private javax.swing.JButton estadoCuenta;
     private javax.swing.JButton guardarbtn;
     private javax.swing.JTextField idCliente;
@@ -395,11 +463,12 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    public static javax.swing.JLabel lavel;
     private javax.swing.JButton modificarbtn;
+    private javax.swing.JTextField montoEntrega;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField tel;
     // End of variables declaration//GEN-END:variables

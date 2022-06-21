@@ -10,6 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Cliente_ {
 
 	public static volatile SingularAttribute<Cliente, String> ci;
+	public static volatile ListAttribute<Cliente, Entrega> entregas;
 	public static volatile SingularAttribute<Cliente, String> apellido;
 	public static volatile SingularAttribute<Cliente, String> direccion;
 	public static volatile ListAttribute<Cliente, Venta> ventas;

@@ -130,7 +130,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", fechaVenta=" + fechaVenta + ", tipoPago=" + tipoPago + ", metodoPago=" + metodoPago + ", descuento=" + descuento + '}';
+        return String.valueOf(precioTotal);
     }
 
 }

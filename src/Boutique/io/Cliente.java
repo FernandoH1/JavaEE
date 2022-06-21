@@ -12,6 +12,9 @@ import javax.persistence.Table;
 @Entity
 public class Cliente implements Serializable {
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Entrega> entregas;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +31,16 @@ public class Cliente implements Serializable {
     public Long getId() {
         return id;
     }
+
+    public List<Entrega> getEntregas() {
+        return entregas;
+    }
+
+    public void setEntregas(List<Entrega> entregas) {
+        this.entregas = entregas;
+    }
+    
+    
 
     public List<Venta> getVentas() {
         return ventas;
