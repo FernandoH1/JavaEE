@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
@@ -72,8 +71,6 @@ public class Venta implements Serializable {
     public void setDetalleDeVenta(List<DetalleDeVenta> detalleDeVenta) {
         this.detalleDeVenta = detalleDeVenta;
     }
-    
-    
 
     public Date getFechaVenta() {
         return fechaVenta;

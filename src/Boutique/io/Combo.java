@@ -7,10 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Combo implements Serializable {
+
+    @OneToMany(mappedBy = "combo")
+    private List<CombosProducto> combosProductos;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -27,6 +29,15 @@ public class Combo implements Serializable {
     public Long getId() {
         return id;
     }
+
+    public List<CombosProducto> getCombosProductos() {
+        return combosProductos;
+    }
+
+    public void setCombosProductos(List<CombosProducto> combosProductos) {
+        this.combosProductos = combosProductos;
+    }
+    
 
     public List<DetalleDeVenta> getDetalleDeVenta() {
         return detalleDeVenta;

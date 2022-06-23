@@ -96,14 +96,14 @@ public class Conexion {
     }
     
     
-    public List<Producto> listarProductos() {
+    public List<Producto> listarProductos(String codigo) {
         EntityManager em = getEntity();
         List<Producto> productos = null;
         em.getTransaction().begin();
         try {
-            productos = em.createNativeQuery("SELECT * FROM producto, accesorio WHERE producto.id = accesorio.id",Accesorio.class).getResultList();
-            productos.addAll(em.createNativeQuery("SELECT * FROM producto, calzado WHERE producto.id = calzado.id",Calzado.class).getResultList());
-            productos.addAll(em.createNativeQuery("SELECT * FROM producto, indumentaria WHERE producto.id = indumentaria.id",Indumentaria.class).getResultList());
+            productos = em.createNativeQuery("SELECT * FROM producto, accesorio WHERE producto.id = accesorio.id AND producto.codigo='"+codigo+"'",Accesorio.class).getResultList();
+            productos.addAll(em.createNativeQuery("SELECT * FROM producto, calzado WHERE producto.id = calzado.id AND producto.codigo='"+codigo+"'",Calzado.class).getResultList());
+            productos.addAll(em.createNativeQuery("SELECT * FROM producto, indumentaria WHERE producto.id = indumentaria.id AND producto.codigo='"+codigo+"'",Indumentaria.class).getResultList());
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -307,5 +307,71 @@ public class Conexion {
         }
         return ventas;
     }
+    
+    public boolean indumentariaExist(Long id){
+        EntityManager em = getEntity();
+        em.getTransaction().begin();
+        int cantidad = 0;
+        try {
+             cantidad = (int) em.createNativeQuery("SELECT COUNT(*) FROM indumentaria WHERE id="+id).getSingleResult();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        if(cantidad == 0){
+            return false;
+        }else{
+            return true;
+        }
+    } 
+    
+    public boolean calazadoExist(Long id){
+        EntityManager em = getEntity();
+        em.getTransaction().begin();
+        int cantidad = 0;
+        try {
+             cantidad = (int) em.createNativeQuery("SELECT COUNT(*) FROM calazado WHERE id="+id).getSingleResult();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        if(cantidad == 0){
+            return false;
+        }else{
+            return true;
+        }
+    } 
+    
+    public boolean accesorioExist(Long id){
+        EntityManager em = getEntity();
+        em.getTransaction().begin();
+        int cantidad = 0;
+        try {
+             cantidad = (int) em.createNativeQuery("SELECT COUNT(*) FROM accesorio WHERE id="+id).getSingleResult();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        if(cantidad == 0){
+            return false;
+        }else{
+            return true;
+        }
+    } 
+    
+    public List<Venta> listarVentas(String fechaInicio, String fechaFin) {
+        EntityManager em = getEntity();
+        List<Venta> ventas = null;
+        em.getTransaction().begin();
+        try {
+            ventas = em.createNativeQuery("SELECT * FROM `venta` WHERE `fechaVenta` between '"+fechaInicio+"' AND '"+fechaFin+"'",Venta.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return ventas;
+    }
+    
+    
     
 }

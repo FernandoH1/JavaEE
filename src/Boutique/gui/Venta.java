@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -26,11 +27,12 @@ import javax.swing.table.TableRowSorter;
 
 public class Venta extends javax.swing.JFrame {
     
+    public static List<String> codigos;
+    
     private TableRowSorter trsfiltro = new TableRowSorter();
-    //private DefaultTableModel tablaDatos;
-
     public Venta() {
         initComponents();
+        codigos = new ArrayList();
         Volver.setBackground(new Color(0, 0, 0, 0));
         cantidadC.setEnabled(false);
         cantidadA.setEnabled(false);
@@ -56,6 +58,8 @@ public class Venta extends javax.swing.JFrame {
         buttonGroupInd = new javax.swing.ButtonGroup();
         buttonGroupC = new javax.swing.ButtonGroup();
         buttonGroupDesc = new javax.swing.ButtonGroup();
+        jDialog1 = new javax.swing.JDialog();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -125,6 +129,11 @@ public class Venta extends javax.swing.JFrame {
         descuento = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+
+        jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton3.setText("Siguiente");
+        jDialog1.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 90, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -822,7 +831,12 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_detalleDeVentaMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Combo cb = (Combo) TablaCombos.getValueAt(TablaCombos.getSelectedRow(), 0);
+        ElegirTalle et = new ElegirTalle(this,true,cb);
+        et.setVisible(true);
+        et.setTitle("Elegir Talle");
+        et.setSize(945, 330);
+        et.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TablaCombosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCombosMouseClicked
@@ -862,8 +876,15 @@ public class Venta extends javax.swing.JFrame {
         });
     }
     
+    public void elegirTalle(){
+    int i;
+        for(i = 0; i < TablaProductosSelecionados.getRowCount(); i++ ){
+           String codigo = (String) TablaProductosSelecionados.getValueAt(i, 1);
+           codigos.add(codigo); 
+        }
+    }
+    
     public void cargarTablaProductos(Long id){
-        //System.out.println("SOY LA ID:"+id);
         DefaultTableModel tableProductos = (DefaultTableModel) TablaProductosSelecionados.getModel();
         Iterator<CombosProducto> it = Conexion.getInstance().obtenerProductosByComboID(id).iterator();
         tableProductos.setRowCount(0);
@@ -1024,6 +1045,7 @@ public class Venta extends javax.swing.JFrame {
             dv.setPrecioCompra(indumentaria.getPrecioVenta() * cantidad);
             dv.setCantidad(cantidad);
             dv.setPrecioUnitario(indumentaria.getPrecioVenta());
+            dv.setPrecioProvedor(indumentaria.getPrecioProveedor());
             dv.setProducto(indumentaria);
             fila[0] = dv;
             fila[1] = cantidad;
@@ -1062,6 +1084,7 @@ public class Venta extends javax.swing.JFrame {
                 dv.setPrecioCompra(indumentaria.getPrecioVenta() * cantidad);
                 dv.setCantidad(cantidad);
                 dv.setPrecioUnitario(indumentaria.getPrecioVenta());
+                dv.setPrecioProvedor(indumentaria.getPrecioProveedor());
                 dv.setProducto(indumentaria);
                 fila[0] = dv;
                 fila[1] = cantidad;
@@ -1088,6 +1111,7 @@ public class Venta extends javax.swing.JFrame {
             dv.setCantidad(cantidad);
             dv.setPrecioUnitario(accesorio.getPrecioVenta());
             dv.setProducto(accesorio);
+            dv.setPrecioProvedor(accesorio.getPrecioProveedor());
             fila[0] = dv;
             fila[1] = cantidad;
             fila[2] = accesorio.getPrecioVenta();
@@ -1125,6 +1149,7 @@ public class Venta extends javax.swing.JFrame {
                 dv.setPrecioCompra(accesorio.getPrecioVenta() * cantidad);
                 dv.setCantidad(cantidad);
                 dv.setPrecioUnitario(accesorio.getPrecioVenta());
+                dv.setPrecioProvedor(accesorio.getPrecioProveedor());
                 dv.setProducto(accesorio);
                 fila[0] = dv;
                 fila[1] = cantidad;
@@ -1151,6 +1176,7 @@ public class Venta extends javax.swing.JFrame {
             dv.setCantidad(cantidad);
             dv.setPrecioUnitario(calzado.getPrecioVenta());
             dv.setProducto(calzado);
+            dv.setPrecioProvedor(calzado.getPrecioProveedor());
             fila[0] = dv;
             fila[1] = cantidad;
             fila[2] = calzado.getPrecioVenta();
@@ -1188,6 +1214,7 @@ public class Venta extends javax.swing.JFrame {
                 dv.setPrecioCompra(calzado.getPrecioVenta() * cantidad);
                 dv.setCantidad(cantidad);
                 dv.setPrecioUnitario(calzado.getPrecioVenta());
+                dv.setPrecioProvedor(calzado.getPrecioProveedor());
                 dv.setProducto(calzado);
                 fila[0] = dv;
                 fila[1] = cantidad;
@@ -1232,8 +1259,10 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

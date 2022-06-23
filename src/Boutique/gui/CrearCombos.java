@@ -573,6 +573,7 @@ public class CrearCombos extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarIMouseClicked
 
     private void crearComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearComboActionPerformed
+        if(listaComboProducto.size() !=0){
         Combo c = new Combo();
         c.setNombre(nombre.getText());
         SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) precio.getModel();
@@ -586,6 +587,9 @@ public class CrearCombos extends javax.swing.JFrame {
             Conexion.getInstance().guardar(cp);
         }
         mostrarCombo();
+        }else{
+        JOptionPane.showMessageDialog(this, "No se Puede Crear un combo sin prodcutos");
+        }
     }//GEN-LAST:event_crearComboActionPerformed
 
     private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed

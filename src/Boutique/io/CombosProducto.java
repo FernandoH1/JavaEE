@@ -19,8 +19,9 @@ public class CombosProducto implements Serializable {
     private String codigoProducto;
     private String nombreProducto;
     
-    @ManyToOne
+    
     @JoinColumn(name = "combo_id")
+    @ManyToOne
     private Combo combo;
     
     private int cantidad;
