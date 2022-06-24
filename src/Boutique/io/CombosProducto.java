@@ -34,7 +34,6 @@ public class CombosProducto implements Serializable {
         this.nombreProducto = nombreProducto;
     }
     
-    
 
     public String getCodigoProducto() {
         return codigoProducto;
