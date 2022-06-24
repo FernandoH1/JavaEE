@@ -116,7 +116,7 @@ public class DetalleDeVenta implements Serializable {
 
     @Override
     public String toString() {
-        return producto.getNombre();
+        return  producto.getNombre();
     }
 
 }

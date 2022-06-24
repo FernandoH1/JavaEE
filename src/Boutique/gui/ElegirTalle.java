@@ -4,25 +4,31 @@ import Boutique.io.Accesorio;
 import Boutique.io.Calzado;
 import Boutique.io.Combo;
 import Boutique.io.CombosProducto;
+import Boutique.io.CombosProductosProductos;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
+import Boutique.io.ProductosCombo;
 import Boutique.persistencia.Conexion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 
 public class ElegirTalle extends javax.swing.JDialog {
+    private Venta venta;
+    private Combo combo;
     private List<Producto> productos;
-    private List<Producto> productoSelecionado;
+    private ArrayList<CombosProductosProductos> combosProductosProductos;
     private ListaProductos listaProductos;
     private List<CombosProducto> codigosProducto;
     private int indice = 0;
     private Combo c = null;
-    public ElegirTalle(java.awt.Frame parent, boolean modal, Combo combos) {
+    public ElegirTalle(java.awt.Frame parent, boolean modal, Combo combos, Venta ventas) {
         super(parent, modal);
         initComponents();
         this.setSize(1224, 755);
-        productoSelecionado = new ArrayList();
+        this.venta = ventas;
+        this.combo = combos;
+        combosProductosProductos = new ArrayList();
         codigosProducto = combos.getCombosProductos();
         total.setText(codigosProducto.size()+"");
         index.setText((indice+1)+"");
@@ -117,7 +123,9 @@ public class ElegirTalle extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        productoSelecionado.addAll(listaProductos.getProductoSelecionado());
+        CombosProducto cp = combo.getCombosProductos().get(indice);
+        CombosProductosProductos cpp = new CombosProductosProductos(cp, listaProductos.getProductoSelecionado());
+        combosProductosProductos.add(cpp);
         indice++;
         index.setText((indice+1)+"");
         if(indice+1 == codigosProducto.size() ){
@@ -125,7 +133,7 @@ public class ElegirTalle extends javax.swing.JDialog {
             mostrarListaProducto(); 
         }else if(indice+1 > codigosProducto.size()){
             cerrar();
-           // confirmarCombo();
+            confirmarCombo();
         }else{
         mostrarListaProducto(); 
         }
@@ -224,4 +232,9 @@ public class ElegirTalle extends javax.swing.JDialog {
     private javax.swing.JLabel total;
     private javax.swing.JLabel txt;
     // End of variables declaration//GEN-END:variables
+
+    private void confirmarCombo() {
+       ProductosCombo productosCombo = new ProductosCombo(this.combo,this.combosProductosProductos);
+       this.venta.agregarProductoCombos(productosCombo);
+    }
 }
