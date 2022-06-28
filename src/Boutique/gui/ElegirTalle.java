@@ -25,7 +25,7 @@ public class ElegirTalle extends javax.swing.JDialog {
     public ElegirTalle(java.awt.Frame parent, boolean modal, Combo combos, Venta ventas) {
         super(parent, modal);
         initComponents();
-        this.setSize(1224, 755);
+        this.setSize(540, 615);
         this.venta = ventas;
         this.combo = combos;
         combosProductosProductos = new ArrayList();
@@ -44,14 +44,34 @@ public class ElegirTalle extends javax.swing.JDialog {
     private void initComponents() {
 
         txt = new javax.swing.JLabel();
-        next = new javax.swing.JButton();
         index = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        next = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 52, 87, 21));
+
+        index.setText("0");
+        getContentPane().add(index, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 14, 20, -1));
+
+        total.setText("0");
+        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 35, 20, -1));
+
+        jLabel1.setText("Indice:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 14, -1, -1));
+
+        jLabel2.setText("Total:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 35, -1, -1));
+
+        panel.setLayout(null);
+        getContentPane().add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 490, 430));
+
+        jPanel1.setBackground(new java.awt.Color(240, 218, 168));
 
         next.setText("Siguiente");
         next.addActionListener(new java.awt.event.ActionListener() {
@@ -60,64 +80,24 @@ public class ElegirTalle extends javax.swing.JDialog {
             }
         });
 
-        index.setText("0");
-
-        total.setText("0");
-
-        jLabel1.setText("Indice:");
-
-        jLabel2.setText("Total:");
-
-        panel.setLayout(null);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(index, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(1013, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(next)))
-                        .addGap(22, 22, 22))))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(405, Short.MAX_VALUE)
+                .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(index)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(total)
-                    .addComponent(jLabel2))
-                .addGap(2, 2, 2)
-                .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(537, Short.MAX_VALUE)
                 .addComponent(next)
-                .addGap(20, 20, 20))
+                .addGap(148, 148, 148))
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -227,6 +207,7 @@ public class ElegirTalle extends javax.swing.JDialog {
     private javax.swing.JLabel index;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     public static javax.swing.JButton next;
     private javax.swing.JPanel panel;
     private javax.swing.JLabel total;
