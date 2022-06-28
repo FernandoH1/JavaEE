@@ -35,6 +35,9 @@ public class Venta extends javax.swing.JFrame {
     private TableRowSorter trsfiltro = new TableRowSorter();
     public Venta() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
+        this.setTitle("Venta");
         productosCombos = new ArrayList();
         codigos = new ArrayList();
         Volver.setBackground(new Color(0, 0, 0, 0));
@@ -47,7 +50,6 @@ public class Venta extends javax.swing.JFrame {
         cargarTablaInd();
         cargarTablaAcc();
         deshabilitarLabel();
-        this.setLocationRelativeTo(null);
 
         List<Cliente> clientes = Conexion.getInstance().listarClientes();
         clientes.forEach(cliente -> clientesCombo.addItem(cliente));

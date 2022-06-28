@@ -31,7 +31,8 @@ String fotoPerfil = "";
     public Productos() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
+        this.setTitle("Productos");
         cargarTablaCalzado();
         cargarTablaInd();
         cargarTablaAcc();

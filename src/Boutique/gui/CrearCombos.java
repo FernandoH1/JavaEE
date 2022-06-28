@@ -6,10 +6,12 @@ import Boutique.io.Combo;
 import Boutique.io.CombosProducto;
 import Boutique.io.Indumentaria;
 import Boutique.persistencia.Conexion;
+import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -24,6 +26,10 @@ public class CrearCombos extends javax.swing.JFrame {
 
     public CrearCombos() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
+        this.setTitle("Combos");
+        Volver.setBackground(new Color(0,0,0,0));
         mostrarCombo();
         cargarTablaCalzado();
         cargarTablaInd();
@@ -80,9 +86,11 @@ public class CrearCombos extends javax.swing.JFrame {
         foto = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         listProductos = new javax.swing.JTable();
-        crearCombo = new javax.swing.JButton();
-        quitar = new javax.swing.JButton();
         precio = new javax.swing.JSpinner();
+        jPanel4 = new javax.swing.JPanel();
+        quitar = new javax.swing.JButton();
+        crearCombo = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -389,7 +397,7 @@ public class CrearCombos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(combosT);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 1320, 250));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 1320, 210));
 
         foto.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 40, 40));
@@ -412,15 +420,13 @@ public class CrearCombos extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(listProductos);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 370, 300));
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 370, 300));
 
-        crearCombo.setText("Crear Combo");
-        crearCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearComboActionPerformed(evt);
-            }
-        });
-        getContentPane().add(crearCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        precio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
+        getContentPane().add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 90, -1));
+
+        jPanel4.setBackground(new java.awt.Color(240, 218, 168));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         quitar.setText("Quitar");
         quitar.addActionListener(new java.awt.event.ActionListener() {
@@ -428,10 +434,20 @@ public class CrearCombos extends javax.swing.JFrame {
                 quitarActionPerformed(evt);
             }
         });
-        getContentPane().add(quitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+        jPanel4.add(quitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
 
-        precio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
-        getContentPane().add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 90, -1));
+        crearCombo.setText("Crear Combo");
+        crearCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearComboActionPerformed(evt);
+            }
+        });
+        jPanel4.add(crearCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, -1, -1));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 110));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/fondo.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -817,6 +833,7 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JTable combosT;
     private javax.swing.JButton crearCombo;
     private javax.swing.JTextField descripcion;
+    private javax.swing.JLabel fondo;
     private javax.swing.JLabel foto;
     private javax.swing.ButtonGroup groupA;
     private javax.swing.ButtonGroup groupC;
@@ -833,6 +850,7 @@ public class CrearCombos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

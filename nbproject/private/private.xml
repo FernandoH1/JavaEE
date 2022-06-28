@@ -3,16 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/io/ProductosCombo.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/ListaAccesorio.java</file>
-            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/io/DetalleDeVenta.java</file>
-            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/ListaProductos.java</file>
-            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/io/Compra.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/Clientes.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/Principal.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/Venta.java</file>
-            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/ElegirTalle.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/persistencia/Conexion.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/Carga.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/CrearCombos.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/gui/ListaCalzado.java</file>
-            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/io/CombosProducto.java</file>
-            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/Boutique/src/Boutique/io/Combo.java</file>
         </group>
     </open-files>
 </project-private>

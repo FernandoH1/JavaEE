@@ -1,14 +1,13 @@
 package Boutique.gui;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
         this.setTitle("Boutique Anita");
     }
 

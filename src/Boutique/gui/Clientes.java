@@ -15,14 +15,14 @@ public class Clientes extends javax.swing.JFrame {
     public Clientes() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/LogoAnita.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
+        this.setTitle("Clientes");
         cargarTabla();
         estadoCuenta.setEnabled(false);
         modificarbtn.setEnabled(false);
         cleanBtn.setEnabled(false);
         Volver.setBackground(new Color(0,0,0,0));
         this.setSize(689, 355);
-        this.setTitle("Clientes");
     }
 
     @SuppressWarnings("unchecked")
@@ -240,7 +240,7 @@ public class Clientes extends javax.swing.JFrame {
         getContentPane().add(estadoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/fondo.jpg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 670, 340));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 700, 380));
         getContentPane().add(idCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 130, -1));
 
         pack();

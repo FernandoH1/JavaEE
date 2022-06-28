@@ -1,8 +1,11 @@
 package Boutique.gui;
 
 import Boutique.persistencia.Conexion;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Gastos extends javax.swing.JFrame {
@@ -10,6 +13,10 @@ public class Gastos extends javax.swing.JFrame {
     private String fechaFin;
     public Gastos() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
+        this.setTitle("Estadísticas");
+        Volver.setBackground(new Color(0,0,0,0));
     }
 
     @SuppressWarnings("unchecked")
@@ -18,7 +25,6 @@ public class Gastos extends javax.swing.JFrame {
 
         Volver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         showStats = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -36,6 +42,7 @@ public class Gastos extends javax.swing.JFrame {
         fechaF = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,13 +55,10 @@ public class Gastos extends javax.swing.JFrame {
                 VolverActionPerformed(evt);
             }
         });
-        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, -1, 50));
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, -1, 50));
 
         jLabel1.setText("Periodo:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        jLabel2.setText("Desde:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
         jLabel3.setText("Hasta:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
@@ -111,14 +115,19 @@ public class Gastos extends javax.swing.JFrame {
                 fechaIniMouseClicked(evt);
             }
         });
-        getContentPane().add(fechaIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 120, -1));
-        getContentPane().add(fechaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 110, -1));
+        getContentPane().add(fechaIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 140, -1));
+        getContentPane().add(fechaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 140, -1));
 
         jPanel1.setBackground(new java.awt.Color(240, 218, 168));
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 250, 140));
 
         jPanel2.setBackground(new java.awt.Color(240, 218, 168));
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 60));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Desde:");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 60));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/fondo.jpg"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 400));
@@ -137,11 +146,15 @@ public class Gastos extends javax.swing.JFrame {
     }//GEN-LAST:event_fechaIniMouseClicked
 
     private void showStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showStatsActionPerformed
-        SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
-        fechaInicio = date.format(fechaIni.getDate());
-        fechaFin = date.format(fechaF.getDate());
-        cargarTabla(fechaInicio,fechaFin);
-        cargarValores();
+        //if(!fechaIni.getVerifyInputWhenFocusTarget() && !fechaF.getVerifyInputWhenFocusTarget()){
+            SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+            fechaInicio = date.format(fechaIni.getDate());
+            fechaFin = date.format(fechaF.getDate());
+            cargarTabla(fechaInicio,fechaFin);
+            cargarValores();  
+        //}else{
+         //  JOptionPane.showMessageDialog(this, "Debe ingresar las Fechas Antes para poder ver las Estadísticas"); 
+        //}
     }//GEN-LAST:event_showStatsActionPerformed
 
     /**
