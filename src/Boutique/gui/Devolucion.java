@@ -1,9 +1,14 @@
 package Boutique.gui;
 
+import javax.swing.ImageIcon;
+
 public class Devolucion extends javax.swing.JFrame {
 
     public Devolucion() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
+        this.setTitle("Devolución");
     }
 
     @SuppressWarnings("unchecked")
