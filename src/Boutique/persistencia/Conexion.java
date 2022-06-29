@@ -5,6 +5,7 @@ import Boutique.io.Calzado;
 import Boutique.io.Cliente;
 import Boutique.io.Combo;
 import Boutique.io.CombosProducto;
+import Boutique.io.Entrega;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
 import Boutique.io.Venta;
@@ -143,6 +144,45 @@ public class Conexion {
         em.getTransaction().begin();
         try {
              productos = em.createNativeQuery("SELECT * FROM producto, calzado WHERE producto.id = calzado.id",Calzado.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
+    public List<Accesorio> listarAccesorioSinStock() {
+        EntityManager em = getEntity();
+        List<Accesorio> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM producto, accesorio WHERE producto.id = accesorio.id AND accesorio.stock > 0",Accesorio.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
+    public List<Indumentaria> listarIndumentariaSinStock() {
+        EntityManager em = getEntity();
+        List<Indumentaria> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM producto, indumentaria WHERE producto.id = indumentaria.id AND indumentaria.stock > 0",Indumentaria.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
+    
+    public List<Calzado> listarCalzadoSinStock() {
+        EntityManager em = getEntity();
+        List<Calzado> productos = null;
+        em.getTransaction().begin();
+        try {
+             productos = em.createNativeQuery("SELECT * FROM producto, calzado WHERE producto.id = calzado.id AND calzado.stock > 0",Calzado.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -370,6 +410,19 @@ public class Conexion {
             em.getTransaction().rollback();
         }
         return ventas;
+    }
+    
+    public List<Entrega> listarEntregasPorId(Long id) {
+        EntityManager em = getEntity();
+        List<Entrega> entrega = null;
+        em.getTransaction().begin();
+        try {
+            entrega = em.createNativeQuery("SELECT * FROM entrega WHERE cliente_id="+id,Entrega.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return entrega;
     }
     
     

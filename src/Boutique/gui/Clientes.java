@@ -106,6 +106,7 @@ public class Clientes extends javax.swing.JFrame {
         jLabel7.setText("Deuda:");
         jDialog1.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
+        deudaTf.setEditable(false);
         deudaTf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deudaTfActionPerformed(evt);
@@ -290,6 +291,7 @@ public class Clientes extends javax.swing.JFrame {
         limpiarCampos();
         guardarbtn.setEnabled(true);
         modificarbtn.setEnabled(false);
+        cleanBtn.setEnabled(false);
     }//GEN-LAST:event_modificarbtnActionPerformed
 
     private void cleanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanBtnActionPerformed
@@ -340,9 +342,11 @@ public class Clientes extends javax.swing.JFrame {
                 cargarTablaVentas(v.getCliente());
                 cargarDeuda();
                 cargarEntrega(v.getCliente());
+                montoEntrega.setText("");
+                JOptionPane.showMessageDialog(this.jDialog1, "Se realizo la entrega con éxito");
             }
         }else {
-            JOptionPane.showMessageDialog(this, "No se Puede Ingresar mas de la Deuda");
+            JOptionPane.showMessageDialog(this.jDialog1, "No se Puede Ingresar mas de la Deuda");
         }
     }//GEN-LAST:event_entregaBtnActionPerformed
 
@@ -399,7 +403,7 @@ public class Clientes extends javax.swing.JFrame {
     public void cargarEntrega(Cliente c){
         DefaultTableModel tablaEntrega = new DefaultTableModel();
         tablaEntrega = (DefaultTableModel) TablaFecha.getModel();
-         Iterator<Entrega> it = c.getEntregas().iterator();
+         Iterator<Entrega> it = Conexion.getInstance().listarEntregasPorId(c.getId()).iterator();
          tablaEntrega.setRowCount(0);
          while(it.hasNext()){
          Entrega next = it.next();

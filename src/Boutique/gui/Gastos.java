@@ -105,9 +105,17 @@ public class Gastos extends javax.swing.JFrame {
 
         jLabel8.setText("Ganancia Neta:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+
+        total.setEditable(false);
         getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 80, -1));
+
+        compras.setEditable(false);
         getContentPane().add(compras, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 80, -1));
+
+        deudas.setEditable(false);
         getContentPane().add(deudas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 80, -1));
+
+        ganancia.setEditable(false);
         getContentPane().add(ganancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 80, -1));
 
         fechaIni.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,15 +154,15 @@ public class Gastos extends javax.swing.JFrame {
     }//GEN-LAST:event_fechaIniMouseClicked
 
     private void showStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showStatsActionPerformed
-        //if(!fechaIni.getVerifyInputWhenFocusTarget() && !fechaF.getVerifyInputWhenFocusTarget()){
+        if(fechaIni.getDate() != null && fechaF.getDate() != null){
             SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
             fechaInicio = date.format(fechaIni.getDate());
             fechaFin = date.format(fechaF.getDate());
             cargarTabla(fechaInicio,fechaFin);
             cargarValores();  
-        //}else{
-         //  JOptionPane.showMessageDialog(this, "Debe ingresar las Fechas Antes para poder ver las Estadísticas"); 
-        //}
+        }else{
+           JOptionPane.showMessageDialog(this, "Debe ingresar las Fechas Antes para poder ver las Estadísticas"); 
+        }
     }//GEN-LAST:event_showStatsActionPerformed
 
     /**

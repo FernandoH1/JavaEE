@@ -78,9 +78,9 @@ String fotoPerfil = "";
         jLabel9 = new javax.swing.JLabel();
         tipoc = new javax.swing.JTextField();
         stockc = new javax.swing.JTextField();
-        GuardarC = new javax.swing.JButton();
-        EditC = new javax.swing.JButton();
-        CleanC = new javax.swing.JButton();
+        guardarC = new javax.swing.JButton();
+        editC = new javax.swing.JButton();
+        cleanC = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaCalzado = new javax.swing.JTable();
         tallec = new javax.swing.JTextField();
@@ -94,9 +94,9 @@ String fotoPerfil = "";
         categoria = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
-        GuardarI = new javax.swing.JButton();
-        EditI = new javax.swing.JButton();
-        CleanI = new javax.swing.JButton();
+        guardarI = new javax.swing.JButton();
+        editI = new javax.swing.JButton();
+        cleanI = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaIndumentaria = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
@@ -110,9 +110,9 @@ String fotoPerfil = "";
         stock = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        GuardarA = new javax.swing.JButton();
-        EditA = new javax.swing.JButton();
-        CleanA = new javax.swing.JButton();
+        guardarA = new javax.swing.JButton();
+        editA = new javax.swing.JButton();
+        cleanA = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaAccesorio = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
@@ -218,29 +218,29 @@ String fotoPerfil = "";
         jPanel1.add(tipoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 157, -1));
         jPanel1.add(stockc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 157, -1));
 
-        GuardarC.setText("Guardar");
-        GuardarC.addActionListener(new java.awt.event.ActionListener() {
+        guardarC.setText("Guardar");
+        guardarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarCActionPerformed(evt);
+                guardarCActionPerformed(evt);
             }
         });
-        jPanel1.add(GuardarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        jPanel1.add(guardarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
-        EditC.setText("Modificar");
-        EditC.addActionListener(new java.awt.event.ActionListener() {
+        editC.setText("Modificar");
+        editC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditCActionPerformed(evt);
+                editCActionPerformed(evt);
             }
         });
-        jPanel1.add(EditC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
+        jPanel1.add(editC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
-        CleanC.setText("Limpiar Datos");
-        CleanC.addActionListener(new java.awt.event.ActionListener() {
+        cleanC.setText("Limpiar Datos");
+        cleanC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CleanCActionPerformed(evt);
+                cleanCActionPerformed(evt);
             }
         });
-        jPanel1.add(CleanC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
+        jPanel1.add(cleanC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
 
         TablaCalzado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -306,29 +306,29 @@ String fotoPerfil = "";
         });
         jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
-        GuardarI.setText("Guardar");
-        GuardarI.addActionListener(new java.awt.event.ActionListener() {
+        guardarI.setText("Guardar");
+        guardarI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarIActionPerformed(evt);
+                guardarIActionPerformed(evt);
             }
         });
-        jPanel2.add(GuardarI, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        jPanel2.add(guardarI, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
-        EditI.setText("Modificar");
-        EditI.addActionListener(new java.awt.event.ActionListener() {
+        editI.setText("Modificar");
+        editI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditIActionPerformed(evt);
+                editIActionPerformed(evt);
             }
         });
-        jPanel2.add(EditI, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
+        jPanel2.add(editI, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
-        CleanI.setText("Limpiar Campos");
-        CleanI.addActionListener(new java.awt.event.ActionListener() {
+        cleanI.setText("Limpiar Campos");
+        cleanI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CleanIActionPerformed(evt);
+                cleanIActionPerformed(evt);
             }
         });
-        jPanel2.add(CleanI, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
+        jPanel2.add(cleanI, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
 
         TablaIndumentaria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -388,29 +388,29 @@ String fotoPerfil = "";
         });
         jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
-        GuardarA.setText("Guardar");
-        GuardarA.addActionListener(new java.awt.event.ActionListener() {
+        guardarA.setText("Guardar");
+        guardarA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarAActionPerformed(evt);
+                guardarAActionPerformed(evt);
             }
         });
-        jPanel3.add(GuardarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jPanel3.add(guardarA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
-        EditA.setText("Modificar");
-        EditA.addActionListener(new java.awt.event.ActionListener() {
+        editA.setText("Modificar");
+        editA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditAActionPerformed(evt);
+                editAActionPerformed(evt);
             }
         });
-        jPanel3.add(EditA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+        jPanel3.add(editA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
-        CleanA.setText("Limpiar Campos");
-        CleanA.addActionListener(new java.awt.event.ActionListener() {
+        cleanA.setText("Limpiar Campos");
+        cleanA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CleanAActionPerformed(evt);
+                cleanAActionPerformed(evt);
             }
         });
-        jPanel3.add(CleanA, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, -1, -1));
+        jPanel3.add(cleanA, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, -1, -1));
 
         TablaAccesorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -470,7 +470,7 @@ String fotoPerfil = "";
         
     }//GEN-LAST:event_proveedorActionPerformed
 
-    private void GuardarIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarIActionPerformed
+    private void guardarIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarIActionPerformed
        try {
         Indumentaria producto = new Indumentaria();
         producto.setNombre(nombre.getText());
@@ -504,9 +504,9 @@ String fotoPerfil = "";
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
     }  
-    }//GEN-LAST:event_GuardarIActionPerformed
+    }//GEN-LAST:event_guardarIActionPerformed
 
-    private void GuardarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarAActionPerformed
+    private void guardarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAActionPerformed
     try {
         Accesorio producto = new Accesorio();
         producto.setNombre(nombre.getText());
@@ -536,7 +536,7 @@ String fotoPerfil = "";
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
     }
-    }//GEN-LAST:event_GuardarAActionPerformed
+    }//GEN-LAST:event_guardarAActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         ColorChooser();
@@ -556,7 +556,7 @@ String fotoPerfil = "";
         labelColor.setBackground(new Color(0,0,0,0));
     }//GEN-LAST:event_jButton15ActionPerformed
 
-    private void GuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarCActionPerformed
+    private void guardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCActionPerformed
          try {
         Calzado producto = new Calzado();
         producto.setNombre(nombre.getText());
@@ -588,9 +588,9 @@ String fotoPerfil = "";
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
     }        
-    }//GEN-LAST:event_GuardarCActionPerformed
+    }//GEN-LAST:event_guardarCActionPerformed
 
-    private void EditCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCActionPerformed
+    private void editCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCActionPerformed
          try {
         Calzado producto = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),5);
         producto.setNombre(nombre.getText());
@@ -610,28 +610,33 @@ String fotoPerfil = "";
         Conexion.getInstance().guardar(producto);
         cargarTablaCalzado();
         limpiarCampos();
+        gestionBotones();
+        JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
     }        
-    }//GEN-LAST:event_EditCActionPerformed
+    }//GEN-LAST:event_editCActionPerformed
 
-    private void CleanCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanCActionPerformed
+    private void cleanCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanCActionPerformed
         limpiarCampos();
-        GuardarC.setEnabled(true);
-        EditC.setEnabled(false);
-    }//GEN-LAST:event_CleanCActionPerformed
+        guardarC.setEnabled(true);
+        editC.setEnabled(false);
+        cleanC.setEnabled(false);
+    }//GEN-LAST:event_cleanCActionPerformed
 
-    private void CleanIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanIActionPerformed
+    private void cleanIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanIActionPerformed
         limpiarCampos();
-        GuardarI.setEnabled(true);
-        EditI.setEnabled(false);
-    }//GEN-LAST:event_CleanIActionPerformed
+        guardarI.setEnabled(true);
+        editI.setEnabled(false);
+        cleanI.setEnabled(false);
+    }//GEN-LAST:event_cleanIActionPerformed
 
-    private void CleanAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanAActionPerformed
+    private void cleanAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanAActionPerformed
         limpiarCampos();
-        GuardarA.setEnabled(true);
-        EditA.setEnabled(false);
-    }//GEN-LAST:event_CleanAActionPerformed
+        guardarA.setEnabled(true);
+        editA.setEnabled(false);
+        cleanA.setEnabled(false);  
+    }//GEN-LAST:event_cleanAActionPerformed
 
     private void tipocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipocActionPerformed
 
@@ -649,14 +654,14 @@ String fotoPerfil = "";
         foto.setIcon(getFotoImage(calzado.getFoto()));
         ColorIndumentaria.setBackground(new Color(Integer.valueOf(calzado.getColor())));
         labelColor.setVisible(true);
-        GuardarC.setEnabled(false);
-        EditC.setEnabled(true);
-        CleanC.setEnabled(true);
+        guardarC.setEnabled(false);
+        editC.setEnabled(true);
+        cleanC.setEnabled(true);
         fotoPanel.setVisible(true);
         codigo.setText(calzado.getCodigo());
     }//GEN-LAST:event_TablaCalzadoMouseClicked
 
-    private void EditAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditAActionPerformed
+    private void editAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAActionPerformed
         try {
         Accesorio producto = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(),5);
         producto.setNombre(nombre.getText());
@@ -675,12 +680,14 @@ String fotoPerfil = "";
         Conexion.getInstance().guardar(producto);
         cargarTablaAcc();
         limpiarCampos();
+        gestionBotones();
+        JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
     }        
-    }//GEN-LAST:event_EditAActionPerformed
+    }//GEN-LAST:event_editAActionPerformed
 
-    private void EditIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditIActionPerformed
+    private void editIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editIActionPerformed
         try {
         Indumentaria producto = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);
         producto.setNombre(nombre.getText());
@@ -702,10 +709,12 @@ String fotoPerfil = "";
         Conexion.getInstance().guardar(producto);
         cargarTablaInd();
         limpiarCampos();
+        gestionBotones();
+        JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
     } catch (IOException ex) {
         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
     }        
-    }//GEN-LAST:event_EditIActionPerformed
+    }//GEN-LAST:event_editIActionPerformed
 
     private void TablaIndumentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaIndumentariaMouseClicked
         Indumentaria indumentaria = (Indumentaria)TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);
@@ -721,9 +730,9 @@ String fotoPerfil = "";
         foto.setIcon(getFotoImage(indumentaria.getFoto()));
         ColorIndumentaria.setBackground(new Color(Integer.valueOf(indumentaria.getColor())));
         labelColor.setVisible(true);
-        GuardarI.setEnabled(false);
-        EditI.setEnabled(true);
-        CleanI.setEnabled(true);
+        guardarI.setEnabled(false);
+        editI.setEnabled(true);
+        cleanI.setEnabled(true);
         fotoPanel.setVisible(true);
         codigo.setText(indumentaria.getCodigo());
     }//GEN-LAST:event_TablaIndumentariaMouseClicked
@@ -739,9 +748,9 @@ String fotoPerfil = "";
         foto.setIcon(getFotoImage(accesorio.getFoto()));
         ColorIndumentaria.setBackground(new Color(Integer.valueOf(accesorio.getColor())));
         labelColor.setVisible(true);
-        GuardarA.setEnabled(false);
-        EditA.setEnabled(true);
-        CleanA.setEnabled(true);
+        guardarA.setEnabled(false);
+        editA.setEnabled(true);
+        cleanA.setEnabled(true);
         fotoPanel.setVisible(true);
         codigo.setText(accesorio.getCodigo());
     }//GEN-LAST:event_TablaAccesorioMouseClicked
@@ -869,6 +878,18 @@ String fotoPerfil = "";
         }
     }
     
+    public void gestionBotones(){
+        guardarC.setEnabled(true);
+        guardarI.setEnabled(true);
+        guardarA.setEnabled(true);
+        editC.setEnabled(false);
+        editI.setEnabled(false);
+        editA.setEnabled(false);
+        cleanC.setEnabled(false);
+        cleanI.setEnabled(false);
+        cleanA.setEnabled(false);   
+    }
+    
     public byte[] convertirImagen(String path) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         BufferedImage img = ImageIO.read(new File(path));
@@ -910,6 +931,7 @@ String fotoPerfil = "";
         TablaAccesorio.clearSelection();
         TablaIndumentaria.clearSelection();   
         fotoPanel.setVisible(false);
+        
     }
     
     
@@ -922,37 +944,37 @@ String fotoPerfil = "";
     }
     
     public void botonesA(){
-        EditI.setEnabled(false);
-        EditA.setEnabled(false);
-        EditC.setEnabled(false);
-        CleanI.setEnabled(false);
-        CleanA.setEnabled(false);
-        CleanC.setEnabled(false);
+        editI.setEnabled(false);
+        editA.setEnabled(false);
+        editC.setEnabled(false);
+        cleanI.setEnabled(false);
+        cleanA.setEnabled(false);
+        cleanC.setEnabled(false);
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CleanA;
-    private javax.swing.JButton CleanC;
-    private javax.swing.JButton CleanI;
     private javax.swing.JLabel ColorIndumentaria;
-    private javax.swing.JButton EditA;
-    private javax.swing.JButton EditC;
-    private javax.swing.JButton EditI;
-    private javax.swing.JButton GuardarA;
-    private javax.swing.JButton GuardarC;
-    private javax.swing.JButton GuardarI;
     private javax.swing.JTable TablaAccesorio;
     private javax.swing.JTable TablaCalzado;
     private javax.swing.JTable TablaIndumentaria;
     private javax.swing.JButton Volver;
     private javax.swing.JTextField categoria;
+    private javax.swing.JButton cleanA;
+    private javax.swing.JButton cleanC;
+    private javax.swing.JButton cleanI;
     private javax.swing.JTextField codigo;
+    private javax.swing.JButton editA;
+    private javax.swing.JButton editC;
+    private javax.swing.JButton editI;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel fondoProducto;
     private javax.swing.JLabel foto;
     private javax.swing.JPanel fotoPanel;
     private javax.swing.JTextField genero;
+    private javax.swing.JButton guardarA;
+    private javax.swing.JButton guardarC;
+    private javax.swing.JButton guardarI;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton15;
