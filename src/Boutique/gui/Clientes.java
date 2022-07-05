@@ -310,6 +310,7 @@ public class Clientes extends javax.swing.JFrame {
         jDialog1.setVisible(true);
         jDialog1.setTitle("Estado de Cuenta");
         jDialog1.setSize(945, 330);
+        jDialog1.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
         jDialog1.setLocationRelativeTo(null);
         Cliente c = (Cliente) TableDatos.getValueAt(TableDatos.getSelectedRow(),0);
         cargarTablaVentas(c);

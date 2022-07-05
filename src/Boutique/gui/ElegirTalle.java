@@ -129,6 +129,7 @@ public class ElegirTalle extends javax.swing.JDialog {
         JPanel jpanel = null;
         String tipo =  getTipoProductoPorCodigo(this.indice);
         System.out.println("TIPO:"+tipo);
+        System.out.println("Indice: "+this.indice);
         if(tipo.equals("Calzado")){
             ListaCalzado lc = new ListaCalzado(getProductoCodigoCalzado(this.indice));
             jpanel = lc;
@@ -182,6 +183,7 @@ public class ElegirTalle extends javax.swing.JDialog {
         ArrayList<Accesorio> accesorio = new ArrayList();
         for(Producto producto : this.productos){
             if(producto.getCodigo().equals(codigosProducto.get(indice).getCodigoProducto())){
+                System.out.println("ESTE ES AC: "+producto.getClass().getSimpleName());
                 accesorio.add((Accesorio) producto);
             }
         }

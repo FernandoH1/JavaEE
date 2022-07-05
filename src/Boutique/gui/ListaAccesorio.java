@@ -16,6 +16,7 @@ public class ListaAccesorio extends javax.swing.JPanel implements ListaProductos
     private ArrayList<Accesorio> accesorios;
     
     public ListaAccesorio(ArrayList<Accesorio> accesorio) {
+        System.out.println("LLEGO ACAA EHH");
         this.accesorios = accesorio;
         productoSelecioandos = new ArrayList();
         initComponents();
