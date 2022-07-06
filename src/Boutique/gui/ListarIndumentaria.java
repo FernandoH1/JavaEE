@@ -142,6 +142,7 @@ public class ListarIndumentaria extends javax.swing.JPanel implements ListaProdu
             fila[0] = lbl;
             fila[3] = next.getStock();
             tableProductos.addRow(fila);
+            jTable2.setDefaultRenderer(Object.class, new ImgTabla());
             jTable2.setRowHeight(40);
         }
     }
@@ -161,6 +162,7 @@ public class ListarIndumentaria extends javax.swing.JPanel implements ListaProdu
             fila[0] = lbl;
             fila[3] = next.getStock();
             tableProductos.addRow(fila);
+            jTable1.setDefaultRenderer(Object.class, new ImgTabla());
             jTable1.setRowHeight(40);
         }
     }

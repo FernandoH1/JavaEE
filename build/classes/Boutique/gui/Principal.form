@@ -161,8 +161,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Boutique/Image/coomingSoon.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="PROXIMAMENTE......"/>
-            <Property name="actionCommand" type="java.lang.String" value="PROXIMAMENTE......"/>
+            <Property name="text" type="java.lang.String" value="DEVOLUCI&#xd3;N"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="1"/>
           </Properties>

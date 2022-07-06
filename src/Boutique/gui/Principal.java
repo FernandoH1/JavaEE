@@ -98,8 +98,7 @@ public class Principal extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(240, 218, 168));
         jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/coomingSoon.png"))); // NOI18N
-        jButton6.setText("PROXIMAMENTE......");
-        jButton6.setActionCommand("PROXIMAMENTE......");
+        jButton6.setText("DEVOLUCIÓN");
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
