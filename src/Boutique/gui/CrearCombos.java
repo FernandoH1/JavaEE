@@ -589,7 +589,11 @@ public class CrearCombos extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarIMouseClicked
 
     private void crearComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearComboActionPerformed
+          
         if(listaComboProducto.size() !=0){
+            if(nombre.getText().isEmpty() && descripcion.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Se debe de llenar todos los campos para crear un combo.");
+            }
         Combo c = new Combo();
         c.setNombre(nombre.getText());
         SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) precio.getModel();

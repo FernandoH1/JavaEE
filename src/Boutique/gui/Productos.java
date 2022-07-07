@@ -24,10 +24,10 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Productos extends javax.swing.JFrame {
-String fotoPerfil = "";
-    
+
+    String fotoPerfil = "";
+
     public Productos() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -37,14 +37,14 @@ String fotoPerfil = "";
         cargarTablaInd();
         cargarTablaAcc();
         botonesA();
-        ColorIndumentaria.setOpaque(true); 
-        ColorIndumentaria.setBackground(new Color(0,0,0,0));
-        fondoProducto.setBackground(new Color(240,218,168)); 
+        ColorIndumentaria.setOpaque(true);
+        ColorIndumentaria.setBackground(new Color(0, 0, 0, 0));
+        fondoProducto.setBackground(new Color(240, 218, 168));
         fotoPanel.setVisible(false);
-        fotoPanel.setBackground(new Color(240,218,168));
+        fotoPanel.setBackground(new Color(240, 218, 168));
         labelColor.setOpaque(true);
-        labelColor.setVisible(false); 
-        Volver.setBackground(new Color(0,0,0,0));
+        labelColor.setVisible(false);
+        Volver.setBackground(new Color(0, 0, 0, 0));
     }
 
     @SuppressWarnings("unchecked")
@@ -459,162 +459,181 @@ String fotoPerfil = "";
             fotoPerfil = jFileChooser1.getSelectedFile().getPath();
             fotoPanel.setVisible(true);
             Image aux = new ImageIcon(fotoPerfil).getImage();
-            ImageIcon perfil = new ImageIcon(aux.getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT)); 
-            foto.setIcon(perfil);        
+            ImageIcon perfil = new ImageIcon(aux.getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT));
+            foto.setIcon(perfil);
         }
-        
-          
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorActionPerformed
-        
+
     }//GEN-LAST:event_proveedorActionPerformed
 
     private void guardarIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarIActionPerformed
-       try {
-        Indumentaria producto = new Indumentaria();
-        producto.setNombre(nombre.getText());
-        double p = Double.parseDouble(proveedor.getText());
-        double v = Double.parseDouble(venta.getText());
-        producto.setPrecioProveedor(p);
-        producto.setPrecioVenta(v);
-        producto.setMarca(marca.getText());
-        producto.setCodigo(codigo.getText());
-        if(!fotoPerfil.equals("")){
-        producto.setFoto(convertirImagen(fotoPerfil));
+        try {
+
+            if (nombre.getText().isEmpty() && proveedor.getText().isEmpty() && venta.getText().isEmpty() && marca.getText().isEmpty() && codigo.getText().isEmpty() && talle.getText().isEmpty()
+                    && tipo.getText().isEmpty() && stocki.getText().isEmpty() && genero.getText().isEmpty() && categoria.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe de completar todos los campos para agregar una indumentaria");
+            } else {
+
+                Indumentaria producto = new Indumentaria();
+                producto.setNombre(nombre.getText());
+                double p = Double.parseDouble(proveedor.getText());
+                double v = Double.parseDouble(venta.getText());
+                producto.setPrecioProveedor(p);
+                producto.setPrecioVenta(v);
+                producto.setMarca(marca.getText());
+                producto.setCodigo(codigo.getText());
+                if (!fotoPerfil.equals("")) {
+                    producto.setFoto(convertirImagen(fotoPerfil));
+                }
+                producto.setTalle(talle.getText());
+                producto.setTipo(tipo.getText());
+                producto.setCategoria(categoria.getText());
+                producto.setSexo(genero.getText());
+                producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+                producto.setStock(Integer.valueOf(stocki.getText()));
+                Conexion.getInstance().guardar(producto);
+                int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    talle.setText("");
+                    stocki.setText("");
+                    ColorIndumentaria.setBackground(new Color(0, 0, 0, 0));
+                    foto.setIcon(null);
+                } else {
+                    limpiarCampos();
+                }
+                cargarTablaInd();
+                fotoPerfil = "";
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        producto.setTalle(talle.getText());
-        producto.setTipo(tipo.getText());
-        producto.setCategoria(categoria.getText());
-        producto.setSexo(genero.getText());
-        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
-        producto.setStock(Integer.valueOf(stocki.getText()));
-        Conexion.getInstance().guardar(producto);
-        int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
-        if(opcion == JOptionPane.YES_OPTION){
-            talle.setText("");
-            stocki.setText("");
-            ColorIndumentaria.setBackground(new Color(0,0,0,0));
-            foto.setIcon(null);         
-        }else{
-           limpiarCampos();
-        }
-        cargarTablaInd();
-        fotoPerfil = "";
-    } catch (IOException ex) {
-        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
-    }  
     }//GEN-LAST:event_guardarIActionPerformed
 
     private void guardarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAActionPerformed
-    try {
-        Accesorio producto = new Accesorio();
-        producto.setNombre(nombre.getText());
-        double p = Double.parseDouble(proveedor.getText());
-        double v = Double.parseDouble(venta.getText());
-        producto.setPrecioProveedor(p);
-        producto.setPrecioVenta(v);
-        producto.setMarca(marca.getText());
-        producto.setCodigo(codigo.getText());
-        if(!fotoPerfil.equals("")){
-        producto.setFoto(convertirImagen(fotoPerfil));
+        try {
+
+            if (nombre.getText().isEmpty() && proveedor.getText().isEmpty() && venta.getText().isEmpty() && marca.getText().isEmpty() && codigo.getText().isEmpty()
+                    && textura.getText().isEmpty() && stock.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe de completar todos los campos para agregar un accesorio");
+            } else {
+                Accesorio producto = new Accesorio();
+                producto.setNombre(nombre.getText());
+                double p = Double.parseDouble(proveedor.getText());
+                double v = Double.parseDouble(venta.getText());
+                producto.setPrecioProveedor(p);
+                producto.setPrecioVenta(v);
+                producto.setMarca(marca.getText());
+                producto.setCodigo(codigo.getText());
+                if (!fotoPerfil.equals("")) {
+                    producto.setFoto(convertirImagen(fotoPerfil));
+                }
+                producto.setTextura(textura.getText());
+                producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+                producto.setStock(Integer.valueOf(stock.getText()));
+                Conexion.getInstance().guardar(producto);
+                int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    textura.setText("");
+                    stock.setText("");
+                    ColorIndumentaria.setBackground(new Color(0, 0, 0, 0));
+                    foto.setIcon(null);
+                } else {
+                    limpiarCampos();
+                }
+                cargarTablaAcc();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        producto.setTextura(textura.getText());
-        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
-        producto.setStock(Integer.valueOf(stock.getText()));
-        Conexion.getInstance().guardar(producto);
-        int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
-        if(opcion == JOptionPane.YES_OPTION){
-            textura.setText("");
-            stock.setText("");
-            ColorIndumentaria.setBackground(new Color(0,0,0,0));
-            foto.setIcon(null);         
-        }else{
-           limpiarCampos();
-        }
-        cargarTablaAcc();
-    } catch (IOException ex) {
-        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }//GEN-LAST:event_guardarAActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         ColorChooser();
         labelColor.setVisible(true);
-        labelColor.setBackground(new Color(0,0,0,0));
+        labelColor.setBackground(new Color(0, 0, 0, 0));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         ColorChooser();
         labelColor.setVisible(true);
-        labelColor.setBackground(new Color(0,0,0,0));
+        labelColor.setBackground(new Color(0, 0, 0, 0));
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         ColorChooser();
         labelColor.setVisible(true);
-        labelColor.setBackground(new Color(0,0,0,0));
+        labelColor.setBackground(new Color(0, 0, 0, 0));
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void guardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCActionPerformed
-         try {
-        Calzado producto = new Calzado();
-        producto.setNombre(nombre.getText());
-        double p = Double.parseDouble(proveedor.getText());
-        double v = Double.parseDouble(venta.getText());
-        producto.setPrecioProveedor(p);
-        producto.setPrecioVenta(v);
-        producto.setMarca(marca.getText());
-        producto.setCodigo(codigo.getText());
-        if(!fotoPerfil.equals("")){
-        producto.setFoto(convertirImagen(fotoPerfil));
+        try {
+
+            if (nombre.getText().isEmpty() && proveedor.getText().isEmpty() && venta.getText().isEmpty() && marca.getText().isEmpty() && codigo.getText().isEmpty() && tallec.getText().isEmpty()
+                    && tipoc.getText().isEmpty() && stockc.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe de completar todos los campos para agregar un calzado");
+            } else {
+                Calzado producto = new Calzado();
+                producto.setNombre(nombre.getText());
+                double p = Double.parseDouble(proveedor.getText());
+                double v = Double.parseDouble(venta.getText());
+                producto.setPrecioProveedor(p);
+                producto.setPrecioVenta(v);
+                producto.setMarca(marca.getText());
+                producto.setCodigo(codigo.getText());
+                if (!fotoPerfil.equals("")) {
+                    producto.setFoto(convertirImagen(fotoPerfil));
+                }
+                producto.setTalle(tallec.getText());
+                producto.setTipo(tipoc.getText());
+                producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+                producto.setStock(Integer.valueOf(stockc.getText()));
+                Conexion.getInstance().guardar(producto);
+                int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    tallec.setText("");
+                    stockc.setText("");
+                    ColorIndumentaria.setBackground(new Color(0, 0, 0, 0));
+                    foto.setIcon(null);
+                } else {
+                    limpiarCampos();
+                }
+                cargarTablaCalzado();
+                fotoPerfil = "";
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        producto.setTalle(tallec.getText());
-        producto.setTipo(tipoc.getText());
-        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
-        producto.setStock(Integer.valueOf(stockc.getText()));
-        Conexion.getInstance().guardar(producto);
-        int opcion = JOptionPane.showConfirmDialog(this, "Desea Agregar un Producto similar?", "Consulta", JOptionPane.YES_NO_OPTION);
-        if(opcion == JOptionPane.YES_OPTION){
-            tallec.setText("");
-            stockc.setText("");
-            ColorIndumentaria.setBackground(new Color(0,0,0,0));
-            foto.setIcon(null);         
-        }else{
-           limpiarCampos();
-        }
-        cargarTablaCalzado();
-        fotoPerfil = "";
-    } catch (IOException ex) {
-        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
-    }        
     }//GEN-LAST:event_guardarCActionPerformed
 
     private void editCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCActionPerformed
-         try {
-        Calzado producto = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),5);
-        producto.setNombre(nombre.getText());
-        double p = Double.parseDouble(proveedor.getText());
-        double v = Double.parseDouble(venta.getText());
-        producto.setPrecioProveedor(p);
-        producto.setPrecioVenta(v);
-        producto.setMarca(marca.getText());
-        producto.setCodigo(codigo.getText());
-        if(!fotoPerfil.equals("")){
-           producto.setFoto(convertirImagen(fotoPerfil)); 
+        try {
+            Calzado producto = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 5);
+            producto.setNombre(nombre.getText());
+            double p = Double.parseDouble(proveedor.getText());
+            double v = Double.parseDouble(venta.getText());
+            producto.setPrecioProveedor(p);
+            producto.setPrecioVenta(v);
+            producto.setMarca(marca.getText());
+            producto.setCodigo(codigo.getText());
+            if (!fotoPerfil.equals("")) {
+                producto.setFoto(convertirImagen(fotoPerfil));
+            }
+            producto.setTalle(tallec.getText());
+            producto.setTipo(tipoc.getText());
+            producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+            producto.setStock(Integer.valueOf(stockc.getText()));
+            Conexion.getInstance().guardar(producto);
+            cargarTablaCalzado();
+            limpiarCampos();
+            gestionBotones();
+            JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
+        } catch (IOException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        producto.setTalle(tallec.getText());
-        producto.setTipo(tipoc.getText());
-        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
-        producto.setStock(Integer.valueOf(stockc.getText()));
-        Conexion.getInstance().guardar(producto);
-        cargarTablaCalzado();
-        limpiarCampos();
-        gestionBotones();
-        JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
-    } catch (IOException ex) {
-        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
-    }        
     }//GEN-LAST:event_editCActionPerformed
 
     private void cleanCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanCActionPerformed
@@ -635,7 +654,7 @@ String fotoPerfil = "";
         limpiarCampos();
         guardarA.setEnabled(true);
         editA.setEnabled(false);
-        cleanA.setEnabled(false);  
+        cleanA.setEnabled(false);
     }//GEN-LAST:event_cleanAActionPerformed
 
     private void tipocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipocActionPerformed
@@ -643,7 +662,7 @@ String fotoPerfil = "";
     }//GEN-LAST:event_tipocActionPerformed
 
     private void TablaCalzadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalzadoMouseClicked
-        Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(),5);
+        Calzado calzado = (Calzado) TablaCalzado.getValueAt(TablaCalzado.getSelectedRow(), 5);
         nombre.setText(calzado.getNombre());
         proveedor.setText(String.valueOf(calzado.getPrecioProveedor()));
         venta.setText(String.valueOf(calzado.getPrecioVenta()));
@@ -663,61 +682,61 @@ String fotoPerfil = "";
 
     private void editAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAActionPerformed
         try {
-        Accesorio producto = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(),5);
-        producto.setNombre(nombre.getText());
-        double p = Double.parseDouble(proveedor.getText());
-        double v = Double.parseDouble(venta.getText());
-        producto.setPrecioProveedor(p);
-        producto.setPrecioVenta(v);
-        producto.setMarca(marca.getText());
-        producto.setCodigo(codigo.getText());
-        if(!fotoPerfil.equals("")){
-           producto.setFoto(convertirImagen(fotoPerfil)); 
+            Accesorio producto = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 5);
+            producto.setNombre(nombre.getText());
+            double p = Double.parseDouble(proveedor.getText());
+            double v = Double.parseDouble(venta.getText());
+            producto.setPrecioProveedor(p);
+            producto.setPrecioVenta(v);
+            producto.setMarca(marca.getText());
+            producto.setCodigo(codigo.getText());
+            if (!fotoPerfil.equals("")) {
+                producto.setFoto(convertirImagen(fotoPerfil));
+            }
+            producto.setTextura(textura.getText());
+            producto.setStock(Integer.valueOf(stock.getText()));
+            producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+            Conexion.getInstance().guardar(producto);
+            cargarTablaAcc();
+            limpiarCampos();
+            gestionBotones();
+            JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
+        } catch (IOException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        producto.setTextura(textura.getText());
-        producto.setStock(Integer.valueOf(stock.getText()));
-        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
-        Conexion.getInstance().guardar(producto);
-        cargarTablaAcc();
-        limpiarCampos();
-        gestionBotones();
-        JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
-    } catch (IOException ex) {
-        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
-    }        
     }//GEN-LAST:event_editAActionPerformed
 
     private void editIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editIActionPerformed
         try {
-        Indumentaria producto = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);
-        producto.setNombre(nombre.getText());
-        double p = Double.parseDouble(proveedor.getText());
-        double v = Double.parseDouble(venta.getText());
-        producto.setPrecioProveedor(p);
-        producto.setPrecioVenta(v);
-        producto.setMarca(marca.getText());
-        producto.setCodigo(codigo.getText());
-        if(!fotoPerfil.equals("")){
-           producto.setFoto(convertirImagen(fotoPerfil)); 
+            Indumentaria producto = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 5);
+            producto.setNombre(nombre.getText());
+            double p = Double.parseDouble(proveedor.getText());
+            double v = Double.parseDouble(venta.getText());
+            producto.setPrecioProveedor(p);
+            producto.setPrecioVenta(v);
+            producto.setMarca(marca.getText());
+            producto.setCodigo(codigo.getText());
+            if (!fotoPerfil.equals("")) {
+                producto.setFoto(convertirImagen(fotoPerfil));
+            }
+            producto.setTalle(talle.getText());
+            producto.setTipo(tipo.getText());
+            producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
+            producto.setStock(Integer.valueOf(stocki.getText()));
+            producto.setCategoria(categoria.getText());
+            producto.setSexo(genero.getText());
+            Conexion.getInstance().guardar(producto);
+            cargarTablaInd();
+            limpiarCampos();
+            gestionBotones();
+            JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
+        } catch (IOException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        producto.setTalle(talle.getText());
-        producto.setTipo(tipo.getText());
-        producto.setColor(String.valueOf(ColorIndumentaria.getBackground().getRGB()));
-        producto.setStock(Integer.valueOf(stocki.getText()));
-        producto.setCategoria(categoria.getText());
-        producto.setSexo(genero.getText());
-        Conexion.getInstance().guardar(producto);
-        cargarTablaInd();
-        limpiarCampos();
-        gestionBotones();
-        JOptionPane.showMessageDialog(this, "El producto se modifico correctamente");
-    } catch (IOException ex) {
-        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);   
-    }        
     }//GEN-LAST:event_editIActionPerformed
 
     private void TablaIndumentariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaIndumentariaMouseClicked
-        Indumentaria indumentaria = (Indumentaria)TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(),5);
+        Indumentaria indumentaria = (Indumentaria) TablaIndumentaria.getValueAt(TablaIndumentaria.getSelectedRow(), 5);
         nombre.setText(indumentaria.getNombre());
         proveedor.setText(String.valueOf(indumentaria.getPrecioProveedor()));
         venta.setText(String.valueOf(indumentaria.getPrecioVenta()));
@@ -738,7 +757,7 @@ String fotoPerfil = "";
     }//GEN-LAST:event_TablaIndumentariaMouseClicked
 
     private void TablaAccesorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAccesorioMouseClicked
-        Accesorio accesorio = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(),5);
+        Accesorio accesorio = (Accesorio) TablaAccesorio.getValueAt(TablaAccesorio.getSelectedRow(), 5);
         nombre.setText(accesorio.getNombre());
         proveedor.setText(String.valueOf(accesorio.getPrecioProveedor()));
         venta.setText(String.valueOf(accesorio.getPrecioVenta()));
@@ -768,7 +787,6 @@ String fotoPerfil = "";
     private void jTabbedPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane5MouseClicked
         limpiarCampos();
     }//GEN-LAST:event_jTabbedPane5MouseClicked
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -801,84 +819,84 @@ String fotoPerfil = "";
             }
         });
     }
-    
-    public void cargarTablaCalzado(){
+
+    public void cargarTablaCalzado() {
         DefaultTableModel tableProductos = (DefaultTableModel) TablaCalzado.getModel();
         Iterator<Calzado> it = Conexion.getInstance().listarCalzado().iterator();
         tableProductos.setRowCount(0);
-        while(it.hasNext()){
-        Calzado next = it.next();
-        Object[] fila = new Object[9];
-        fila[0]= next.getNombre();
-        fila[1]= next.getPrecioProveedor();
-        fila[2]= next.getPrecioVenta();
-        fila[3]= next.getMarca();
-        fila[4]= new JLabel(getFotoImage(next.getFoto()));
-        fila[5]= next;
-        fila[6]= next.getTipo();
-        JLabel lbl = new JLabel();
-        lbl.setOpaque(true);
-        lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
-        fila[7]= lbl;
-        fila[8]= next.getStock();
-        tableProductos.addRow(fila);
-        TablaCalzado.setDefaultRenderer(Object.class, new ImgTabla());
-        TablaCalzado.setRowHeight(85);
+        while (it.hasNext()) {
+            Calzado next = it.next();
+            Object[] fila = new Object[9];
+            fila[0] = next.getNombre();
+            fila[1] = next.getPrecioProveedor();
+            fila[2] = next.getPrecioVenta();
+            fila[3] = next.getMarca();
+            fila[4] = new JLabel(getFotoImage(next.getFoto()));
+            fila[5] = next;
+            fila[6] = next.getTipo();
+            JLabel lbl = new JLabel();
+            lbl.setOpaque(true);
+            lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
+            fila[7] = lbl;
+            fila[8] = next.getStock();
+            tableProductos.addRow(fila);
+            TablaCalzado.setDefaultRenderer(Object.class, new ImgTabla());
+            TablaCalzado.setRowHeight(85);
         }
     }
-    
-    public void cargarTablaInd(){
-    DefaultTableModel tableProductos = (DefaultTableModel) TablaIndumentaria.getModel();
+
+    public void cargarTablaInd() {
+        DefaultTableModel tableProductos = (DefaultTableModel) TablaIndumentaria.getModel();
         Iterator<Indumentaria> it = Conexion.getInstance().listarIndumentaria().iterator();
         tableProductos.setRowCount(0);
-        while(it.hasNext()){
-        Indumentaria next = it.next();
-        Object[] fila = new Object[11];
-        fila[0]= next.getNombre();
-        fila[1]= next.getPrecioProveedor();
-        fila[2]= next.getPrecioVenta();
-        fila[3]= next.getMarca();
-        fila[4]= new JLabel(getFotoImage(next.getFoto()));
-        fila[5]= next;
-        fila[6]= next.getTipo();
-        fila[7]= next.getCategoria();
-        fila[8]= next.getSexo();
-        JLabel lbl = new JLabel();
-        lbl.setOpaque(true);
-        lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
-        fila[9]= lbl;
-        fila[10]= next.getStock();
-        tableProductos.addRow(fila);
-        TablaIndumentaria.setDefaultRenderer(Object.class, new ImgTabla());
-        TablaIndumentaria.setRowHeight(85);
+        while (it.hasNext()) {
+            Indumentaria next = it.next();
+            Object[] fila = new Object[11];
+            fila[0] = next.getNombre();
+            fila[1] = next.getPrecioProveedor();
+            fila[2] = next.getPrecioVenta();
+            fila[3] = next.getMarca();
+            fila[4] = new JLabel(getFotoImage(next.getFoto()));
+            fila[5] = next;
+            fila[6] = next.getTipo();
+            fila[7] = next.getCategoria();
+            fila[8] = next.getSexo();
+            JLabel lbl = new JLabel();
+            lbl.setOpaque(true);
+            lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
+            fila[9] = lbl;
+            fila[10] = next.getStock();
+            tableProductos.addRow(fila);
+            TablaIndumentaria.setDefaultRenderer(Object.class, new ImgTabla());
+            TablaIndumentaria.setRowHeight(85);
         }
     }
-        
-    public void cargarTablaAcc(){
-    DefaultTableModel tableProductos = (DefaultTableModel) TablaAccesorio.getModel();
+
+    public void cargarTablaAcc() {
+        DefaultTableModel tableProductos = (DefaultTableModel) TablaAccesorio.getModel();
         Iterator<Accesorio> it = Conexion.getInstance().listarAccesorio().iterator();
         tableProductos.setRowCount(0);
-        while(it.hasNext()){
-        Accesorio next = it.next();
-        Object[] fila = new Object[8];
-        fila[0]= next.getNombre();
-        fila[1]= next.getPrecioProveedor();
-        fila[2]= next.getPrecioVenta();
-        fila[3]= next.getMarca();
-        fila[4]= new JLabel(getFotoImage(next.getFoto()));
-        fila[5]= next;
-        JLabel lbl = new JLabel();
-        lbl.setOpaque(true);
-        lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
-        fila[6]= lbl;
-        fila[7]= next.getStock();
-        tableProductos.addRow(fila);
-        TablaAccesorio.setDefaultRenderer(Object.class, new ImgTabla());
-        TablaAccesorio.setRowHeight(85);
+        while (it.hasNext()) {
+            Accesorio next = it.next();
+            Object[] fila = new Object[8];
+            fila[0] = next.getNombre();
+            fila[1] = next.getPrecioProveedor();
+            fila[2] = next.getPrecioVenta();
+            fila[3] = next.getMarca();
+            fila[4] = new JLabel(getFotoImage(next.getFoto()));
+            fila[5] = next;
+            JLabel lbl = new JLabel();
+            lbl.setOpaque(true);
+            lbl.setBackground(new Color(Integer.valueOf(next.getColor())));
+            fila[6] = lbl;
+            fila[7] = next.getStock();
+            tableProductos.addRow(fila);
+            TablaAccesorio.setDefaultRenderer(Object.class, new ImgTabla());
+            TablaAccesorio.setRowHeight(85);
         }
     }
-    
-    public void gestionBotones(){
+
+    public void gestionBotones() {
         guardarC.setEnabled(true);
         guardarI.setEnabled(true);
         guardarA.setEnabled(true);
@@ -887,9 +905,9 @@ String fotoPerfil = "";
         editA.setEnabled(false);
         cleanC.setEnabled(false);
         cleanI.setEnabled(false);
-        cleanA.setEnabled(false);   
+        cleanA.setEnabled(false);
     }
-    
+
     public byte[] convertirImagen(String path) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         BufferedImage img = ImageIO.read(new File(path));
@@ -901,14 +919,14 @@ String fotoPerfil = "";
 
         return Base64.decode(base64String);
     }
-    
+
     public ImageIcon getFotoImage(byte[] foto) {
         Image aux = new ImageIcon(foto).getImage();
         ImageIcon perfil = new ImageIcon(aux.getScaledInstance(this.foto.getWidth(), this.foto.getHeight(), Image.SCALE_DEFAULT));
         return perfil;
     }
-    
-    public void limpiarCampos(){
+
+    public void limpiarCampos() {
         nombre.setText("");
         proveedor.setText("");
         stock.setText("");
@@ -925,25 +943,24 @@ String fotoPerfil = "";
         genero.setText("");
         categoria.setText("");
         labelColor.setVisible(false);
-        ColorIndumentaria.setBackground(new Color(0,0,0,0));
+        ColorIndumentaria.setBackground(new Color(0, 0, 0, 0));
         foto.setIcon(null);
         TablaCalzado.clearSelection();
         TablaAccesorio.clearSelection();
-        TablaIndumentaria.clearSelection();   
+        TablaIndumentaria.clearSelection();
         fotoPanel.setVisible(false);
-        
+
     }
-    
-    
-    public void ColorChooser(){
-    JColorChooser cc=new JColorChooser();
-       Color color1 = cc.showDialog(this,"Selector de color",Color.white);
-       ColorIndumentaria.setBackground(color1);
-       ColorIndumentaria.repaint();
-       ColorIndumentaria.validate();
+
+    public void ColorChooser() {
+        JColorChooser cc = new JColorChooser();
+        Color color1 = cc.showDialog(this, "Selector de color", Color.white);
+        ColorIndumentaria.setBackground(color1);
+        ColorIndumentaria.repaint();
+        ColorIndumentaria.validate();
     }
-    
-    public void botonesA(){
+
+    public void botonesA() {
         editI.setEnabled(false);
         editA.setEnabled(false);
         editC.setEnabled(false);
@@ -951,7 +968,7 @@ String fotoPerfil = "";
         cleanA.setEnabled(false);
         cleanC.setEnabled(false);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ColorIndumentaria;

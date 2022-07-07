@@ -253,15 +253,21 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreActionPerformed
 
     private void guardarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarbtnActionPerformed
-        Cliente cliente = new Cliente();
-        cliente.setNombre(nombre.getText());
-        cliente.setApellido(apellido.getText());
-        cliente.setCi(ci.getText());
-        cliente.setTelefonos(tel.getText());
-        cliente.setDireccion(dir.getText());
-        Conexion.getInstance().guardar(cliente); 
-        cargarTabla();
-        limpiarCampos();
+        
+        if(nombre.getText().isEmpty() && apellido.getText().isEmpty() && ci.getText().isEmpty() && tel.getText().isEmpty() && dir.getText().isEmpty()){   
+            JOptionPane.showMessageDialog(this, "Debe de completar todos los campos para agregar un cliente");
+        }else{
+            Cliente cliente = new Cliente();
+            cliente.setNombre(nombre.getText());
+            cliente.setApellido(apellido.getText());
+            cliente.setCi(ci.getText());
+            cliente.setTelefonos(tel.getText());
+            cliente.setDireccion(dir.getText());
+            Conexion.getInstance().guardar(cliente); 
+            cargarTabla();
+            limpiarCampos();
+             
+        }
     }//GEN-LAST:event_guardarbtnActionPerformed
 
     private void TableDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableDatosMouseClicked
@@ -422,7 +428,12 @@ public class Clientes extends javax.swing.JFrame {
         apellido.setText("");
         ci.setText("");
         tel.setText("");
-        dir.setText("");}
+        dir.setText("");
+    }
+    
+    public void checkearCampo(){
+        
+    }
     
     /**
      * @param args the command line arguments

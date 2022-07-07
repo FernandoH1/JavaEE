@@ -159,7 +159,7 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Boutique/Image/coomingSoon.png"/>
+              <Image iconType="3" name="/Boutique/Image/reemplazo.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="DEVOLUCI&#xd3;N"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>

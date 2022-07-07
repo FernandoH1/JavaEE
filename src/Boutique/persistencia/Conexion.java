@@ -5,6 +5,7 @@ import Boutique.io.Calzado;
 import Boutique.io.Cliente;
 import Boutique.io.Combo;
 import Boutique.io.CombosProducto;
+import Boutique.io.DetalleDeVenta;
 import Boutique.io.Entrega;
 import Boutique.io.Indumentaria;
 import Boutique.io.Producto;
@@ -425,6 +426,33 @@ public class Conexion {
         return entrega;
     }
     
+    public List<DetalleDeVenta> listarDetallesDeVenta(Long id) {
+        EntityManager em = getEntity();
+        List<DetalleDeVenta> dv = null;
+        em.getTransaction().begin();
+        try {
+            dv = em.createNativeQuery("SELECT * FROM detalledeventa WHERE venta_id="+id,DetalleDeVenta.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return dv;
+    }
+    
+    public List<Producto> listarProductosPorId(Long id) {
+        EntityManager em = getEntity();
+        List<Producto> productos = null;
+        em.getTransaction().begin();
+        try {
+            productos = em.createNativeQuery("SELECT * FROM producto, accesorio WHERE producto.id = accesorio.id AND producto.id='"+id+"'",Accesorio.class).getResultList();
+            productos.addAll(em.createNativeQuery("SELECT * FROM producto, calzado WHERE producto.id = calzado.id AND producto.id='"+id+"'",Calzado.class).getResultList());
+            productos.addAll(em.createNativeQuery("SELECT * FROM producto, indumentaria WHERE producto.id = indumentaria.id AND producto.id='"+id+"'",Indumentaria.class).getResultList());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return productos;
+    }
     
     
 }

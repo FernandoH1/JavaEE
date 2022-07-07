@@ -161,8 +161,13 @@ public class Gastos extends javax.swing.JFrame {
             cargarTabla(fechaInicio,fechaFin);
             cargarValores();  
         }else{
-           JOptionPane.showMessageDialog(this, "Debe ingresar las Fechas Antes para poder ver las Estadísticas"); 
+            JOptionPane.showMessageDialog(this, "Debe ingresar las Fechas Antes para poder ver las Estadísticas"); 
         }
+        
+        if(fechaF.getDate().before(fechaIni.getDate())){
+           JOptionPane.showMessageDialog(this, "La fecha inicio debe de ser menor a la fecha final"); 
+        }
+       
     }//GEN-LAST:event_showStatsActionPerformed
 
     /**

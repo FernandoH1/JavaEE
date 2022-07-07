@@ -1,9 +1,19 @@
 package Boutique.gui;
 
+import Boutique.io.DetalleDeVenta;
+import Boutique.io.Producto;
+import Boutique.persistencia.Conexion;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Devolucion extends javax.swing.JFrame {
+    
+    private String fechaInicio;
+    private String fechaFin;
 
     public Devolucion() {
         initComponents();
@@ -18,20 +28,21 @@ public class Devolucion extends javax.swing.JFrame {
     private void initComponents() {
 
         Volver = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        fechaIni = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaVentas = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        detalleVenta = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        producto = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        fechaF = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -46,39 +57,14 @@ public class Devolucion extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 50, 50));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 130, -1));
+        getContentPane().add(fechaIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 130, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Fecha Venta", "Método de Pago", "Deuda", "Descuento", "Precio Total"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        }
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 660, 90));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha", "Tipo de Pago", "Metodo de Pago", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -89,16 +75,21 @@ public class Devolucion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        TablaVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaVentasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaVentas);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 660, 90));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 660, 120));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        detalleVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Producto", "Cantidad", "Precio Unitario", "Precio Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -109,13 +100,40 @@ public class Devolucion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        detalleVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                detalleVentaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(detalleVenta);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 660, 90));
+
+        producto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(producto);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 660, 90));
 
         jButton1.setText("Devolver");
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 120, -1));
+
+        total.setEditable(false);
+        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 120, -1));
 
         jLabel1.setText("TOTAL:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
@@ -125,12 +143,20 @@ public class Devolucion extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(240, 218, 168));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 130, -1));
+        jPanel1.add(fechaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 130, -1));
 
         jLabel3.setText("Hasta:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 510, 50));
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 640, 50));
 
         jPanel2.setBackground(new java.awt.Color(240, 218, 168));
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 500, 60));
@@ -146,6 +172,31 @@ public class Devolucion extends javax.swing.JFrame {
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VolverActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(fechaIni.getDate() != null && fechaF.getDate() != null){
+            SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+            fechaInicio = date.format(fechaIni.getDate());
+            fechaFin = date.format(fechaF.getDate());
+            cargarTabla(fechaInicio,fechaFin); 
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe ingresar las Fechas Antes para poder ver las Estadísticas"); 
+        }
+        
+        if(fechaF.getDate().before(fechaIni.getDate())){
+           JOptionPane.showMessageDialog(this, "La fecha inicio debe de ser menor a la fecha final"); 
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void TablaVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaVentasMouseClicked
+        Boutique.io.Venta venta = (Boutique.io.Venta) TablaVentas.getValueAt(TablaVentas.getSelectedRow(), 3);      
+        cargarTablaDetalleVenta(venta.getId());
+    }//GEN-LAST:event_TablaVentasMouseClicked
+
+    private void detalleVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detalleVentaMouseClicked
+        DetalleDeVenta dv = (DetalleDeVenta) detalleVenta.getValueAt(detalleVenta.getSelectedRow(), 0);      
+        cargarTablaProducto(dv.getProducto().getId());
+    }//GEN-LAST:event_detalleVentaMouseClicked
 
 
     public static void main(String args[]) {
@@ -179,12 +230,66 @@ public class Devolucion extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void cargarTabla(String fechaInicio, String fechaFin){
+        DefaultTableModel tablaDeVentas = new DefaultTableModel();
+        tablaDeVentas = (DefaultTableModel) TablaVentas.getModel();
+        Iterator<Boutique.io.Venta> it = Conexion.getInstance().listarVentas(fechaInicio, fechaFin).iterator();
+        tablaDeVentas.setRowCount(0);
+        while(it.hasNext()){
+        Boutique.io.Venta next = it.next();
+        Object[] fila = new Object[4];
+        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+        fila[0]= date.format(next.getFechaVenta());
+        fila[1]= next.getTipoPago();
+        fila[2]= next.getMetodoPago();
+        fila[3]= next;
+        tablaDeVentas.addRow(fila);
+        }
+    }
+    
+    public void cargarTablaDetalleVenta(Long id){
+        DefaultTableModel detalleDeVenta = new DefaultTableModel();
+        detalleDeVenta = (DefaultTableModel) detalleVenta.getModel();
+        Iterator<DetalleDeVenta> it = Conexion.getInstance().listarDetallesDeVenta(id).iterator();
+        detalleDeVenta.setRowCount(0);
+        while(it.hasNext()){
+        DetalleDeVenta next = it.next();
+        Object[] fila = new Object[4];
+        fila[0]= next;
+        fila[1]= next.getCantidad();
+        fila[2]= next.getPrecioUnitario();
+        fila[3]= next.getPrecioCompra();
+        detalleDeVenta.addRow(fila);
+        }
+    }
+    
+    public void cargarTablaProducto(Long id){
+        DefaultTableModel producto1 = new DefaultTableModel();
+        producto1 = (DefaultTableModel) producto.getModel();
+        Iterator<Producto> it = Conexion.getInstance().listarProductosPorId(id).iterator();
+        producto1.setRowCount(0);
+        while(it.hasNext()){
+        Producto next = it.next();
+        Object[] fila = new Object[2];
+        fila[0]= next.getNombre();
+        fila[1]= next.getPrecioVenta();
+        producto1.addRow(fila);
+        }
+    }
+    
+    public void calcularTotal(){
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaVentas;
     private javax.swing.JButton Volver;
+    private javax.swing.JTable detalleVenta;
+    private com.toedter.calendar.JDateChooser fechaF;
+    private com.toedter.calendar.JDateChooser fechaIni;
     private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -194,9 +299,7 @@ public class Devolucion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable producto;
+    private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
 }
