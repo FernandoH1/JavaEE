@@ -1,9 +1,11 @@
 package Boutique.gui;
 
+import Boutique.io.DetalleDeVenta;
 import Boutique.persistencia.Conexion;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -159,11 +161,11 @@ public class Gastos extends javax.swing.JFrame {
             fechaInicio = date.format(fechaIni.getDate());
             fechaFin = date.format(fechaF.getDate());
             cargarTabla(fechaInicio,fechaFin);
-            cargarValores();  
+            cargarValores(); 
         }else{
             JOptionPane.showMessageDialog(this, "Debe ingresar las Fechas Antes para poder ver las Estadísticas"); 
         }
-        
+       
         if(fechaF.getDate().before(fechaIni.getDate())){
            JOptionPane.showMessageDialog(this, "La fecha inicio debe de ser menor a la fecha final"); 
         }
@@ -213,15 +215,16 @@ public class Gastos extends javax.swing.JFrame {
            Boutique.io.Venta v = (Boutique.io.Venta) TablaVentas.getValueAt(i, 3);
            precio += v.getPrecioTotal();
            deuda += v.getDeuda();
-           for(int x=0; x < v.getDetalleDeVenta().size(); x++){
-            precioProvedor += v.getDetalleDeVenta().get(x).getPrecioProvedor()*v.getDetalleDeVenta().get(x).getCantidad();
+           List<DetalleDeVenta> dv = Conexion.getInstance().listarDetallesDeVenta(v.getId());
+           for(int x=0; x < dv.size(); x++){
+               precioProvedor += dv.get(x).getPrecioProvedor()* dv.get(x).getCantidad();
            }
            
         }
        total.setText(String.valueOf(precio));
        compras.setText(String.valueOf(precioProvedor));
        deudas.setText(String.valueOf(deuda));
-       double ganancias =0;
+       double ganancias = 0;
        
        ganancias = (precio - precioProvedor) - deuda;
        ganancia.setText(String.valueOf(ganancias));

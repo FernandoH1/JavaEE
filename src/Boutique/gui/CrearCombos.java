@@ -29,7 +29,7 @@ public class CrearCombos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
         this.setTitle("Combos");
-        Volver.setBackground(new Color(0,0,0,0));
+        Volver.setBackground(new Color(0, 0, 0, 0));
         mostrarCombo();
         cargarTablaCalzado();
         cargarTablaInd();
@@ -589,26 +589,28 @@ public class CrearCombos extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarIMouseClicked
 
     private void crearComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearComboActionPerformed
-          
-        if(listaComboProducto.size() !=0){
-            if(nombre.getText().isEmpty() && descripcion.getText().isEmpty()){
+
+        if (listaComboProducto.size() != 0) {
+            if (nombre.getText().isEmpty() && descripcion.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Se debe de llenar todos los campos para crear un combo.");
+            } else {
+                Combo c = new Combo();
+                c.setNombre(nombre.getText());
+                SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) precio.getModel();
+                modeloSpinner.setMinimum(0);
+                double precioC = (double) precio.getValue();
+                c.setPrecio(precioC);
+                c.setDescripcion(descripcion.getText());
+                Conexion.getInstance().guardar(c);
+                for (CombosProducto cp : listaComboProducto) {
+                    cp.setCombo(c);
+                    Conexion.getInstance().guardar(cp);
+                }
+                mostrarCombo();
+                limpiarCampos();
             }
-        Combo c = new Combo();
-        c.setNombre(nombre.getText());
-        SpinnerNumberModel modeloSpinner = (SpinnerNumberModel) precio.getModel();
-        modeloSpinner.setMinimum(0);
-        double precioC = (double) precio.getValue();
-        c.setPrecio(precioC);
-        c.setDescripcion(descripcion.getText());
-        Conexion.getInstance().guardar(c);
-        for (CombosProducto cp : listaComboProducto) {
-            cp.setCombo(c);
-            Conexion.getInstance().guardar(cp);
-        }
-        mostrarCombo();
-        }else{
-        JOptionPane.showMessageDialog(this, "No se Puede Crear un combo sin prodcutos");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se Puede Crear un combo sin prodcutos");
         }
     }//GEN-LAST:event_crearComboActionPerformed
 
@@ -817,6 +819,23 @@ public class CrearCombos extends javax.swing.JFrame {
             tableDetalle.removeRow(listProductos.getSelectedRow());
         }
         estimarPrecio();
+    }
+    
+    public void limpiarCampos(){
+        DefaultTableModel tableDetalle = (DefaultTableModel) listProductos.getModel();
+        nombre.setText("");
+        descripcion.setText("");
+        precio.setValue(0);
+        TablaCalzado.clearSelection();
+        TablaAccesorio.clearSelection();
+        TablaIndumentaria.clearSelection();
+        
+        int fila = listProductos.getRowCount();
+
+        for(int i=fila-1 ; i >= 0 ; i--){
+            tableDetalle.removeRow(i);
+        }
+        
     }
 
 

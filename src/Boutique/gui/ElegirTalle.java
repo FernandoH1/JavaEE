@@ -11,6 +11,7 @@ import Boutique.io.ProductosCombo;
 import Boutique.persistencia.Conexion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class ElegirTalle extends javax.swing.JDialog {
@@ -25,6 +26,9 @@ public class ElegirTalle extends javax.swing.JDialog {
     public ElegirTalle(java.awt.Frame parent, boolean modal, Combo combos, Venta ventas) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Boutique/Image/Logo1.png")).getImage());
+        this.setTitle("Elegir Producto");
         this.setSize(540, 615);
         this.venta = ventas;
         this.combo = combos;
