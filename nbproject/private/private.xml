@@ -5,12 +5,16 @@
         <group>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/ElegirTalle.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/Venta.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/ListaCalzado.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/Carga.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/ListarIndumentaria.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/ListaAccesorio.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/persistencia/Conexion.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/Clientes.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/Gastos.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/Principal.java</file>
             <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/Devolucion.java</file>
+            <file>file:/C:/Users/ferna/OneDrive/Documentos/NetBeansProjects/JavaEE/src/Boutique/gui/Productos.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,12 +1,20 @@
 package Boutique.gui;
 
 import Boutique.persistencia.Conexion;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class Gastos extends javax.swing.JFrame {
     private String fechaInicio;
@@ -41,8 +49,13 @@ public class Gastos extends javax.swing.JFrame {
         fechaIni = new com.toedter.calendar.JDateChooser();
         fechaF = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        Jpanel3 = new javax.swing.JPanel();
+        panel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,7 +68,7 @@ public class Gastos extends javax.swing.JFrame {
                 VolverActionPerformed(evt);
             }
         });
-        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, -1, 50));
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, -1, 50));
 
         jLabel1.setText("Periodo:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
@@ -94,15 +107,19 @@ public class Gastos extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 590, 120));
 
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Ingreso Total:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Costo de Compra:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Deuda de Clientes:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Ganancia Neta:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
@@ -127,7 +144,17 @@ public class Gastos extends javax.swing.JFrame {
         getContentPane().add(fechaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 140, -1));
 
         jPanel1.setBackground(new java.awt.Color(240, 218, 168));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 250, 140));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("Graficar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 140, 200, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 250, 180));
 
         jPanel2.setBackground(new java.awt.Color(240, 218, 168));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -137,8 +164,30 @@ public class Gastos extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 60));
 
+        Jpanel3.setBackground(new java.awt.Color(240, 218, 168));
+        Jpanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Jpanel3.add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 360, 260));
+
+        jButton2.setText("Grafico Circular");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        Jpanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jButton3.setText("Grafico de Barras");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        Jpanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+
+        getContentPane().add(Jpanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 380, 340));
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Boutique/Image/fondo.jpg"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 400));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,6 +218,18 @@ public class Gastos extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_showStatsActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        graficarCircular();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        graficarCircular();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        graficarBarras();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,8 +306,79 @@ public class Gastos extends javax.swing.JFrame {
         tablaDeVentas.addRow(fila);
         }
     }
+    
+    public void graficarCircular(){
+    panel1.removeAll();
+    String titulo = "Grafico de las Estadisticas";
+        
+        double total = Double.parseDouble(this.total.getText());
+        double compras = Double.parseDouble(this.compras.getText());
+        double deudas = Double.parseDouble(this.deudas.getText());
+        double ganancia = Double.parseDouble(this.ganancia.getText());
+                
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        dataset.setValue( "Ingreso Total" , total );  
+        dataset.setValue( "Costo de Compras" , compras );   
+        dataset.setValue( "Deuda de Clientes" , deudas );    
+        dataset.setValue( "Ganancia Neta" , ganancia );  
+
+        JFreeChart grafico_circular = ChartFactory.createPieChart(titulo, dataset);
+
+        ChartPanel panel = new ChartPanel(grafico_circular);
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+       
+        panel1.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.setLayout(new BorderLayout());
+        panel1.add(panel,BorderLayout.NORTH);
+
+        pack();
+        repaint();
+    }
+    
+    public void graficarBarras(){
+    panel1.removeAll();
+    String titulo = "Grafico de las Estadisticas";
+    String barras = ""; 
+    String numeracion = "Cantidad"; 
+    
+        double total = Double.parseDouble(this.total.getText());
+        double compras = Double.parseDouble(this.compras.getText());
+        double deudas = Double.parseDouble(this.deudas.getText());
+        double ganancia = Double.parseDouble(this.ganancia.getText());
+                
+        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+        datos.setValue( total ,numeracion , "Ingreso Total");  
+        datos.setValue( compras,numeracion , "Costo de Compras");   
+        datos.setValue( deudas,numeracion , "Deuda de Clientes");    
+        datos.setValue( ganancia ,numeracion , "Ganancia Neta");  
+
+        
+        JFreeChart grafico_barras = ChartFactory.createBarChart3D(
+            titulo, //nombre del grafico
+            barras, //nombres de las barras
+            numeracion,
+            datos, //datos del grafico
+            PlotOrientation.VERTICAL, //Orientacion
+            true, //Leyenda de las barras indibividuales de color
+            true, //Herraminetas
+            false //url del Grafico
+);
+
+        ChartPanel panel = new ChartPanel(grafico_barras);
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(panel1.getWidth(),panel1.getHeight()));
+       
+        panel1.setBounds(0,0,panel1.getWidth(),panel1.getHeight());
+        panel1.setLayout(new BorderLayout());
+        panel1.add(panel,BorderLayout.NORTH);
+
+        pack();
+        repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Jpanel3;
     private javax.swing.JTable TablaVentas;
     private javax.swing.JButton Volver;
     private javax.swing.JTextField compras;
@@ -254,6 +386,9 @@ public class Gastos extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser fechaF;
     private com.toedter.calendar.JDateChooser fechaIni;
     private javax.swing.JTextField ganancia;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -266,6 +401,7 @@ public class Gastos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panel1;
     private javax.swing.JButton showStats;
     private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
