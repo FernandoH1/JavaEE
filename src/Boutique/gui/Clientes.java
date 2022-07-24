@@ -349,9 +349,9 @@ public class Clientes extends javax.swing.JFrame {
                 cargarTablaVentas(v.getCliente());
                 cargarDeuda();
                 cargarEntrega(v.getCliente());
-                montoEntrega.setText("");
-                JOptionPane.showMessageDialog(this.jDialog1, "Se realizo la entrega con éxito");
+                montoEntrega.setText("");             
             }
+            JOptionPane.showMessageDialog(this.jDialog1, "Se realizo la entrega con éxito");
         }else {
             JOptionPane.showMessageDialog(this.jDialog1, "No se Puede Ingresar mas de la Deuda");
         }

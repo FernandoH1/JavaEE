@@ -556,6 +556,16 @@ public class Venta extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         clienteFinal.setText("Consumidor Final");
+        clienteFinal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clienteFinalMouseClicked(evt);
+            }
+        });
+        clienteFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clienteFinalActionPerformed(evt);
+            }
+        });
         jPanel4.add(clienteFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 850, 80));
@@ -840,9 +850,14 @@ public class Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarAActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(jDateChooser1.getDate() != null){
         generarVenta();
         JOptionPane.showMessageDialog(this, "La venta se realizo con éxito");
         limpiarCampos();
+        
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe de completar todos los campos.");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void descuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descuentoActionPerformed
@@ -872,6 +887,20 @@ public class Venta extends javax.swing.JFrame {
         Combo cb = (Combo) TablaCombos.getValueAt(TablaCombos.getSelectedRow(), 0);
         cargarTablaProductos(cb.getId());
     }//GEN-LAST:event_TablaCombosMouseClicked
+
+    private void clienteFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteFinalActionPerformed
+        
+    }//GEN-LAST:event_clienteFinalActionPerformed
+
+    private void clienteFinalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteFinalMouseClicked
+        if(clienteFinal.isSelected()){
+            clientesCombo.setEnabled(false);
+            cliente.setEnabled(false);
+        }else{
+            clientesCombo.setEnabled(true);
+            cliente.setEnabled(true);
+        }
+    }//GEN-LAST:event_clienteFinalMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
